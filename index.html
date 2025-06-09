@@ -1,0 +1,676 @@
+<html>
+ <head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <title>
+    Your Name
+   </title>
+   <base target="_blank">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <style>
+    /* your customized css style */
+   body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    .hover\:text-orange-500:hover {
+      color: #f97316;
+    }
+    .hover\:text-blue-500:hover {
+        color: rgb(59 130 246);
+    }
+    .hover\:text-underline:hover{
+        text-decoration: underline;
+    }
+    .type-tag {
+        margin-right: 0px;
+        cursor: pointer;
+        user-select: none;
+        padding: 1px 4px;
+        border-radius: 0px;
+        transition: all 0.2s ease;
+    }
+    .type-tag:first-child {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+    .type-tag:last-child {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+    .type-tag:hover {
+        opacity: 1;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .type-tag.active {
+        font-weight: bold;
+        text-decoration: underline;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .paper-item.hidden {
+        display: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .paper-item {
+        transition: all 0.3s ease;
+        min-height: 0;
+    }
+    .tag-cop {
+        color: rgb(59 130 246); /* blue */
+    }
+    .tag-jssp {
+        color: rgb(16 185 129); /* green */
+    }
+    .tag-ml {
+        color: rgb(245 158 11); /* orange */
+    }
+    .tag-rl {
+        color: rgb(239 68 68); /* red */
+    }
+    .tag-nlp {
+        color: rgb(139 92 246); /* purple */
+    }
+    .tag-vrp {
+        color: rgb(236 72 153); /* pink */
+    }
+    .tag-llm {
+        color: rgb(236, 192, 72); /* pink */
+    }
+    .tag-cop:hover {
+        background-color: rgba(59, 130, 246, 0.1);
+    }
+    .tag-jssp:hover {
+        background-color: rgba(16, 185, 129, 0.1);
+    }
+    .tag-ml:hover {
+        background-color: rgba(245, 158, 11, 0.1);
+    }
+    .tag-rl:hover {
+        background-color: rgba(239, 68, 68, 0.1);
+    }
+    .tag-nlp:hover {
+        background-color: rgba(139, 92, 246, 0.1);
+    }
+    .tag-vrp:hover {
+        background-color: rgba(236, 72, 153, 0.1);
+    }
+    .tag-llm:hover {
+        background-color: rgba(236, 192, 72, 0.1);
+    }
+    .paper-item img {
+        min-width: 12rem;
+        height: 10rem;
+        object-fit: contain;
+    }
+    .paper-img-bg {
+        width: 12rem;
+        height: 10rem;
+        background-size: cover;
+        background-position: center;
+    }
+    /* end your customized css style */
+</style>
+ </head>
+ <body class="bg-gray-100 text-gray-800 text-sm md:text-base">
+  <div class="container mx-auto py-8 w-1/2">
+   <div class="flex flex-wrap">
+    <div class="w-full">
+     <div class="flex flex-wrap">
+      <div class="w-full lg:w-3/4">
+       <h1 class="text-3xl font-bold mb-8">
+        Cong Zhang (张聪)
+       </h1>
+       <!-- <p class="text-gray-700 mb-6">
+        Your Introduction Here: (generated Lorem Ipsum)
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque vitae tempus quam pellentesque nec nam aliquam sem et. Sed felis eget velit aliquet sagittis id. Mi bibendum neque egestas congue quisque egestas diam in arcu. Neque viverra justo nec ultrices dui sapien eget.
+        </p> -->
+
+        <p class="text-gray-700 mb-6">
+            Cong Zhang is a final-year Ph.D. student in the School of Computer Science and Engineering
+            (SCSE) at Nanyang Technological University Singapore (NTU, Singapore), jointly supervised by <a
+                href="https://personal.ntu.edu.sg/zhangj/" target="_blank" rel="noopener">Prof. Zhang
+            Jie</a>, <a
+                href="https://ssia.org.sg/semiconductor-business-connect-speakers-profile/dr-tan-puay-siew/"
+                target="_blank" rel="noopener">Dr. Tan Puay Siew</a>, and <a
+                href="https://www.linkedin.com/in/ernestchixu/?originalSubdomain=sg" target="_blank"
+                rel="noopener">Dr.Xu Chi</a>. During his Ph.D. study, he held the Singapore International
+            Graduate Award (<a
+                href="https://www.a-star.edu.sg/Scholarships/for-graduate-studies/singapore-international-graduate-award-singa"
+                target="_blank" rel="noopener">SINGA</a>), a full-time scholarship offered by the Singapore Government to the top
+            international students worldwide to study at a Singapore University. Before joining NTU, Cong Zhang was fortunate to work with <a
+                href="https://www.imperial.ac.uk/people/k.broda" target="_blank"
+                rel="noopener">Dr. Krysia Broda</a>
+            (from Imperial College London) and <a
+                href="https://web.comp.polyu.edu.hk/cskchung/" target="_blank"
+                rel="noopener">Dr. Fu-lai Chung</a> (from The Hong Kong Polytechnic University). They initialized his research career
+            by mentoring and teaching him research skills.
+            
+            Cong Zhang's research interest mainly lies in the intersection of Artificial Intelligence and
+            Operations Research. He is particularly interested in leveraging Deep Reinforcement Learning
+            (DRL) to solve challenging combinatorial optimization problems in various application domains,
+            such as the job-shop scheduling problem (JSSP) and the vehicle routing problem (VRP). His Ph.D.
+            study is mainly devoted to developing DRL-based construction and improvement heuristic
+            algorithms for solving JSSP.
+        </p>
+
+
+       <p class="text-gray-700 mb-6"> 
+            Email: cong.zhang92@gmail.com
+       </p>
+       <div class="flex flex-wrap text-blue-500 mb-10">
+        <a class="mr-4 anchor-link" href="https://scholar.google.com.sg/citations?user=lSC-K24AAAAJ&hl=zh-CN">
+            Scholar
+        </a>
+        <a class="mr-4 anchor-link" href="https://github.com/zcaicaros">
+            Github
+        </a>
+        <a class="mr-4 anchor-link" href="https://www.linkedin.com/in/cong-zhang-5b9358122/">
+            Linkedin
+        </a>
+
+       </div>
+      </div>
+      <div class="w-full lg:w-1/4 lg:pl-4 mt-6">
+       <img alt="Your's profile picture" class="rounded-full" height="150" src="./portrait.jpg" width="150"/>
+      </div>
+     </div>
+
+     <div class="mb-8">
+    <h2 class="text-2xl font-bold mb-5">
+        News
+    </h2>
+    <ul class="list-disc pl-6 mb-5">
+        <li class="mb-2">[2025] Two papers accepted by ACL 2025</li>
+        <li class="mb-2">[2025] One paper accepted by ICLR 2025</li>
+        <li class="mb-2">[2025] One paper accepted by COLING 2025</li>
+    </ul>
+
+
+     <h2 class="text-2xl font-bold mb-5">
+      Conference Publications
+     </h2>
+     <!-- Research Items -->
+
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-nlp" data-tag="nlp">[NLP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> CtrlA: Adaptive Retrieval-Augmented Generation via Probe-Guided Control
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Huanshuo Liu, 
+                Hao Zhang, 
+                Zhijiang Guo, 
+                Kuicai Dong, 
+                Xiangyang Li, 
+                Yi Quan Lee, 
+                <strong>Cong Zhang</strong>,
+                Yong Liu
+            <p class="gray-blue-500 mb-1">
+                The Annual Meeting of the Association for Computational Linguistics <strong>(ACL)</strong>, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-nlp" data-tag="nlp">[NLP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> Adaptive Tool Use in Large Language Models with Meta-Cognition Trigger
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Wenjun Li, 
+                Dexun Li, 
+                Kuicai Dong,
+                <strong>Cong Zhang</strong>,
+                Hao Zhang, 
+                Weiwen Liu, 
+                Yasheng Wang, 
+                Ruiming Tang, 
+                Yong Liu
+            </p>
+            <p class="gray-blue-500 mb-1">
+                The Annual Meeting of the Association for Computational Linguistics <strong>(ACL)</strong>, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-jssp" data-tag="jssp">[JSSP]</span> Graph Assisted Offline-Online Deep Reinforcement Learning for Dynamic Workflow Scheduling
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Yifan Yang, 
+                Gang Chen, 
+                Hui Ma, 
+                <strong>Cong Zhang†</strong>,
+                Zhiguang Cao, 
+                Mengjie Zhang
+            </p>
+            <p class="gray-blue-500 mb-1">
+                International Conference on Learning Representations <strong>(ICLR)</strong>, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-nlp" data-tag="nlp">[NLP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> Planning with Multi-Constraints via Collaborative Language Agents
+            </h3>
+            <p class="text-gray-700 mb-1">
+                <strong>Cong Zhang*</strong>, 
+                Derrick Goh Xin Deik*, 
+                Dexun Li, 
+                Hao Zhang, 
+                Yong Liu
+            </p>
+            <p class="gray-blue-500 mb-1">
+                The International Conference on Computational Linguistics <strong>(COLING)</strong>, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-nlp" data-tag="nlp">[NLP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> Aligning Crowd Feedback via Distributional Preference Reward Modeling
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Dexun Li*,
+                <strong>Cong Zhang*</strong>,
+                Kuicai Dong,
+                Derrick Goh Xin Deik,
+                Ruiming Tang,
+                Yong Liu
+            </p>
+            <p class="gray-blue-500 mb-1">
+                International Conference on Machine Learning <strong>(ICML)</strong> - MFHAIA Workshop, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-nlp" data-tag="nlp">[NLP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> MC-indexing: Effective Long Document Retrieval via Multi-view Content-aware Indexing
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Kuicai Dong,
+                Derrick Goh Xin Deik,
+                Yi Quan Lee,
+                Hao Zhang,
+                Xiangyang Li,
+                <strong>Cong Zhang</strong>,
+                Yong Liu
+            </p>
+            <p class="gray-blue-500 mb-1">
+                Conference on Empirical Methods in Natural Language Processing <strong>(EMNLP)</strong>, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-3/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-jssp" data-tag="jssp">[JSSP]</span> Learning topological representations with bidirectional graph attention network for solving job shop scheduling problem
+            </h3>
+            <p class="text-gray-700 mb-1">
+                    <strong>Cong Zhang</strong>,
+                    Zhiguang Cao,
+                    Yaoxin Wu,
+                    Wen Song,
+                    Jing Sun
+            </p>
+            <p class="gray-blue-500 mb-1">
+                The Conference on Uncertainty in Artificial Intelligence <strong>(UAI)</strong>, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-3/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-jssp" data-tag="jssp">[JSSP]</span> Deep reinforcement learning guided improvement heuristic for job shop scheduling
+            </h3>
+            <p class="text-gray-700 mb-1">
+                    <strong>Cong Zhang</strong>,
+                    Zhiguang Cao,
+                    Wen Song,
+                    Yaoxin Wu,
+                    Jie Zhang
+            </p>
+            <p class="gray-blue-500 mb-1">
+                International Conference on Learning Representations <strong>(ICLR)</strong>, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-3/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-jssp" data-tag="jssp">[JSSP]</span> Learning to dispatch for job shop scheduling via deep reinforcement learning
+            </h3>
+            <p class="text-gray-700 mb-1">
+                    <strong>Cong Zhang*</strong>,
+                    Wen Song*,
+                    Zhiguang Cao,
+                    Jie Zhang,
+                    Pua Siew Tan,
+                    Chi Xu
+            </p>
+            <p class="gray-blue-500 mb-1">
+                Conference on Neural Information Processing Systems <strong>(NeurIPS)</strong>, 2020
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+            
+            
+     <h2 class="text-2xl font-bold mb-5">
+        Journal Publications
+    </h2>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-JSSP" data-tag="jssp">[JSSP]</span> Graph Neural Networks for Job Shop Scheduling Problems: A Survey
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Igor G Smit, 
+                Jianan Zhou, 
+                Robbert Reijnen, 
+                Yaoxin Wu, 
+                Jian Chen, 
+                <strong>Cong Zhang</strong>, 
+                Zaharah Bukhsh, 
+                Wim Nuijten, 
+                Yingqian Zhang
+            </p>
+            <p class="gray-blue-500 mb-1">
+                Computers & Operations Research <strong>(COR)</strong>, 2024
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+  
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-ml" data-tag="ml">[ML]</span><span class="type-tag tag-rl" data-tag="rl">[DRL]</span> Decision-making with speculative opponent models
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Jing Sun, 
+                Shuo Chen, 
+                <strong>Cong Zhang</strong>, 
+                Yining Ma, 
+                Jie Zhang
+            </p>
+            <p class="gray-blue-500 mb-1">
+                IEEE Transactions on Neural Networks and Learning Systems <strong>(TNNLS)</strong>, 2024
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-jssp" data-tag="jssp">[JSSP]</span> Fast pareto set approximation for multi-objective flexible job shop scheduling via parallel preference-conditioned graph reinforcement learning
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Chupeng Su*,
+                <strong>Cong Zhang*</strong>,
+                Chuang Wang,
+                Weihong Cen,
+                Gang Chen,
+                Longhan Xie
+            </p>
+            <p class="gray-blue-500 mb-1">
+                Swarm and Evolutionary Computation <strong>(SEC)</strong>, 2024
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+        <div class="w-full md:w-4/4 px-3">
+         <h3 class="text-l font-bold mb-1 paper-title">
+             <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-jssp" data-tag="jssp">[JSSP]</span> A review on learning to solve combinatorial optimisation problems in manufacturing
+         </h3>
+         <p class="text-gray-700 mb-1">
+             <strong>Cong Zhang*</strong>,
+             Yaoxin Wu*,
+             Yining Ma*,
+             Wen Song,
+             Le Zhang,
+             Zhiguang Cao,
+             Jie Zhang
+         </p>
+         <p class="gray-blue-500 mb-1">
+             IET Collaborative Intelligent Manufacturing, 2023
+         </p>
+         <p>
+             <a class="anchor-link text-blue-500" href="#">arxiv</a>
+             /
+             <a class="anchor-link text-blue-500" href="#">code</a>
+         </p>
+        </div>
+        </div>
+       
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+             <h3 class="text-l font-bold mb-1 paper-title">
+                 <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-jssp" data-tag="jssp">[JSSP]</span> Evolution strategies-based optimized graph reinforcement learning for solving dynamic job shop scheduling problem
+             </h3>
+             <p class="text-gray-700 mb-1">
+                 Chupeng Su,
+                 <strong>Cong Zhang</strong>,
+                 Dan Xia,
+                 Baoan Han,
+                 Chuang Wang,
+                 Gang Chen,
+                 Longhan Xie
+             </p>
+             <p class="gray-blue-500 mb-1">
+                Applied Soft Computing <strong>(ASC)</strong>, 2023
+             </p>
+             <p>
+                 <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                 /
+                 <a class="anchor-link text-blue-500" href="#">code</a>
+             </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+             <h3 class="text-l font-bold mb-1 paper-title">
+                 <span class="type-tag tag-ml" data-tag="ml">[ML]</span><span class="type-tag tag-rl" data-tag="rl">[DRL]</span> Sampling efficient deep reinforcement learning through preference-guided stochastic exploration
+             </h3>
+             <p class="text-gray-700 mb-1">
+                 Wenhui Huang,
+                 <strong>Cong Zhang</strong>,
+                 Jingda Wu,
+                 Xiangkun He,
+                 Jie Zhang,
+                 Chen Lv
+             </p>
+             <p class="gray-blue-500 mb-1">
+                IEEE Transactions on Neural Networks and Learning Systems <strong>(TNNLS)</strong>, 2023
+             </p>
+             <p>
+                 <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                 /
+                 <a class="anchor-link text-blue-500" href="#">code</a>
+             </p>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+             <h3 class="text-l font-bold mb-1 paper-title">
+                 <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-vrp" data-tag="vrp">[VRP]</span> Learning to solve multiple-TSP with time window and rejections via deep reinforcement learning
+             </h3>
+             <p class="text-gray-700 mb-1">
+                 Rongkai Zhang*
+                 <strong>Cong Zhang*</strong>,
+                 Zhiguang Cao,
+                 Wen Song,
+                 Puay Siew Tan,
+                 Jie Zhang,
+                 Bihan Wen,
+                 Justin Dauwels
+             </p>
+             <p class="gray-blue-500 mb-1">
+                IEEE Transactions on Intelligent Transportation Systems <strong>(T-ITS)</strong>, 2022
+             </p>
+             <p>
+                 <a class="anchor-link text-blue-500" href="#">arxiv</a>
+                 /
+                 <a class="anchor-link text-blue-500" href="#">code</a>
+             </p>
+            </div>
+        </div>
+
+
+
+
+
+    <!-- <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-4 mt-2">
+            Misc
+        </h2>
+        <div class="mb-1">
+            information 1
+        </div>
+        <div class="mb-1">
+            information 2
+        </div>
+    </div>   -->
+    </div>
+    </div>
+
+     <!-- End of Research Items -->
+    </div>
+   </div>
+  </div>
+
+ </body>
+ 
+ <script>
+    // Tag filtering functionality
+    let activeTags = new Set();
+
+    function toggleTag(tag) {
+        const tagElement = document.querySelector(`[data-tag="${tag}"]`);
+        if (activeTags.has(tag)) {
+            activeTags.delete(tag);
+            tagElement.classList.remove('active');
+        } else {
+            activeTags.add(tag);
+            tagElement.classList.add('active');
+        }
+        filterPapers();
+    }
+
+    function filterPapers() {
+        const papers = document.querySelectorAll('.paper-item');
+        papers.forEach(paper => {
+            if (activeTags.size === 0) {
+                // If no tags are selected, show all papers
+                paper.classList.remove('hidden');
+                return;
+            }
+
+            const paperTags = Array.from(paper.querySelectorAll('.type-tag'))
+                .map(tag => tag.getAttribute('data-tag'));
+
+            // Show paper if it has at least one of the active tags
+            const shouldShow = paperTags.some(tag => activeTags.has(tag));
+            paper.classList.toggle('hidden', !shouldShow);
+        });
+    }
+
+    // Add click handlers to all tags
+    document.querySelectorAll('.type-tag').forEach(tag => {
+        tag.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const tagName = tag.getAttribute('data-tag');
+            toggleTag(tagName);
+        });
+    });
+ </script>
+
+
+</html>
