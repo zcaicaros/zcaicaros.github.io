@@ -103,13 +103,22 @@
     /* Main toggle container */
     .theme-toggle {
         position: relative;
-        width: 60px;
-        height: 30px;
+        width: 50px;
+        height: 25px;
         background: #e5e7eb;
-        border-radius: 30px;
+        border-radius: 25px;
         cursor: pointer;
         transition: background 0.3s ease;
         margin-left: auto;
+    }
+    
+    /* Larger toggle on desktop */
+    @media (min-width: 640px) {
+        .theme-toggle {
+            width: 60px;
+            height: 30px;
+            border-radius: 30px;
+        }
     }
 
     /* Dark state background */
@@ -121,20 +130,37 @@
     .theme-toggle::before {
         content: '';
         position: absolute;
-        top: 3px;
-        left: 3px;
-        width: 24px;
-        height: 24px;
+        top: 2px;
+        left: 2px;
+        width: 21px;
+        height: 21px;
         background: white;
         border-radius: 50%;
         transition: transform 0.3s ease;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
+    
+    /* Larger circle on desktop */
+    @media (min-width: 640px) {
+        .theme-toggle::before {
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+        }
+    }
 
     /* Move circle to right when dark mode is active */
     .theme-toggle.dark::before {
-        transform: translateX(30px);
+        transform: translateX(25px);
         background: white;
+    }
+    
+    /* Larger movement on desktop */
+    @media (min-width: 640px) {
+        .theme-toggle.dark::before {
+            transform: translateX(30px);
+        }
     }
 
     /* Icon styling */
@@ -304,17 +330,52 @@
     
     /* Paper thumbnail images */
     .paper-item img {
-        min-width: 12rem;
-        height: 10rem;
+        min-width: 8rem;
+        height: 6rem;
         object-fit: contain;
+    }
+    
+    /* Larger images on desktop */
+    @media (min-width: 640px) {
+        .paper-item img {
+            min-width: 12rem;
+            height: 10rem;
+        }
     }
     
     /* Background images for papers */
     .paper-img-bg {
-        width: 12rem;
-        height: 10rem;
+        width: 8rem;
+        height: 6rem;
         background-size: cover;
         background-position: center;
+    }
+    
+    /* Larger background images on desktop */
+    @media (min-width: 640px) {
+        .paper-img-bg {
+            width: 12rem;
+            height: 10rem;
+        }
+    }
+    
+    /* Mobile-first responsive improvements */
+    @media (max-width: 639px) {
+        .type-tag {
+            font-size: 0.75rem;
+            padding: 2px 4px;
+        }
+        
+        /* Ensure readability on small screens */
+        body {
+            line-height: 1.5;
+        }
+        
+        /* Improved touch targets for mobile */
+        .anchor-link {
+            padding: 2px 0;
+            display: inline-block;
+        }
     }
   </style>
  </head>
@@ -322,14 +383,14 @@
   <!-- ========================================
        MAIN CONTAINER
        ======================================== -->
-  <div class="container mx-auto py-8 w-1/2">
+  <div class="container mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 w-full sm:w-5/6 md:w-4/5 lg:w-3/4 xl:w-2/3 2xl:w-1/2">
    <div class="flex flex-wrap">
     <div class="w-full">
      
      <!-- ========================================
           HEADER WITH THEME TOGGLE
           ======================================== -->
-     <div class="flex justify-between items-center mb-6">
+     <div class="flex justify-between items-center mb-4 sm:mb-6">
        <div></div> <!-- Empty div for spacing -->
        <div class="theme-toggle" id="themeToggle">
          <i class="fas fa-moon theme-toggle-icon moon"></i>
@@ -342,15 +403,15 @@
           ======================================== -->
      <div class="flex flex-wrap">
       <!-- Main content area -->
-      <div class="w-full lg:w-3/4">
-       <h1 class="text-3xl font-bold mb-8">
+      <div class="w-full lg:w-3/4 mb-6 lg:mb-0">
+       <h1 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 md:mb-8">
         Cong Zhang (张聪)
        </h1>
        
        <!-- About Me Section -->
        <strong>About Me:</strong>
-        <p class="text-gray-700 mb-6"></p>
-        <p class="text-gray-700 mb-6">  
+        <p class="text-gray-700 mb-4 sm:mb-6"></p>
+        <p class="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">  
             Cong Zhang is a Ph.D. from the School of Computer Science and Engineering
             (SCSE) Nanyang Technological University Singapore (NTU, Singapore), jointly supervised by <a
                 href="https://personal.ntu.edu.sg/zhangj/" target="_blank" rel="noopener"><i>Prof. Zhang
@@ -372,17 +433,17 @@
             by mentoring and teaching him research skills.
         </p>
 
-        <p class="text-gray-700 mb-6">
+        <p class="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">
             <strong>Education:</strong>
-            <ul class="list-disc pl-6 mb-5">
-                <li class="mb-2">【2022】Ph.D., Computer Science, Nanyang Technological University, SG</li>
-                <li class="mb-2">【2017】Master of Science, Merit, Computing Science, Imperial College London, UK</li>
-                <li class="mb-2">【2015】Bachelor of Science, 1st-Class, Mathematics, University of Liverpool, UK</li>
-                <li class="mb-2">【2015】Bachelor of Science, 1st-Class, Applied Mathematics, Xi'an Jiaotong-Liverpool University, CN</li>
+            <ul class="list-disc pl-4 sm:pl-6 mb-4 sm:mb-5">
+                <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2022】Ph.D., Computer Science, Nanyang Technological University, SG</li>
+                <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2017】Master of Science, Merit, Computing Science, Imperial College London, UK</li>
+                <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2015】Bachelor of Science, 1st-Class, Mathematics, University of Liverpool, UK</li>
+                <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2015】Bachelor of Science, 1st-Class, Applied Mathematics, Xi'an Jiaotong-Liverpool University, CN</li>
             </ul>
         </p>
 
-        <p class="text-gray-700 mb-6">
+        <p class="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">
             Cong Zhang's research interest mainly lies in the intersection of Artificial Intelligence and
             Operations Research. He is particularly interested in leveraging Deep Reinforcement Learning
             (DRL) to solve challenging combinatorial optimization problems in various application domains,
@@ -391,94 +452,94 @@
             algorithms for solving JSSP.
         </p>
 
-        <p class="text-gray-700 mb-6">
+        <p class="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">
             <strong>Research Keywords</strong>: 
-            <ul class="list-disc pl-6 mb-5">
-                <li class="mb-2">Deep Reinforcement Learning (DRL)</li>
-                <li class="mb-2">Combinatorial Optimization Problems (COP)</li>
-                <li class="mb-2">Reinforcement Learning for LLM</li>
+            <ul class="list-disc pl-4 sm:pl-6 mb-4 sm:mb-5">
+                <li class="mb-1 sm:mb-2 text-sm sm:text-base">Deep Reinforcement Learning (DRL)</li>
+                <li class="mb-1 sm:mb-2 text-sm sm:text-base">Combinatorial Optimization Problems (COP)</li>
+                <li class="mb-1 sm:mb-2 text-sm sm:text-base">Reinforcement Learning for LLM</li>
             </ul>
         </p>
 
 
-       <p class="text-gray-700 mb-6"> 
+       <p class="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base"> 
             Email: cong.zhang92@gmail.com
        </p>
        <!-- Social Links -->
-       <div class="flex flex-wrap text-blue-500 mb-10">
-        <a class="mr-4 anchor-link" href="https://scholar.google.com.sg/citations?user=lSC-K24AAAAJ&hl=zh-CN">
+       <div class="flex flex-wrap text-blue-500 mb-6 sm:mb-8 md:mb-10 gap-y-2">
+        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://scholar.google.com.sg/citations?user=lSC-K24AAAAJ&hl=zh-CN">
             Google Scholar
         </a>
-        <a class="mr-4 anchor-link" href="https://github.com/zcaicaros">
+        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://github.com/zcaicaros">
             Github
         </a>
-        <a class="mr-4 anchor-link" href="https://www.linkedin.com/in/cong-zhang-5b9358122/">
+        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://www.linkedin.com/in/cong-zhang-5b9358122/">
             Linkedin
         </a>
-        <a class="mr-4 anchor-link" href="./Academic_CV.pdf">
+        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="./Academic_CV.pdf">
             Academic CV
         </a>
        </div>
       </div>
       
       <!-- Profile Picture -->
-      <div class="w-full lg:w-1/4 lg:pl-4 mt-6">
-       <img alt="Cong Zhang's profile picture" class="rounded-full" height="150" src="./portrait.jpg" width="150"/>
+      <div class="w-full lg:w-1/4 lg:pl-4 flex justify-center lg:justify-start">
+       <img alt="Cong Zhang's profile picture" class="rounded-full w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-150 lg:h-150" src="./portrait.jpg"/>
       </div>
      </div>
 
      <!-- ========================================
           NEWS, AWARDS, AND EXPERIENCE SECTIONS
           ======================================== -->
-     <div class="mb-8">
+     <div class="mb-6 sm:mb-8">
       <!-- News Section -->
-      <h2 class="text-2xl font-bold mb-5">
+      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
           News
       </h2>
-      <ul class="list-disc pl-6 mb-5">
-          <li class="mb-2">【2025.6】 One paper accepted by TMLR</li>
-          <li class="mb-2">【2025.5】 Two papers accepted by ACL 2025</li>
-          <li class="mb-2">【2025.3】 One paper accepted by ICLR 2025</li>
-          <li class="mb-2">【2025.2】 One paper accepted by COLING 2025</li>
+      <ul class="list-disc pl-4 sm:pl-6 mb-4 sm:mb-5">
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.6】 One paper accepted by TMLR</li>
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.5】 Two papers accepted by ACL 2025</li>
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.3】 One paper accepted by ICLR 2025</li>
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.2】 One paper accepted by COLING 2025</li>
       </ul>
 
       <!-- Awards Section -->
-      <h2 class="text-2xl font-bold mb-5">
+      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
           Awards
       </h2>
-      <ul class="list-disc pl-6 mb-5">
-          <li class="mb-2">【2019】Certified to teach, Nanyang Technological University</li>
-          <li class="mb-2">【2018】Singapore International Graduate Award (SINGA), PhD scholarship provided by the SG Government</li>
+      <ul class="list-disc pl-4 sm:pl-6 mb-4 sm:mb-5">
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2019】Certified to teach, Nanyang Technological University</li>
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2018】Singapore International Graduate Award (SINGA), PhD scholarship provided by the SG Government</li>
       </ul>
 
       <!-- Work Experience Section -->
-      <h2 class="text-2xl font-bold mb-5">
+      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
           Working Experiences
       </h2>
-      <ul class="list-disc pl-6 mb-5">
-          <li class="mb-2">【2024.08 - Present】 LLM Algorithm Research Scientist, AIIC/TikTok, Singapore</li>
-          <li class="mb-2">【2022.11 - 2024.08】 Research Engineer, Huawei Noah's Ark Lab, Singapore</li>
-          <li class="mb-2">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
+      <ul class="list-disc pl-4 sm:pl-6 mb-4 sm:mb-5">
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2024.08 - Present】 LLM Algorithm Research Scientist, AIIC/TikTok, Singapore</li>
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2022.11 - 2024.08】 Research Engineer, Huawei Noah's Ark Lab, Singapore</li>
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
       </ul>
 
      <!-- ========================================
           CONFERENCE PAPERS SECTION
           ======================================== -->
-     <h2 class="text-2xl font-bold mb-5">
+     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
         Conference Papers
      </h2>
      
      <!-- Instructions for paper filtering -->
-     <div class="text-gray-500 italic text-sm mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
-     <div class="text-gray-500 italic text-sm mb-4">* denotes equal contribution, # denotes corresponding author</div>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
 
-        <div class="flex flex-wrap mb-8 paper-item">
-            <div class="w-full md:w-4/4 px-3">
-            <h3 class="text-l font-bold mb-1 paper-title">
-                <span class="type-tag tag-nlp" data-tag="nlp">[NLP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> CtrlA: Adaptive Retrieval-Augmented Generation via Probe-Guided Control
+        <div class="flex flex-wrap mb-6 sm:mb-8 paper-item">
+            <div class="w-full px-2 sm:px-3">
+            <h3 class="text-sm sm:text-base font-bold mb-2 paper-title">
+                <span class="type-tag tag-nlp text-xs sm:text-sm" data-tag="nlp">[NLP]</span><span class="type-tag tag-llm text-xs sm:text-sm" data-tag="llm">[LLM]</span> CtrlA: Adaptive Retrieval-Augmented Generation via Probe-Guided Control
             </h3>
-            <p class="text-gray-700 mb-1">
+            <p class="text-gray-700 mb-2 text-xs sm:text-sm">
                 Huanshuo Liu, 
                 Hao Zhang, 
                 Zhijiang Guo, 
@@ -487,10 +548,11 @@
                 Yi Quan Lee, 
                 <strong>Cong Zhang</strong>,
                 Yong Liu
-            <p class="gray-blue-500 mb-1">
+            </p>
+            <p class="gray-blue-500 mb-2 text-xs sm:text-sm">
                 The Annual Meeting of the Association for Computational Linguistics <strong>(ACL)</strong>, 2025
             </p>
-            <p>
+            <p class="text-xs sm:text-sm">
                 <a class="anchor-link text-blue-500" href="https://arxiv.org/pdf/2405.18727">paper</a>
                 /
                 <a class="anchor-link text-blue-500" href="#">code</a>
@@ -694,13 +756,13 @@
      <!-- ========================================
           JOURNAL ARTICLES SECTION
           ======================================== -->                       
-     <h2 class="text-2xl font-bold mb-5">
+     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
         Journal Articles
      </h2>
      
      <!-- Instructions for paper filtering -->
-     <div class="text-gray-500 italic text-sm mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
-     <div class="text-gray-500 italic text-sm mb-4">* denotes equal contribution, # denotes corresponding author</div>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
@@ -910,10 +972,10 @@
   <!-- ========================================
        FOOTER
        ======================================== -->
-  <footer class="w-full theme-bg-secondary theme-text-secondary py-4 mt-10 text-center text-xs theme-border border-t">
-    <div>
+  <footer class="w-full theme-bg-secondary theme-text-secondary py-3 sm:py-4 mt-6 sm:mt-8 md:mt-10 text-center text-xs sm:text-sm theme-border border-t">
+    <div class="px-4">
       &copy; 2024 Cong Zhang. Modified with Cursor.
-      <a href="https://github.com/zcaicaros" class="text-blue-500 hover:text-orange-500" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/zcaicaros" class="text-blue-500 hover:text-orange-500 ml-2" target="_blank" rel="noopener">GitHub</a>
     </div>
   </footer>
 
