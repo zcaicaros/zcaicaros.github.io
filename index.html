@@ -1,34 +1,195 @@
-<html>
- <head>
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic Meta Tags -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <title>
-    Cong Zhang
-   </title>
-   <base target="_blank">
+  <meta name="description" content="Cong Zhang - PhD in Computer Science specializing in Deep Reinforcement Learning and Combinatorial Optimization">
+  <meta name="keywords" content="Cong Zhang, Deep Reinforcement Learning, Combinatorial Optimization, JSSP, VRP, Machine Learning">
+  
+  <!-- Page Title -->
+  <title>Cong Zhang - Academic Portfolio</title>
+  
+  <!-- External Links Configuration -->
+  <base target="_blank">
+  
+  <!-- External Stylesheets -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;display=swap" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+        darkMode: 'class',
+    }
+  </script>
+  
+  <!-- GitHub Buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   <style>
-    /* your customized css style */
-   body {
-      font-family: 'Open Sans', sans-serif;
+    /* ========================================
+       CSS CUSTOM PROPERTIES (THEME VARIABLES)
+       ======================================== */
+    
+    /* Light Theme Variables */
+    :root {
+        --bg-primary: #f3f4f6;        /* Light gray background */
+        --bg-secondary: #ffffff;      /* White background */
+        --text-primary: #1f2937;      /* Dark gray text */
+        --text-secondary: #6b7280;    /* Medium gray text */
+        --border-color: #e5e7eb;      /* Light border */
+        --hover-bg: rgba(0, 0, 0, 0.05); /* Light hover effect */
     }
+
+    /* Dark Theme Variables */
+    [data-theme="dark"] {
+        --bg-primary: #111827;        /* Dark background */
+        --bg-secondary: #1f2937;      /* Darker secondary background */
+        --text-primary: #d1d5db;      /* Light gray text */
+        --text-secondary: #9ca3af;    /* Medium gray text */
+        --border-color: #374151;      /* Dark border */
+        --hover-bg: rgba(255, 255, 255, 0.05); /* Light hover effect on dark */
+    }
+
+    /* ========================================
+       GLOBAL STYLES
+       ======================================== */
+    
+    body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Theme-aware utility classes */
+    .theme-bg-secondary {
+        background-color: var(--bg-secondary);
+    }
+
+    .theme-text-secondary {
+        color: var(--text-secondary);
+    }
+
+    .theme-border {
+        border-color: var(--border-color);
+    }
+
+    .theme-hover:hover {
+        background-color: var(--hover-bg);
+    }
+
+    /* Dark mode text color overrides */
+    [data-theme="dark"] .text-gray-700,
+    [data-theme="dark"] .text-gray-500,
+    [data-theme="dark"] .gray-blue-500 {
+        color: var(--text-secondary) !important;
+    }
+
+    [data-theme="dark"] h1,
+    [data-theme="dark"] h2,
+    [data-theme="dark"] h3,
+    [data-theme="dark"] strong {
+        color: var(--text-primary) !important;
+    }
+
+    /* ========================================
+       THEME TOGGLE COMPONENT
+       ======================================== */
+    
+    /* Main toggle container */
+    .theme-toggle {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        background: #e5e7eb;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-left: auto;
+    }
+
+    /* Dark state background */
+    .theme-toggle.dark {
+        background: #374151;
+    }
+
+    /* Toggle button circle */
+    .theme-toggle::before {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 24px;
+        height: 24px;
+        background: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Move circle to right when dark mode is active */
+    .theme-toggle.dark::before {
+        transform: translateX(30px);
+        background: white;
+    }
+
+    /* Icon styling */
+    .theme-toggle-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        transition: opacity 0.3s ease;
+    }
+
+    /* Sun icon (visible in dark mode) */
+    .theme-toggle-icon.sun {
+        right: 8px;
+        color: #6b7280;
+        opacity: 0;
+    }
+
+    /* Moon icon (visible in light mode) */
+    .theme-toggle-icon.moon {
+        left: 8px;
+        color: #6b7280;
+        opacity: 1;
+    }
+
+    /* Show/hide icons based on theme */
+    .theme-toggle.dark .theme-toggle-icon.sun {
+        opacity: 1;
+    }
+
+    .theme-toggle.dark .theme-toggle-icon.moon {
+        opacity: 0;
+    }
+
+    /* ========================================
+       CUSTOM UTILITY CLASSES
+       ======================================== */
+    
+    /* Hover effects for links */
     .hover\:text-orange-500:hover {
-      color: #f97316;
+        color: #f97316;
     }
+    
     .hover\:text-blue-500:hover {
         color: rgb(59 130 246);
     }
-    .hover\:text-underline:hover{
+    
+    .hover\:text-underline:hover {
         text-decoration: underline;
     }
+    /* ========================================
+       PAPER FILTERING SYSTEM
+       ======================================== */
+    
+    /* Tag styling for paper categories */
     .type-tag {
         margin-right: 0px;
         cursor: pointer;
@@ -37,24 +198,33 @@
         border-radius: 0px;
         transition: all 0.2s ease;
     }
+    
+    /* Round corners for first and last tags */
     .type-tag:first-child {
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;
     }
+    
     .type-tag:last-child {
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
     }
+    
+    /* Hover effect for tags */
     .type-tag:hover {
         opacity: 1;
         transform: translateY(-1px);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+    
+    /* Active state for selected tags */
     .type-tag.active {
         font-weight: bold;
         text-decoration: underline;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+    
+    /* Paper item visibility states */
     .paper-item.hidden {
         display: none;
         height: 0;
@@ -62,80 +232,123 @@
         padding: 0;
         overflow: hidden;
     }
+    
     .paper-item {
         transition: all 0.3s ease;
         min-height: 0;
     }
+    /* ========================================
+       TAG COLOR SYSTEM
+       ======================================== */
+    
+    /* Research area color coding */
     .tag-cop {
-        color: rgb(59 130 246); /* blue */
+        color: rgb(59 130 246); /* Blue - Combinatorial Optimization Problems */
     }
+    
     .tag-jssp {
-        color: rgb(16 185 129); /* green */
+        color: rgb(16 185 129); /* Green - Job Shop Scheduling Problem */
     }
+    
     .tag-ml {
-        color: rgb(245 158 11); /* orange */
+        color: rgb(245 158 11); /* Orange - Machine Learning */
     }
+    
     .tag-rl {
-        color: rgb(239 68 68); /* red */
+        color: rgb(239 68 68); /* Red - Reinforcement Learning */
     }
+    
     .tag-nlp {
-        color: rgb(139 92 246); /* purple */
+        color: rgb(139 92 246); /* Purple - Natural Language Processing */
     }
+    
     .tag-vrp {
-        color: rgb(236 72 153); /* pink */
+        color: rgb(236 72 153); /* Pink - Vehicle Routing Problem */
     }
+    
     .tag-llm {
-        color: rgb(236, 192, 72); /* pink */
+        color: rgb(236, 192, 72); /* Yellow - Large Language Models */
     }
+    
+    /* Hover background effects for each tag type */
     .tag-cop:hover {
         background-color: rgba(59, 130, 246, 0.1);
     }
+    
     .tag-jssp:hover {
         background-color: rgba(16, 185, 129, 0.1);
     }
+    
     .tag-ml:hover {
         background-color: rgba(245, 158, 11, 0.1);
     }
+    
     .tag-rl:hover {
         background-color: rgba(239, 68, 68, 0.1);
     }
+    
     .tag-nlp:hover {
         background-color: rgba(139, 92, 246, 0.1);
     }
+    
     .tag-vrp:hover {
         background-color: rgba(236, 72, 153, 0.1);
     }
+    
     .tag-llm:hover {
         background-color: rgba(236, 192, 72, 0.1);
     }
+    /* ========================================
+       PAPER IMAGES
+       ======================================== */
+    
+    /* Paper thumbnail images */
     .paper-item img {
         min-width: 12rem;
         height: 10rem;
         object-fit: contain;
     }
+    
+    /* Background images for papers */
     .paper-img-bg {
         width: 12rem;
         height: 10rem;
         background-size: cover;
         background-position: center;
     }
-    /* end your customized css style */
-</style>
+  </style>
  </head>
- <body class="bg-gray-100 text-gray-800 text-sm md:text-base">
+ <body class="text-sm md:text-base">
+  <!-- ========================================
+       MAIN CONTAINER
+       ======================================== -->
   <div class="container mx-auto py-8 w-1/2">
    <div class="flex flex-wrap">
     <div class="w-full">
+     
+     <!-- ========================================
+          HEADER WITH THEME TOGGLE
+          ======================================== -->
+     <div class="flex justify-between items-center mb-6">
+       <div></div> <!-- Empty div for spacing -->
+       <div class="theme-toggle" id="themeToggle">
+         <i class="fas fa-moon theme-toggle-icon moon"></i>
+         <i class="fas fa-sun theme-toggle-icon sun"></i>
+       </div>
+     </div>
+     
+     <!-- ========================================
+          PROFILE SECTION
+          ======================================== -->
      <div class="flex flex-wrap">
+      <!-- Main content area -->
       <div class="w-full lg:w-3/4">
        <h1 class="text-3xl font-bold mb-8">
         Cong Zhang (张聪)
        </h1>
-       <!-- <p class="text-gray-700 mb-6">
-        Your Introduction Here: (generated Lorem Ipsum)
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque vitae tempus quam pellentesque nec nam aliquam sem et. Sed felis eget velit aliquet sagittis id. Mi bibendum neque egestas congue quisque egestas diam in arcu. Neque viverra justo nec ultrices dui sapien eget.
-        </p> -->
-        <strong>About Me:</strong>
+       
+       <!-- About Me Section -->
+       <strong>About Me:</strong>
         <p class="text-gray-700 mb-6"></p>
         <p class="text-gray-700 mb-6">  
             Cong Zhang is a Ph.D. from the School of Computer Science and Engineering
@@ -191,6 +404,7 @@
        <p class="text-gray-700 mb-6"> 
             Email: cong.zhang92@gmail.com
        </p>
+       <!-- Social Links -->
        <div class="flex flex-wrap text-blue-500 mb-10">
         <a class="mr-4 anchor-link" href="https://scholar.google.com.sg/citations?user=lSC-K24AAAAJ&hl=zh-CN">
             Google Scholar
@@ -206,48 +420,57 @@
         </a>
        </div>
       </div>
+      
+      <!-- Profile Picture -->
       <div class="w-full lg:w-1/4 lg:pl-4 mt-6">
-       <img alt="Your's profile picture" class="rounded-full" height="150" src="./portrait.jpg" width="150"/>
+       <img alt="Cong Zhang's profile picture" class="rounded-full" height="150" src="./portrait.jpg" width="150"/>
       </div>
      </div>
 
+     <!-- ========================================
+          NEWS, AWARDS, AND EXPERIENCE SECTIONS
+          ======================================== -->
      <div class="mb-8">
-    <h2 class="text-2xl font-bold mb-5">
-        News
-    </h2>
-    <ul class="list-disc pl-6 mb-5">
-        <li class="mb-2">【2025.6】 One paper accepted by TMLR</li>
-        <li class="mb-2">【2025.5】 Two papers accepted by ACL 2025</li>
-        <li class="mb-2">【2025.3】 One paper accepted by ICLR 2025</li>
-        <li class="mb-2">【2025.2】 One paper accepted by COLING 2025</li>
-    </ul>
+      <!-- News Section -->
+      <h2 class="text-2xl font-bold mb-5">
+          News
+      </h2>
+      <ul class="list-disc pl-6 mb-5">
+          <li class="mb-2">【2025.6】 One paper accepted by TMLR</li>
+          <li class="mb-2">【2025.5】 Two papers accepted by ACL 2025</li>
+          <li class="mb-2">【2025.3】 One paper accepted by ICLR 2025</li>
+          <li class="mb-2">【2025.2】 One paper accepted by COLING 2025</li>
+      </ul>
 
-    <h2 class="text-2xl font-bold mb-5">
-        Awards
-    </h2>
-    <ul class="list-disc pl-6 mb-5">
-        <!-- <li class="mb-2">【2025】Top Cited Article for paper "A review on learning to solve combinatorial optimisation problems in manufacturing"</li> -->
-        <li class="mb-2">【2019】Certified to teach, Nanyang Technological University</li>
-        <li class="mb-2">【2018】Singapore International Graduate Award (SINGA), PhD scholarship provided by the SG Government </li>
-        <!-- <li class="mb-2">【2013-2015】Partial tuition waiver for academic excellence, University of Liverpool</li> -->
-        <!-- <li class="mb-2">【2011】Entry Scholarship, Xi'an Jiaotong-Liverpool University</li> -->
-    </ul>
+      <!-- Awards Section -->
+      <h2 class="text-2xl font-bold mb-5">
+          Awards
+      </h2>
+      <ul class="list-disc pl-6 mb-5">
+          <li class="mb-2">【2019】Certified to teach, Nanyang Technological University</li>
+          <li class="mb-2">【2018】Singapore International Graduate Award (SINGA), PhD scholarship provided by the SG Government</li>
+      </ul>
 
-    <h2 class="text-2xl font-bold mb-5">
-        Working Experiences
-    </h2>
-    <ul class="list-disc pl-6 mb-5">
-        <li class="mb-2">【2024.08 - Present】 LLM Algorithm Research Scientist, AIIC/TikTok, Singapore</li>
-        <li class="mb-2">【2022.11 - 2024.08】 Research Engineer, Huawei Noah's Ark Lab, Singapore</li>
-        <li class="mb-2">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
-        <!-- Add more experiences as needed -->
-    </ul>
+      <!-- Work Experience Section -->
+      <h2 class="text-2xl font-bold mb-5">
+          Working Experiences
+      </h2>
+      <ul class="list-disc pl-6 mb-5">
+          <li class="mb-2">【2024.08 - Present】 LLM Algorithm Research Scientist, AIIC/TikTok, Singapore</li>
+          <li class="mb-2">【2022.11 - 2024.08】 Research Engineer, Huawei Noah's Ark Lab, Singapore</li>
+          <li class="mb-2">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
+      </ul>
 
+     <!-- ========================================
+          CONFERENCE PAPERS SECTION
+          ======================================== -->
      <h2 class="text-2xl font-bold mb-5">
         Conference Papers
      </h2>
+     
+     <!-- Instructions for paper filtering -->
      <div class="text-gray-500 italic text-sm mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
-     <div class="text-gray-500 italic text-sm mb-4">* denotes equal contribution, # denotes corresponding author</div><!-- Research Items -->
+     <div class="text-gray-500 italic text-sm mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
 
         <div class="flex flex-wrap mb-8 paper-item">
@@ -468,12 +691,16 @@
             </div>
         </div>
 
-                        
+     <!-- ========================================
+          JOURNAL ARTICLES SECTION
+          ======================================== -->                       
      <h2 class="text-2xl font-bold mb-5">
         Journal Articles
-    </h2>
-    <div class="text-gray-500 italic text-sm mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
-    <div class="text-gray-500 italic text-sm mb-4">* denotes equal contribution, # denotes corresponding author</div>
+     </h2>
+     
+     <!-- Instructions for paper filtering -->
+     <div class="text-gray-500 italic text-sm mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
+     <div class="text-gray-500 italic text-sm mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
@@ -499,7 +726,7 @@
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
             <h3 class="text-l font-bold mb-1 paper-title">
-                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-JSSP" data-tag="jssp">[JSSP]</span> Graph Neural Networks for Job Shop Scheduling Problems: A Survey
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-jssp" data-tag="jssp">[JSSP]</span> Graph Neural Networks for Job Shop Scheduling Problems: A Survey
             </h3>
             <p class="text-gray-700 mb-1">
                 Igor G Smit, 
@@ -674,27 +901,16 @@
 
 
 
-    <!-- <div class="mb-8">
-        <h2 class="text-2xl font-bold mb-4 mt-2">
-            Misc
-        </h2>
-        <div class="mb-1">
-            information 1
-        </div>
-        <div class="mb-1">
-            information 2
-        </div>
-    </div>   -->
     </div>
     </div>
-
-     <!-- End of Research Items -->
     </div>
    </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="w-full bg-gray-200 text-gray-600 py-4 mt-10 text-center text-xs">
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="w-full theme-bg-secondary theme-text-secondary py-4 mt-10 text-center text-xs theme-border border-t">
     <div>
       &copy; 2024 Cong Zhang. Modified with Cursor.
       <a href="https://github.com/zcaicaros" class="text-blue-500 hover:text-orange-500" target="_blank" rel="noopener">GitHub</a>
@@ -703,22 +919,38 @@
 
  </body>
  
+ <!-- ========================================
+      JAVASCRIPT FUNCTIONALITY
+      ======================================== -->
  <script>
-    // Tag filtering functionality
+    /* ========================================
+       PAPER FILTERING SYSTEM
+       ======================================== */
+    
+    // Store currently active filter tags
     let activeTags = new Set();
 
+    /**
+     * Toggle a tag filter on/off
+     * @param {string} tag - The tag name to toggle
+     */
     function toggleTag(tag) {
         const tagElement = document.querySelector(`[data-tag="${tag}"]`);
         if (activeTags.has(tag)) {
+            // Remove tag from active filters
             activeTags.delete(tag);
             tagElement.classList.remove('active');
         } else {
+            // Add tag to active filters
             activeTags.add(tag);
             tagElement.classList.add('active');
         }
         filterPapers();
     }
 
+    /**
+     * Filter papers based on active tags
+     */
     function filterPapers() {
         const papers = document.querySelectorAll('.paper-item');
         papers.forEach(paper => {
@@ -728,6 +960,7 @@
                 return;
             }
 
+            // Get all tags for this paper
             const paperTags = Array.from(paper.querySelectorAll('.type-tag'))
                 .map(tag => tag.getAttribute('data-tag'));
 
@@ -737,29 +970,101 @@
         });
     }
 
-    // Add click handlers to all tags
-    document.querySelectorAll('.type-tag').forEach(tag => {
-        tag.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const tagName = tag.getAttribute('data-tag');
-            toggleTag(tagName);
+    /**
+     * Initialize tag filtering system
+     */
+    function initializeTagFiltering() {
+        document.querySelectorAll('.type-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const tagName = tag.getAttribute('data-tag');
+                toggleTag(tagName);
+            });
         });
-    });
+    }
 
-    // Color the 'code' links gray if no real link, blue otherwise
-    document.querySelectorAll('a.anchor-link').forEach(link => {
-        if (link.textContent.trim().toLowerCase() === 'code') {
-            if (!link.getAttribute('href') || link.getAttribute('href') === '#') {
-                link.classList.remove('text-blue-500');
-                link.style.color = '#6b7280'; // Tailwind gray-500
-                link.style.pointerEvents = 'none';
-            } else {
-                link.classList.add('text-blue-500');
-                link.style.color = '';
-                link.style.pointerEvents = '';
-            }
+    /* ========================================
+       THEME TOGGLE SYSTEM
+       ======================================== */
+    
+    /**
+     * Initialize theme based on saved preference or default to light
+     */
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const toggle = document.getElementById('themeToggle');
+        
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggle.classList.add('dark');
         }
+    }
+
+    /**
+     * Toggle between light and dark themes
+     */
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const toggle = document.getElementById('themeToggle');
+        
+        if (currentTheme === 'dark') {
+            // Switch to light theme
+            document.documentElement.setAttribute('data-theme', 'light');
+            toggle.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            // Switch to dark theme
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggle.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    /**
+     * Initialize theme toggle functionality
+     */
+    function initializeThemeToggle() {
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    }
+
+    /* ========================================
+       LINK STYLING SYSTEM
+       ======================================== */
+    
+    /**
+     * Style code links based on whether they have valid URLs
+     */
+    function styleCodeLinks() {
+        document.querySelectorAll('a.anchor-link').forEach(link => {
+            if (link.textContent.trim().toLowerCase() === 'code') {
+                if (!link.getAttribute('href') || link.getAttribute('href') === '#') {
+                    // Gray out inactive code links
+                    link.classList.remove('text-blue-500');
+                    link.style.color = '#6b7280'; // Tailwind gray-500
+                    link.style.pointerEvents = 'none';
+                } else {
+                    // Keep active code links blue
+                    link.classList.add('text-blue-500');
+                    link.style.color = '';
+                    link.style.pointerEvents = '';
+                }
+            }
+        });
+    }
+
+    /* ========================================
+       INITIALIZATION
+       ======================================== */
+    
+    /**
+     * Initialize all functionality when DOM is loaded
+     */
+    document.addEventListener('DOMContentLoaded', function() {
+        initTheme();
+        initializeTagFiltering();
+        initializeThemeToggle();
+        styleCodeLinks();
     });
  </script>
 
