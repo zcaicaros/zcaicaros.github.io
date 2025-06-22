@@ -4,7 +4,7 @@
   <!-- Basic Meta Tags -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Cong Zhang - PhD in Computer Science specializing in Deep Reinforcement Learning and Combinatorial Optimization">
   <meta name="keywords" content="Cong Zhang, Deep Reinforcement Learning, Combinatorial Optimization, JSSP, VRP, Machine Learning">
   
@@ -63,6 +63,30 @@
         background-color: var(--bg-primary);
         color: var(--text-primary);
         transition: background-color 0.3s ease, color 0.3s ease;
+        width: 100%;
+        min-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Ensure full width on all orientations */
+    html, body {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Handle orientation changes */
+    @media screen and (orientation: portrait) {
+        .container {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+    }
+
+    @media screen and (orientation: landscape) {
+        .container {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
     }
 
     /* Theme-aware utility classes */
@@ -1116,6 +1140,39 @@
     }
 
     /* ========================================
+       ORIENTATION CHANGE HANDLING
+       ======================================== */
+    
+    /**
+     * Handle orientation changes to ensure proper layout
+     */
+    function handleOrientationChange() {
+        // Force a reflow to ensure proper sizing
+        document.body.style.width = '100%';
+        document.documentElement.style.width = '100%';
+        
+        // Update container width
+        const containers = document.querySelectorAll('.container');
+        containers.forEach(container => {
+            container.style.width = '100%';
+            container.style.maxWidth = '100%';
+        });
+    }
+
+    /**
+     * Initialize orientation change handling
+     */
+    function initializeOrientationHandling() {
+        // Handle orientation change
+        window.addEventListener('orientationchange', function() {
+            setTimeout(handleOrientationChange, 100);
+        });
+        
+        // Handle resize events
+        window.addEventListener('resize', handleOrientationChange);
+    }
+
+    /* ========================================
        INITIALIZATION
        ======================================== */
     
@@ -1127,6 +1184,8 @@
         initializeTagFiltering();
         initializeThemeToggle();
         styleCodeLinks();
+        initializeOrientationHandling();
+        handleOrientationChange(); // Ensure proper sizing on load
     });
  </script>
 
