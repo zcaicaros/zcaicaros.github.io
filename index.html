@@ -74,18 +74,26 @@
         max-width: 100%;
     }
 
-    /* Handle orientation changes */
-    @media screen and (orientation: portrait) {
+    /* Handle orientation changes - only for mobile devices */
+    @media screen and (orientation: portrait) and (max-width: 1023px) {
         .container {
             width: 100% !important;
             max-width: 100% !important;
         }
     }
 
-    @media screen and (orientation: landscape) {
+    @media screen and (orientation: landscape) and (max-width: 1023px) {
         .container {
             width: 100% !important;
             max-width: 100% !important;
+        }
+    }
+
+    /* Desktop width constraints */
+    @media screen and (min-width: 1024px) {
+        .container {
+            width: 50% !important;
+            max-width: 50% !important;
         }
     }
 
@@ -407,7 +415,7 @@
   <!-- ========================================
        MAIN CONTAINER
        ======================================== -->
-  <div class="container mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 w-full">
+  <div class="container mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 w-full lg:w-1/2">
    <div class="flex flex-wrap">
     <div class="w-full">
      
@@ -1151,11 +1159,20 @@
         document.body.style.width = '100%';
         document.documentElement.style.width = '100%';
         
-        // Update container width
+        // Update container width based on screen size
         const containers = document.querySelectorAll('.container');
+        const isDesktop = window.innerWidth >= 1024;
+        
         containers.forEach(container => {
-            container.style.width = '100%';
-            container.style.maxWidth = '100%';
+            if (isDesktop) {
+                // Desktop: use 50% width
+                container.style.width = '50%';
+                container.style.maxWidth = '50%';
+            } else {
+                // Mobile/Tablet: use 100% width
+                container.style.width = '100%';
+                container.style.maxWidth = '100%';
+            }
         });
     }
 
