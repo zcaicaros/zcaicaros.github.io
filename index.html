@@ -1,80 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic Meta Tags -->
+  <!-- ==========================================
+       DOCUMENT META INFORMATION
+       ========================================== -->
+  
+  <!-- Basic Meta Tags for proper HTML rendering and SEO -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!-- Responsive viewport settings for mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- SEO meta description for search engines -->
   <meta name="description" content="Cong Zhang - PhD in Computer Science specializing in Deep Reinforcement Learning and Combinatorial Optimization">
+  <!-- SEO keywords for better search indexing -->
   <meta name="keywords" content="Cong Zhang, Deep Reinforcement Learning, Combinatorial Optimization, JSSP, VRP, Machine Learning">
   
-  <!-- Page Title -->
+  <!-- Page Title displayed in browser tab -->
   <title>Cong Zhang - Academic Portfolio</title>
   
-  <!-- External Links Configuration -->
+  <!-- Configure all external links to open in new tab by default -->
   <base target="_blank">
   
-  <!-- External Stylesheets -->
+  <!-- ==========================================
+       EXTERNAL DEPENDENCIES
+       ========================================== -->
+  
+  <!-- Google Fonts - Open Sans font family for consistent typography -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;display=swap" rel="stylesheet"/>
+  <!-- Font Awesome icons for UI elements (moon/sun icons for theme toggle) -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS Framework for rapid UI development -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    // Configure Tailwind to use class-based dark mode
     tailwind.config = {
         darkMode: 'class',
     }
   </script>
   
-  <!-- GitHub Buttons -->
+  <!-- GitHub Buttons for social integration (if needed) -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   <style>
-    /* ========================================
-       CSS CUSTOM PROPERTIES (THEME VARIABLES)
-       ======================================== */
+    /* ==========================================
+       CSS CUSTOM PROPERTIES (THEME SYSTEM)
+       ========================================== 
+       
+       This section defines CSS custom properties (variables) that enable
+       seamless switching between light and dark themes. The theme system
+       uses CSS custom properties to maintain consistent colors across
+       all components while allowing easy theme switching via JavaScript.
+    */
     
-    /* Light Theme Variables */
+    /* Light Theme Color Palette */
     :root {
-        --bg-primary: #f3f4f6;        /* Light gray background */
-        --bg-secondary: #ffffff;      /* White background */
-        --text-primary: #1f2937;      /* Dark gray text */
-        --text-secondary: #6b7280;    /* Medium gray text */
-        --border-color: #e5e7eb;      /* Light border */
-        --hover-bg: rgba(0, 0, 0, 0.05); /* Light hover effect */
+        --bg-primary: #f3f4f6;        /* Main page background (light gray) */
+        --bg-secondary: #ffffff;      /* Card/section backgrounds (white) */
+        --text-primary: #1f2937;      /* Primary text color (dark gray) */
+        --text-secondary: #6b7280;    /* Secondary text color (medium gray) */
+        --border-color: #e5e7eb;      /* Border color for elements */
+        --hover-bg: rgba(0, 0, 0, 0.05); /* Subtle hover effect background */
     }
 
-    /* Dark Theme Variables */
+    /* Dark Theme Color Palette - Applied when [data-theme="dark"] is set on document */
     [data-theme="dark"] {
-        --bg-primary: #111827;        /* Dark background */
-        --bg-secondary: #1f2937;      /* Darker secondary background */
-        --text-primary: #d1d5db;      /* Light gray text */
-        --text-secondary: #9ca3af;    /* Medium gray text */
-        --border-color: #374151;      /* Dark border */
-        --hover-bg: rgba(255, 255, 255, 0.05); /* Light hover effect on dark */
+        --bg-primary: #111827;        /* Main page background (dark) */
+        --bg-secondary: #1f2937;      /* Card/section backgrounds (darker) */
+        --text-primary: #d1d5db;      /* Primary text color (light gray) */
+        --text-secondary: #9ca3af;    /* Secondary text color (medium gray) */
+        --border-color: #374151;      /* Border color for dark theme */
+        --hover-bg: rgba(255, 255, 255, 0.05); /* Subtle hover effect for dark theme */
     }
 
-    /* ========================================
-       GLOBAL STYLES
-       ======================================== */
+    /* ==========================================
+       GLOBAL STYLES & RESPONSIVE DESIGN
+       ========================================== 
+       
+       This section establishes the foundation styling for the entire site,
+       including typography, theme integration, and responsive behavior
+       across different screen sizes and orientations.
+    */
     
+    /* Base body styling with theme integration */
     body {
-        font-family: 'Open Sans', sans-serif;
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        transition: background-color 0.3s ease, color 0.3s ease;
-        width: 100%;
-        min-width: 100%;
-        overflow-x: hidden;
+        font-family: 'Open Sans', sans-serif;  /* Consistent typography */
+        background-color: var(--bg-primary);   /* Theme-aware background */
+        color: var(--text-primary);            /* Theme-aware text color */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transitions */
+        width: 100%;                            /* Full width layout */
+        min-width: 100%;                        /* Prevent horizontal scrolling */
+        overflow-x: hidden;                     /* Hide horizontal overflow */
     }
 
-    /* Ensure full width on all orientations */
+    /* Ensure consistent full-width layout across browsers */
     html, body {
         width: 100%;
         max-width: 100%;
     }
 
-    /* Handle orientation changes - only for mobile devices */
+    /* ==========================================
+       RESPONSIVE CONTAINER SYSTEM
+       ========================================== 
+       
+       The site uses a smart container system that adapts to screen size:
+       - Mobile/Tablet (< 1024px): Full width for optimal content visibility
+       - Desktop (≥ 1024px): 50% width for better readability and design balance
+    */
+
+    /* Mobile Portrait Mode - Full width for maximum content visibility */
     @media screen and (orientation: portrait) and (max-width: 1023px) {
         .container {
             width: 100% !important;
@@ -82,6 +116,7 @@
         }
     }
 
+    /* Mobile Landscape Mode - Full width to accommodate limited vertical space */
     @media screen and (orientation: landscape) and (max-width: 1023px) {
         .container {
             width: 100% !important;
@@ -89,11 +124,11 @@
         }
     }
 
-    /* Desktop width constraints */
+    /* Desktop Layout - Constrained width for better readability */
     @media screen and (min-width: 1024px) {
         .container {
-            width: 50% !important;
-            max-width: 50% !important;
+            width: 50% !important;          /* Centered, constrained width */
+            max-width: 50% !important;      /* Prevents excessive line length */
         }
     }
 
@@ -128,103 +163,111 @@
         color: var(--text-primary) !important;
     }
 
-    /* ========================================
+    /* ==========================================
        THEME TOGGLE COMPONENT
-       ======================================== */
+       ========================================== 
+       
+       Custom-built theme toggle switch that allows users to switch between
+       light and dark modes. The component includes:
+       - Responsive sizing (smaller on mobile, larger on desktop)
+       - Smooth animations for state transitions
+       - Visual feedback with moon/sun icons
+       - Accessible design with proper contrast and interactive states
+    */
     
-    /* Main toggle container */
+    /* Main toggle container - Creates the background "track" for the switch */
     .theme-toggle {
-        position: relative;
-        width: 50px;
-        height: 25px;
-        background: #e5e7eb;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        margin-left: auto;
+        position: relative;                      /* Required for absolute positioning of child elements */
+        width: 50px;                            /* Mobile width */
+        height: 25px;                           /* Mobile height */
+        background: #e5e7eb;                    /* Light gray background for light mode */
+        border-radius: 25px;                    /* Rounded pill shape */
+        cursor: pointer;                        /* Indicates interactive element */
+        transition: background 0.3s ease;       /* Smooth background color transition */
+        margin-left: auto;                      /* Aligns toggle to the right */
     }
     
-    /* Larger toggle on desktop */
+    /* Larger toggle dimensions for better desktop usability */
     @media (min-width: 640px) {
         .theme-toggle {
-            width: 60px;
-            height: 30px;
-            border-radius: 30px;
+            width: 60px;                        /* Increased width for desktop */
+            height: 30px;                       /* Increased height for desktop */
+            border-radius: 30px;                /* Adjust border radius to maintain shape */
         }
     }
 
-    /* Dark state background */
+    /* Dark theme state - Changes background color when dark mode is active */
     .theme-toggle.dark {
-        background: #374151;
+        background: #374151;                    /* Darker background for dark mode */
     }
 
-    /* Toggle button circle */
+    /* Toggle button circle - The sliding "thumb" of the switch */
     .theme-toggle::before {
-        content: '';
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 21px;
-        height: 21px;
-        background: white;
-        border-radius: 50%;
-        transition: transform 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        content: '';                            /* Creates pseudo-element */
+        position: absolute;                     /* Positioned relative to toggle container */
+        top: 2px;                              /* Small gap from top */
+        left: 2px;                             /* Starting position (left side) */
+        width: 21px;                           /* Circle width */
+        height: 21px;                          /* Circle height */
+        background: white;                      /* White circle for contrast */
+        border-radius: 50%;                     /* Makes it circular */
+        transition: transform 0.3s ease;       /* Smooth sliding animation */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
     }
     
-    /* Larger circle on desktop */
+    /* Larger circle dimensions for desktop */
     @media (min-width: 640px) {
         .theme-toggle::before {
-            top: 3px;
-            left: 3px;
-            width: 24px;
-            height: 24px;
+            top: 3px;                          /* Adjust position for larger container */
+            left: 3px;                         /* Adjust position for larger container */
+            width: 24px;                       /* Larger circle for desktop */
+            height: 24px;                      /* Larger circle for desktop */
         }
     }
 
-    /* Move circle to right when dark mode is active */
+    /* Slide circle to right when dark mode is active */
     .theme-toggle.dark::before {
-        transform: translateX(25px);
-        background: white;
+        transform: translateX(25px);           /* Move circle to right side (mobile) */
+        background: white;                     /* Maintain white color */
     }
     
-    /* Larger movement on desktop */
+    /* Adjust sliding distance for larger desktop toggle */
     @media (min-width: 640px) {
         .theme-toggle.dark::before {
-            transform: translateX(30px);
+            transform: translateX(30px);       /* Greater distance for larger toggle */
         }
     }
 
-    /* Icon styling */
+    /* Base styling for moon/sun icons inside the toggle */
     .theme-toggle-icon {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 14px;
-        transition: opacity 0.3s ease;
+        position: absolute;                     /* Positioned within toggle container */
+        top: 50%;                              /* Center vertically */
+        transform: translateY(-50%);           /* Adjust for true center alignment */
+        font-size: 14px;                      /* Icon size */
+        transition: opacity 0.3s ease;        /* Smooth fade in/out transition */
     }
 
-    /* Sun icon (visible in dark mode) */
+    /* Sun icon - Visible during dark mode (represents switching to light) */
     .theme-toggle-icon.sun {
-        right: 8px;
-        color: #6b7280;
-        opacity: 0;
+        right: 8px;                            /* Position on right side */
+        color: #6b7280;                        /* Gray color */
+        opacity: 0;                            /* Hidden by default */
     }
 
-    /* Moon icon (visible in light mode) */
+    /* Moon icon - Visible during light mode (represents switching to dark) */
     .theme-toggle-icon.moon {
-        left: 8px;
-        color: #6b7280;
-        opacity: 1;
+        left: 8px;                             /* Position on left side */
+        color: #6b7280;                        /* Gray color */
+        opacity: 1;                            /* Visible by default */
     }
 
-    /* Show/hide icons based on theme */
+    /* Icon visibility control based on theme state */
     .theme-toggle.dark .theme-toggle-icon.sun {
-        opacity: 1;
+        opacity: 1;                            /* Show sun icon in dark mode */
     }
 
     .theme-toggle.dark .theme-toggle-icon.moon {
-        opacity: 0;
+        opacity: 0;                            /* Hide moon icon in dark mode */
     }
 
     /* ========================================
@@ -243,57 +286,66 @@
     .hover\:text-underline:hover {
         text-decoration: underline;
     }
-    /* ========================================
+    /* ==========================================
        PAPER FILTERING SYSTEM
-       ======================================== */
+       ========================================== 
+       
+       Interactive filtering system that allows users to filter academic papers
+       by research areas. Features include:
+       - Clickable tags that can be combined for refined filtering
+       - Visual feedback for active filters
+       - Smooth animations for showing/hiding papers
+       - AND-logic filtering (papers must match ALL selected tags)
+    */
     
-    /* Tag styling for paper categories */
+    /* Base styling for clickable research area tags */
     .type-tag {
-        margin-right: 0px;
-        cursor: pointer;
-        user-select: none;
-        padding: 1px 4px;
-        border-radius: 0px;
-        transition: all 0.2s ease;
+        margin-right: 0px;                      /* No gap between adjacent tags */
+        cursor: pointer;                        /* Indicates clickable element */
+        user-select: none;                      /* Prevent text selection on click */
+        padding: 1px 4px;                       /* Compact padding */
+        border-radius: 0px;                     /* No rounding by default */
+        transition: all 0.2s ease;              /* Smooth hover/active transitions */
     }
     
-    /* Round corners for first and last tags */
+    /* Create pill-shaped appearance when tags are grouped together */
     .type-tag:first-child {
-        border-top-left-radius: 3px;
+        border-top-left-radius: 3px;           /* Round left side of first tag */
         border-bottom-left-radius: 3px;
     }
     
     .type-tag:last-child {
-        border-top-right-radius: 3px;
+        border-top-right-radius: 3px;          /* Round right side of last tag */
         border-bottom-right-radius: 3px;
     }
     
-    /* Hover effect for tags */
+    /* Interactive hover effect provides visual feedback */
     .type-tag:hover {
-        opacity: 1;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        opacity: 1;                             /* Ensure full opacity */
+        transform: translateY(-1px);           /* Subtle lift effect */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
     }
     
-    /* Active state for selected tags */
+    /* Active state styling for currently selected filters */
     .type-tag.active {
-        font-weight: bold;
-        text-decoration: underline;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-weight: bold;                      /* Bold text for emphasis */
+        text-decoration: underline;             /* Underline for clear indication */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Persistent shadow */
     }
     
-    /* Paper item visibility states */
+    /* Hidden state for filtered out papers */
     .paper-item.hidden {
-        display: none;
-        height: 0;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
+        display: none;                          /* Completely remove from layout */
+        height: 0;                             /* Collapse height */
+        margin: 0;                             /* Remove margins */
+        padding: 0;                            /* Remove padding */
+        overflow: hidden;                      /* Hide any overflow */
     }
     
+    /* Smooth transitions for paper visibility changes */
     .paper-item {
-        transition: all 0.3s ease;
-        min-height: 0;
+        transition: all 0.3s ease;             /* Smooth show/hide animations */
+        min-height: 0;                         /* Allow height to collapse */
     }
     /* ========================================
        TAG COLOR SYSTEM
@@ -430,27 +482,53 @@
   </style>
  </head>
  <body class="text-sm md:text-base">
-  <!-- ========================================
-       MAIN CONTAINER
-       ======================================== -->
+  <!-- ==========================================
+       MAIN SITE STRUCTURE
+       ========================================== 
+       
+       The site uses a responsive container system:
+       - Mobile/Tablet: Full width for optimal content display
+       - Desktop: Centered 50% width for better readability
+       
+       The layout is built with Tailwind CSS using flexbox
+       for responsive design across all screen sizes.
+  -->
   <div class="container mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 w-full lg:w-1/2">
    <div class="flex flex-wrap">
     <div class="w-full">
      
-     <!-- ========================================
-          HEADER WITH THEME TOGGLE
-          ======================================== -->
+     <!-- ==========================================
+          SITE HEADER WITH THEME TOGGLE
+          ========================================== 
+          
+          Minimal header containing only the theme toggle button.
+          The toggle is positioned on the right side and provides
+          visual feedback for the current theme state.
+     -->
      <div class="flex justify-between items-center mb-4 sm:mb-6">
-       <div></div> <!-- Empty div for spacing -->
+       <!-- Spacer div to push theme toggle to the right -->
+       <div></div>
+       
+       <!-- Interactive theme toggle component -->
        <div class="theme-toggle" id="themeToggle">
+         <!-- Moon icon: visible in light mode, indicates "switch to dark" -->
          <i class="fas fa-moon theme-toggle-icon moon"></i>
+         <!-- Sun icon: visible in dark mode, indicates "switch to light" -->
          <i class="fas fa-sun theme-toggle-icon sun"></i>
        </div>
      </div>
      
-     <!-- ========================================
-          PROFILE SECTION
-          ======================================== -->
+     <!-- ==========================================
+          PERSONAL PROFILE SECTION
+          ========================================== 
+          
+          Contains the main biographical and contact information:
+          - Name and professional title
+          - Academic background and research interests
+          - Education history
+          - Contact information and social links
+          - Professional headshot (desktop only)
+     -->
      <div class="flex flex-wrap">
       <!-- Main content area -->
       <div class="w-full lg:w-3/4 mb-6 lg:mb-0">
@@ -572,16 +650,31 @@
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
       </ul>
 
-     <!-- ========================================
+     <!-- ==========================================
           CONFERENCE PAPERS SECTION
-          ======================================== -->
+          ========================================== 
+          
+          Interactive academic publications list featuring:
+          - Click-to-filter tag system by research area
+          - AND-logic filtering for precise paper discovery
+          - Links to papers and code repositories
+          - Visual indicators for authorship roles
+          - Responsive layout for all screen sizes
+     -->
      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
         Conference Papers
      </h2>
      
-     <!-- Instructions for paper filtering -->
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on tags to filter papers. Multiple tags can be selected to narrow down results (e.g., click [COP] then [VRP] to see only VRP papers within COP)</div>
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
+     <!-- User instructions for the interactive filtering system -->
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">
+        Click on tags to filter papers. Multiple tags can be selected to narrow down results 
+        (e.g., click [COP] then [VRP] to see only VRP papers within COP)
+     </div>
+     
+     <!-- Legend for authorship notation -->
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">
+        * denotes equal contribution, # denotes corresponding author
+     </div>
 
 
         <div class="flex flex-wrap mb-6 sm:mb-8 paper-item">
@@ -1019,54 +1112,96 @@
    </div>
   </div>
 
-  <!-- ========================================
-       FOOTER
-       ======================================== -->
+  <!-- ==========================================
+       SITE FOOTER
+       ========================================== 
+       
+       Simple footer with copyright information and additional GitHub link.
+       Uses theme-aware classes to adapt to light/dark mode automatically.
+       The footer is styled to complement the overall design while
+       providing essential attribution and links.
+  -->
   <footer class="w-full theme-bg-secondary theme-text-secondary py-3 sm:py-4 mt-6 sm:mt-8 md:mt-10 text-center text-xs sm:text-sm theme-border border-t">
     <div class="px-4">
+      <!-- Copyright notice and attribution -->
       &copy; 2024 Cong Zhang. Modified with Cursor.
-      <a href="https://github.com/zcaicaros" class="text-blue-500 hover:text-orange-500 ml-2" target="_blank" rel="noopener">GitHub</a>
+      
+      <!-- Additional GitHub link with hover effects -->
+      <a href="https://github.com/zcaicaros" 
+         class="text-blue-500 hover:text-orange-500 ml-2" 
+         target="_blank" 
+         rel="noopener">GitHub</a>
     </div>
   </footer>
 
  </body>
  
- <!-- ========================================
+ <!-- ==========================================
       JAVASCRIPT FUNCTIONALITY
-      ======================================== -->
+      ========================================== 
+      
+      This script manages the interactive features of the portfolio site:
+      1. Paper Filtering System - Interactive tag-based filtering with AND logic
+      2. Theme Toggle System - Light/dark mode switching with persistence
+      3. Link Styling System - Dynamic styling for active/inactive links
+      4. Responsive Layout Management - Orientation and resize handling
+      
+      All functions are designed to be lightweight, accessible, and performant.
+ -->
  <script>
-    /* ========================================
+    /* ==========================================
        PAPER FILTERING SYSTEM
-       ======================================== */
+       ========================================== 
+       
+       Implements an interactive filtering system for academic papers.
+       Users can click on research area tags to filter papers, with support for:
+       - Multiple simultaneous filters (AND logic)
+       - Visual feedback for active filters
+       - Smooth animations for paper show/hide
+       - Persistent filter display
+    */
     
-    // Store currently active filter tags
+    // Global state: Set to store currently active filter tags
     let activeTags = new Set();
 
     /**
-     * Toggle a tag filter on/off
-     * @param {string} tag - The tag name to toggle
+     * Toggle a research area tag filter on or off
+     * 
+     * This function handles the core filtering logic:
+     * - Adds tag to active filters if not present
+     * - Removes tag from active filters if already present
+     * - Updates UI to reflect current filter state
+     * 
+     * @param {string} tag - The tag identifier to toggle (e.g., 'cop', 'jssp', 'ml')
      */
     function toggleTag(tag) {
-        // Update active tags
+        // Update the global active tags set
         if (activeTags.has(tag)) {
-            // Remove tag from active filters
+            // Tag is currently active - remove it
             activeTags.delete(tag);
         } else {
-            // Add tag to active filters
+            // Tag is not active - add it to active filters
             activeTags.add(tag);
         }
         
-        // Update all tag elements with the same data-tag
-        updateTagHighlighting();
-        filterPapers();
+        // Update visual state and apply filters
+        updateTagHighlighting();  // Refresh tag visual states
+        filterPapers();          // Apply filtering to papers
     }
     
     /**
-     * Update highlighting for all tag elements
+     * Update visual highlighting for all tag elements across the page
+     * 
+     * Synchronizes the visual state of all tag elements with the same data-tag
+     * attribute, ensuring consistent highlighting when multiple instances of
+     * the same tag exist (e.g., [COP] appearing in multiple papers).
      */
     function updateTagHighlighting() {
+        // Find all tag elements and update their active state
         document.querySelectorAll('.type-tag').forEach(tagElement => {
             const tagName = tagElement.getAttribute('data-tag');
+            
+            // Apply or remove 'active' class based on filter state
             if (activeTags.has(tagName)) {
                 tagElement.classList.add('active');
             } else {
@@ -1144,63 +1279,97 @@
     }
 
     /**
-     * Filter papers based on active tags (AND logic - paper must have ALL selected tags)
+     * Apply filtering logic to show/hide papers based on active tags
+     * 
+     * Uses AND logic: papers are only shown if they contain ALL selected tags.
+     * This allows for precise filtering (e.g., selecting both [COP] and [JSSP] 
+     * will only show papers that are both combinatorial optimization AND JSSP papers).
      */
     function filterPapers() {
         const papers = document.querySelectorAll('.paper-item');
+        
         papers.forEach(paper => {
+            // If no filters are active, show all papers
             if (activeTags.size === 0) {
-                // If no tags are selected, show all papers
                 paper.classList.remove('hidden');
                 return;
             }
 
-            // Get all tags for this paper
+            // Extract all research area tags from this paper
             const paperTags = Array.from(paper.querySelectorAll('.type-tag'))
                 .map(tag => tag.getAttribute('data-tag'));
 
-            // Show paper only if it has ALL of the active tags (AND logic)
-            const shouldShow = Array.from(activeTags).every(activeTag => paperTags.includes(activeTag));
+            // Apply AND logic: paper must have ALL active tags to be shown
+            const shouldShow = Array.from(activeTags).every(activeTag => 
+                paperTags.includes(activeTag)
+            );
+            
+            // Toggle visibility based on filter match
             paper.classList.toggle('hidden', !shouldShow);
         });
         
-        // Update active filter display
+        // Update the active filters display at the top
         updateActiveFiltersDisplay();
     }
 
     /**
-     * Initialize tag filtering system
+     * Initialize click handlers for all tag elements
+     * 
+     * Sets up event listeners for tag filtering functionality.
+     * Prevents default link behavior and stops event propagation
+     * to ensure clean interaction handling.
      */
     function initializeTagFiltering() {
         document.querySelectorAll('.type-tag').forEach(tag => {
             tag.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+                e.preventDefault();     // Prevent any default link behavior
+                e.stopPropagation();    // Stop event from bubbling up
+                
                 const tagName = tag.getAttribute('data-tag');
-                toggleTag(tagName);
+                toggleTag(tagName);     // Toggle the filter state
             });
         });
     }
 
-    /* ========================================
+    /* ==========================================
        THEME TOGGLE SYSTEM
-       ======================================== */
+       ========================================== 
+       
+       Manages light/dark theme switching with browser persistence.
+       The theme system works by:
+       - Setting data-theme attribute on document element
+       - Using CSS custom properties to update colors
+       - Persisting user preference in localStorage
+       - Providing smooth visual transitions between themes
+    */
     
     /**
-     * Initialize theme based on saved preference or default to light
+     * Initialize theme on page load based on user's saved preference
+     * 
+     * Checks localStorage for previously saved theme preference
+     * and applies it immediately to prevent theme flash. Defaults
+     * to light theme if no preference is found.
      */
     function initTheme() {
+        // Retrieve saved theme preference or default to light
         const savedTheme = localStorage.getItem('theme') || 'light';
         const toggle = document.getElementById('themeToggle');
         
+        // Apply dark theme if it was previously selected
         if (savedTheme === 'dark') {
+            // Set the data-theme attribute to trigger CSS changes
             document.documentElement.setAttribute('data-theme', 'dark');
+            // Update toggle visual state to match
             toggle.classList.add('dark');
         }
+        // Light theme is default, no action needed
     }
 
     /**
-     * Toggle between light and dark themes
+     * Toggle between light and dark themes with persistence
+     * 
+     * Switches theme state, updates the visual toggle component,
+     * and saves the new preference to localStorage for future visits.
      */
     function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -1212,7 +1381,7 @@
             toggle.classList.remove('dark');
             localStorage.setItem('theme', 'light');
         } else {
-            // Switch to dark theme
+            // Switch to dark theme (covers null/undefined/light cases)
             document.documentElement.setAttribute('data-theme', 'dark');
             toggle.classList.add('dark');
             localStorage.setItem('theme', 'dark');
@@ -1220,10 +1389,16 @@
     }
 
     /**
-     * Initialize theme toggle functionality
+     * Set up click handler for the theme toggle button
+     * 
+     * Attaches the toggle functionality to the theme toggle element.
+     * This must be called after DOM is loaded.
      */
     function initializeThemeToggle() {
-        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
     }
 
     /* ========================================
@@ -1293,20 +1468,33 @@
         window.addEventListener('resize', handleOrientationChange);
     }
 
-    /* ========================================
-       INITIALIZATION
-       ======================================== */
+    /* ==========================================
+       APPLICATION INITIALIZATION
+       ========================================== 
+       
+       Coordinates the initialization of all interactive features
+       when the page loads. Functions are called in a specific order
+       to ensure proper setup and avoid any dependency issues.
+    */
     
     /**
-     * Initialize all functionality when DOM is loaded
+     * Master initialization function - Called when DOM is fully loaded
+     * 
+     * Initializes all interactive features in the correct order:
+     * 1. Theme system (must be first to prevent flash)
+     * 2. Paper filtering system
+     * 3. Theme toggle click handlers
+     * 4. Link styling for code links
+     * 5. Responsive layout handlers
+     * 6. Initial layout adjustment
      */
     document.addEventListener('DOMContentLoaded', function() {
-        initTheme();
-        initializeTagFiltering();
-        initializeThemeToggle();
-        styleCodeLinks();
-        initializeOrientationHandling();
-        handleOrientationChange(); // Ensure proper sizing on load
+        initTheme();                        // Load saved theme immediately
+        initializeTagFiltering();           // Set up paper filter functionality
+        initializeThemeToggle();            // Attach theme toggle click handler
+        styleCodeLinks();                   // Style active/inactive code links
+        initializeOrientationHandling();    // Set up responsive layout handlers
+        handleOrientationChange();          // Apply initial responsive layout
     });
  </script>
 
