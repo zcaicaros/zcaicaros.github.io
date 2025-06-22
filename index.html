@@ -356,6 +356,24 @@
     .tag-llm:hover {
         background-color: rgba(236, 192, 72, 0.1);
     }
+    
+    /* ========================================
+       ACTIVE FILTERS DISPLAY
+       ======================================== */
+    
+    /* Active filters display */
+    #active-filters-display {
+        background-color: rgba(59, 130, 246, 0.05);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        color: rgb(30, 64, 175);
+    }
+    
+    /* Dark theme active filters display */
+    [data-theme="dark"] #active-filters-display {
+        background-color: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        color: rgb(147, 197, 253);
+    }
     /* ========================================
        PAPER IMAGES
        ======================================== */
@@ -562,7 +580,7 @@
      </h2>
      
      <!-- Instructions for paper filtering -->
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on tags to filter papers. Multiple tags can be selected to narrow down results (e.g., click [COP] then [VRP] to see only VRP papers within COP)</div>
      <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
 
@@ -793,7 +811,7 @@
      </h2>
      
      <!-- Instructions for paper filtering -->
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on the tag, e.g., [JSSP], to view all papers with the same tag</div>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on tags to filter papers. Multiple tags can be selected to narrow down results (e.g., click [COP] then [VRP] to see only VRP papers within COP)</div>
      <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
         <div class="flex flex-wrap mb-8 paper-item">
@@ -1029,21 +1047,104 @@
      * @param {string} tag - The tag name to toggle
      */
     function toggleTag(tag) {
-        const tagElement = document.querySelector(`[data-tag="${tag}"]`);
+        // Update active tags
         if (activeTags.has(tag)) {
             // Remove tag from active filters
             activeTags.delete(tag);
-            tagElement.classList.remove('active');
         } else {
             // Add tag to active filters
             activeTags.add(tag);
-            tagElement.classList.add('active');
         }
+        
+        // Update all tag elements with the same data-tag
+        updateTagHighlighting();
+        filterPapers();
+    }
+    
+    /**
+     * Update highlighting for all tag elements
+     */
+    function updateTagHighlighting() {
+        document.querySelectorAll('.type-tag').forEach(tagElement => {
+            const tagName = tagElement.getAttribute('data-tag');
+            if (activeTags.has(tagName)) {
+                tagElement.classList.add('active');
+            } else {
+                tagElement.classList.remove('active');
+            }
+        });
+    }
+    
+    /**
+     * Display active filters at the top of the papers section
+     */
+    function updateActiveFiltersDisplay() {
+        // Remove existing active filters display
+        const existingDisplay = document.getElementById('active-filters-display');
+        if (existingDisplay) {
+            existingDisplay.remove();
+        }
+        
+        if (activeTags.size > 0) {
+            // Create active filters display
+            const filtersDisplay = document.createElement('div');
+            filtersDisplay.id = 'active-filters-display';
+            filtersDisplay.className = 'mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg';
+            filtersDisplay.setAttribute('data-theme-aware', 'true');
+            
+            // Create single line display
+            let filtersHTML = '<div class="text-sm font-medium text-blue-800">';
+            filtersHTML += 'Active Filters: ';
+            
+            // Add comma-separated tags
+            const tagArray = Array.from(activeTags);
+            tagArray.forEach((tag, index) => {
+                const tagColor = getTagColor(tag);
+                filtersHTML += `<span onclick="toggleTag('${tag}')" style="color: ${tagColor}; font-weight: bold; cursor: pointer; text-decoration: underline;" title="Click to remove this filter">${tag.toUpperCase()}</span>`;
+                if (index < tagArray.length - 1) {
+                    filtersHTML += ', ';
+                }
+            });
+            
+            filtersHTML += '</div>';
+            
+            filtersDisplay.innerHTML = filtersHTML;
+            
+            // Insert before the first paper
+            const firstPaper = document.querySelector('.paper-item');
+            if (firstPaper) {
+                firstPaper.parentNode.insertBefore(filtersDisplay, firstPaper);
+            }
+        }
+    }
+    
+    /**
+     * Get color for a specific tag type
+     */
+    function getTagColor(tag) {
+        const colorMap = {
+            'cop': 'rgb(59, 130, 246)',     // Blue
+            'jssp': 'rgb(16, 185, 129)',    // Green
+            'ml': 'rgb(245, 158, 11)',      // Orange
+            'rl': 'rgb(239, 68, 68)',       // Red
+            'nlp': 'rgb(139, 92, 246)',     // Purple
+            'vrp': 'rgb(236, 72, 153)',     // Pink
+            'llm': 'rgb(236, 192, 72)'      // Yellow
+        };
+        return colorMap[tag] || 'rgb(107, 114, 128)'; // Default gray
+    }
+    
+    /**
+     * Clear all active filters
+     */
+    function clearAllFilters() {
+        activeTags.clear();
+        updateTagHighlighting();
         filterPapers();
     }
 
     /**
-     * Filter papers based on active tags
+     * Filter papers based on active tags (AND logic - paper must have ALL selected tags)
      */
     function filterPapers() {
         const papers = document.querySelectorAll('.paper-item');
@@ -1058,10 +1159,13 @@
             const paperTags = Array.from(paper.querySelectorAll('.type-tag'))
                 .map(tag => tag.getAttribute('data-tag'));
 
-            // Show paper if it has at least one of the active tags
-            const shouldShow = paperTags.some(tag => activeTags.has(tag));
+            // Show paper only if it has ALL of the active tags (AND logic)
+            const shouldShow = Array.from(activeTags).every(activeTag => paperTags.includes(activeTag));
             paper.classList.toggle('hidden', !shouldShow);
         });
+        
+        // Update active filter display
+        updateActiveFiltersDisplay();
     }
 
     /**
