@@ -426,6 +426,22 @@
         border: 1px solid rgba(59, 130, 246, 0.3);
         color: rgb(147, 197, 253);
     }
+    
+    /* ========================================
+       NEURIPS SPOTLIGHT HIGHLIGHTING
+       ======================================== */
+    
+    /* NeurIPS Spotlight red highlighting for light mode */
+    strong.neurips-spotlight {
+        color: #dc2626 !important;
+        font-weight: bold;
+    }
+    
+    /* NeurIPS Spotlight red highlighting for dark mode */
+    [data-theme="dark"] strong.neurips-spotlight {
+        color: #f87171 !important; /* Lighter red for better contrast in dark mode */
+        font-weight: bold;
+    }
     /* ========================================
        PAPER IMAGES
        ======================================== */
@@ -625,6 +641,7 @@
           News
       </h2>
       <ul class="list-disc pl-4 sm:pl-6 mb-8 sm:mb-12">
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.9】 One paper accepted as <strong class="neurips-spotlight">NeurIPS 2026 Spotlight</strong></li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.6】 One paper accepted by TMLR</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.5】 Two papers accepted by ACL 2025</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.3】 One paper accepted by ICLR 2025</li>
@@ -676,6 +693,31 @@
         * denotes equal contribution, # denotes corresponding author
      </div>
 
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full px-2 sm:px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-nlp" data-tag="nlp">[NLP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> Robust SuperAlignment: Weak-to-Strong Robustness Generalization for Vision-Language Models </strong>
+            </h3>
+            <p class="text-gray-700 mb-1">
+                <strong>Cong Zhang</strong>,
+                Junhao Dong,
+                Cong Zhang, 
+                Xinghua Qu, 
+                Piotr Koniusz, 
+                Zejun MA, 
+                Yew-Soon Ong
+            </p>
+            <p class="gray-blue-500 mb-2 text-xs sm:text-sm">
+                Conference on Neural Information Processing Systems (<strong class="neurips-spotlight">NeurIPS Spotlight</strong>), 2025
+            </p>
+            <p class="text-xs sm:text-sm">
+                <a class="anchor-link text-blue-500" href="https://openreview.net/forum?id=rOR5IZcwJx&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DNeurIPS.cc%2F2025%2FConference%2FAuthors%23your-submissions)">paper</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
 
         <div class="flex flex-wrap mb-6 sm:mb-8 paper-item">
             <div class="w-full px-2 sm:px-3">
@@ -1124,7 +1166,7 @@
   <footer class="w-full theme-bg-secondary theme-text-secondary py-3 sm:py-4 mt-6 sm:mt-8 md:mt-10 text-center text-xs sm:text-sm theme-border border-t">
     <div class="px-4">
       <!-- Copyright notice and attribution -->
-      &copy; 2024 Cong Zhang. Modified with Cursor.
+      &copy; 2025 Cong Zhang. Modified with Cursor.
       
       <!-- Additional GitHub link with hover effects -->
       <a href="https://github.com/zcaicaros" 
