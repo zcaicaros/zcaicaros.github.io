@@ -360,12 +360,12 @@
         color: rgb(16 185 129); /* Green - Job Shop Scheduling Problem */
     }
     
-    .tag-ml {
-        color: rgb(245 158 11); /* Orange - Machine Learning */
+    .tag-drl {
+        color: rgb(245 158 11); /* Orange - Deep Reinforcement Learning */
     }
     
-    .tag-rl {
-        color: rgb(239 68 68); /* Red - Reinforcement Learning */
+    .tag-marl {
+        color: rgb(239 68 68); /* Red - Multi-Agent Reinforcement Learning */
     }
     
     .tag-nlp {
@@ -389,11 +389,11 @@
         background-color: rgba(16, 185, 129, 0.1);
     }
     
-    .tag-ml:hover {
+    .tag-drl:hover {
         background-color: rgba(245, 158, 11, 0.1);
     }
     
-    .tag-rl:hover {
+    .tag-marl:hover {
         background-color: rgba(239, 68, 68, 0.1);
     }
     
@@ -666,6 +666,54 @@
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2022.11 - 2024.08】 Research Engineer, Huawei Noah's Ark Lab, Singapore</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
       </ul>
+
+     <!-- Instructions for paper filtering -->
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on tags to show/hide papers. Papers are shown if they contain at least one enabled tag. Disable tags to hide related papers.</div>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
+
+     <!-- Active Filters Display - Always visible with all tags -->
+     <div id="active-filters-display" class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg max-w-2xl">
+         <div class="text-sm font-medium text-blue-800 mb-2">
+             Filter Papers by Research Area:
+         </div>
+         <div id="active-filters-list" class="flex flex-wrap gap-2">
+             <!-- All available tags will be populated here -->
+         </div>
+     </div>
+
+     <!-- ========================================
+          PREPRINTS SECTION
+          ======================================== -->                       
+     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
+        Preprints
+     </h2>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-vrp" data-tag="vrp">[VRP]</span> Lifelong Learner: Discovering Versatile Neural Solvers for Vehicle Routing Problems
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Shaodi Feng, 
+                Zhuoyi Lin, 
+                Jianan Zhou, 
+                <strong>Cong Zhang</strong>, 
+                Jingwen Li, 
+                Kuan-Wen Chen, 
+                Senthilnath Jayavelu, 
+                Yew-Soon Ong
+            </p>
+            <p class="gray-blue-500 mb-1">
+                arXiv preprint, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="https://arxiv.org/abs/2508.11679">paper</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
+
 
      <!-- ==========================================
           CONFERENCE PAPERS SECTION
@@ -945,13 +993,13 @@
      </h2>
      
      <!-- Instructions for paper filtering -->
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on tags to filter papers. Multiple tags can be selected to narrow down results (e.g., click [COP] then [VRP] to see only VRP papers within COP)</div>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on tags to show/hide papers. Papers are shown if they contain at least one enabled tag. Disable tags to hide related papers.</div>
      <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
             <h3 class="text-l font-bold mb-1 paper-title">
-                <span class="type-tag tag-ml" data-tag="ml">[ML]</span><span class="type-tag tag-rl" data-tag="rl">[DRL]</span> Collaboration with Dynamic Open Ad Hoc Team via Team State Modelling
+                <span class="type-tag tag-drl" data-tag="drl">[DRL]</span><span class="type-tag tag-marl" data-tag="marl">[MARL]</span> Collaboration with Dynamic Open Ad Hoc Team via Team State Modelling
             </h3>
             <p class="text-gray-700 mb-1">
                 Jing Sun,
@@ -999,7 +1047,7 @@
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
             <h3 class="text-l font-bold mb-1 paper-title">
-                <span class="type-tag tag-ml" data-tag="ml">[ML]</span><span class="type-tag tag-rl" data-tag="rl">[DRL]</span> Decision-making with speculative opponent models
+                <span class="type-tag tag-drl" data-tag="drl">[DRL]</span><span class="type-tag tag-marl" data-tag="marl">[MARL]</span> Decision-making with speculative opponent models
             </h3>
             <p class="text-gray-700 mb-1">
                 Jing Sun, 
@@ -1096,7 +1144,7 @@
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
              <h3 class="text-l font-bold mb-1 paper-title">
-                 <span class="type-tag tag-ml" data-tag="ml">[ML]</span><span class="type-tag tag-rl" data-tag="rl">[DRL]</span> Sampling efficient deep reinforcement learning through preference-guided stochastic exploration
+                 <span class="type-tag tag-drl" data-tag="drl">[DRL]</span><span class="type-tag tag-marl" data-tag="marl">[MARL]</span> Sampling efficient deep reinforcement learning through preference-guided stochastic exploration
              </h3>
              <p class="text-gray-700 mb-1">
                  Wenhui Huang,
@@ -1202,31 +1250,60 @@
        - Persistent filter display
     */
     
-    // Global state: Set to store currently active filter tags
-    let activeTags = new Set();
+    // Global state: Set to store enabled tags (tags that show papers)
+    let enabledTags = new Set();
+    
+    // Global state: Set to store all available tags found in papers
+    let allAvailableTags = new Set();
 
     /**
-     * Toggle a research area tag filter on or off
+     * Toggle a research area tag filter on or off (from paper tags)
      * 
      * This function handles the core filtering logic:
-     * - Adds tag to active filters if not present
-     * - Removes tag from active filters if already present
+     * - Adds tag to enabled filters if not present
+     * - Removes tag from enabled filters if already present
      * - Updates UI to reflect current filter state
      * 
      * @param {string} tag - The tag identifier to toggle (e.g., 'cop', 'jssp', 'ml')
      */
     function toggleTag(tag) {
-        // Update the global active tags set
-        if (activeTags.has(tag)) {
-            // Tag is currently active - remove it
-            activeTags.delete(tag);
+        // Update the global enabled tags set
+        if (enabledTags.has(tag)) {
+            // Tag is currently enabled - disable it
+            enabledTags.delete(tag);
         } else {
-            // Tag is not active - add it to active filters
-            activeTags.add(tag);
+            // Tag is not enabled - enable it
+            enabledTags.add(tag);
         }
         
         // Update visual state and apply filters
         updateTagHighlighting();  // Refresh tag visual states
+        updateActiveFiltersDisplay(); // Update the filter display
+        filterPapers();          // Apply filtering to papers
+    }
+    
+    /**
+     * Toggle a tag's enabled state (from Active Filters display)
+     * 
+     * This function handles enabling/disabling tags in the Active Filters display:
+     * - Adds tag to enabled set if not enabled
+     * - Removes tag from enabled set if already enabled
+     * - Updates the filtering
+     * 
+     * @param {string} tag - The tag identifier to toggle enabled state
+     */
+    function toggleEnabledTag(tag) {
+        if (enabledTags.has(tag)) {
+            // Tag is currently enabled - disable it
+            enabledTags.delete(tag);
+        } else {
+            // Tag is not enabled - enable it
+            enabledTags.add(tag);
+        }
+        
+        // Update visual state and apply filters
+        updateTagHighlighting();  // Refresh tag visual states
+        updateActiveFiltersDisplay(); // Update the filter display
         filterPapers();          // Apply filtering to papers
     }
     
@@ -1242,8 +1319,8 @@
         document.querySelectorAll('.type-tag').forEach(tagElement => {
             const tagName = tagElement.getAttribute('data-tag');
             
-            // Apply or remove 'active' class based on filter state
-            if (activeTags.has(tagName)) {
+            // Apply or remove 'active' class based on enabled state
+            if (enabledTags.has(tagName)) {
                 tagElement.classList.add('active');
             } else {
                 tagElement.classList.remove('active');
@@ -1252,46 +1329,59 @@
     }
     
     /**
-     * Display active filters at the top of the papers section
+     * Update the persistent active filters display with all available tags
      */
     function updateActiveFiltersDisplay() {
-        // Remove existing active filters display
-        const existingDisplay = document.getElementById('active-filters-display');
-        if (existingDisplay) {
-            existingDisplay.remove();
-        }
+        const filtersList = document.getElementById('active-filters-list');
         
-        if (activeTags.size > 0) {
-            // Create active filters display
-            const filtersDisplay = document.createElement('div');
-            filtersDisplay.id = 'active-filters-display';
-            filtersDisplay.className = 'mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg';
-            filtersDisplay.setAttribute('data-theme-aware', 'true');
+        // Get all available tags from papers
+        collectAllAvailableTags();
+        
+        // Create the list of all available tags
+        let filtersHTML = '';
+        const sortedTags = Array.from(allAvailableTags).sort();
+        
+        sortedTags.forEach((tag, index) => {
+            const tagColor = getTagColor(tag);
+            const isEnabled = enabledTags.has(tag);
+            const tagDisplayName = getTagDisplayName(tag);
             
-            // Create single line display
-            let filtersHTML = '<div class="text-sm font-medium text-blue-800">';
-            filtersHTML += 'Active Filters:   ';
+            // Style based on enabled state
+            const style = isEnabled ? 
+                `color: ${tagColor}; font-weight: bold; opacity: 1;` : 
+                `color: ${tagColor}; font-weight: normal; opacity: 0.5;`;
             
-            // Add comma-separated tags
-            const tagArray = Array.from(activeTags);
-            tagArray.forEach((tag, index) => {
-                const tagColor = getTagColor(tag);
-                filtersHTML += `<span onclick="toggleTag('${tag}')" style="color: ${tagColor}; font-weight: bold; cursor: pointer; text-decoration: underline;" title="Click to remove this filter">${tag.toUpperCase()}</span>`;
-                if (index < tagArray.length - 1) {
-                    filtersHTML += ', ';
-                }
-            });
-            
-            filtersHTML += '</div>';
-            
-            filtersDisplay.innerHTML = filtersHTML;
-            
-            // Insert before the first paper
-            const firstPaper = document.querySelector('.paper-item');
-            if (firstPaper) {
-                firstPaper.parentNode.insertBefore(filtersDisplay, firstPaper);
-            }
-        }
+            filtersHTML += `<span onclick="toggleEnabledTag('${tag}')" style="${style} cursor: pointer; text-decoration: underline; padding: 2px 6px; border-radius: 3px; margin: 1px;" title="Click to ${isEnabled ? 'hide' : 'show'} papers with this tag">${tagDisplayName}</span>`;
+        });
+        
+        filtersList.innerHTML = filtersHTML;
+    }
+    
+    /**
+     * Collect all available tags from all papers
+     */
+    function collectAllAvailableTags() {
+        allAvailableTags.clear();
+        document.querySelectorAll('.type-tag').forEach(tagElement => {
+            const tagName = tagElement.getAttribute('data-tag');
+            allAvailableTags.add(tagName);
+        });
+    }
+    
+    /**
+     * Get display name for a tag
+     */
+    function getTagDisplayName(tag) {
+        const displayNames = {
+            'cop': '[COP]',
+            'jssp': '[JSSP]',
+            'drl': '[DRL]',
+            'marl': '[MARL]',
+            'nlp': '[NLP]',
+            'vrp': '[VRP]',
+            'llm': '[LLM]'
+        };
+        return displayNames[tag] || `[${tag.toUpperCase()}]`;
     }
     
     /**
@@ -1301,8 +1391,8 @@
         const colorMap = {
             'cop': 'rgb(59, 130, 246)',     // Blue
             'jssp': 'rgb(16, 185, 129)',    // Green
-            'ml': 'rgb(245, 158, 11)',      // Orange
-            'rl': 'rgb(239, 68, 68)',       // Red
+            'drl': 'rgb(245, 158, 11)',      // Orange
+            'marl': 'rgb(239, 68, 68)',     // Red
             'nlp': 'rgb(139, 92, 246)',     // Purple
             'vrp': 'rgb(236, 72, 153)',     // Pink
             'llm': 'rgb(236, 192, 72)'      // Yellow
@@ -1311,28 +1401,31 @@
     }
     
     /**
-     * Clear all active filters
+     * Clear all active filters (enable all tags)
      */
     function clearAllFilters() {
-        activeTags.clear();
+        enabledTags.clear();
+        // Enable all available tags
+        collectAllAvailableTags();
+        allAvailableTags.forEach(tag => enabledTags.add(tag));
         updateTagHighlighting();
+        updateActiveFiltersDisplay();
         filterPapers();
     }
 
     /**
-     * Apply filtering logic to show/hide papers based on active tags
+     * Apply filtering logic to show/hide papers based on enabled tags
      * 
-     * Uses AND logic: papers are only shown if they contain ALL selected tags.
-     * This allows for precise filtering (e.g., selecting both [COP] and [JSSP] 
-     * will only show papers that are both combinatorial optimization AND JSSP papers).
+     * Papers are shown if they contain at least one enabled tag.
+     * If no tags are enabled, all papers are hidden.
      */
     function filterPapers() {
         const papers = document.querySelectorAll('.paper-item');
         
         papers.forEach(paper => {
-            // If no filters are active, show all papers
-            if (activeTags.size === 0) {
-                paper.classList.remove('hidden');
+            // If no tags are enabled, hide all papers
+            if (enabledTags.size === 0) {
+                paper.classList.add('hidden');
                 return;
             }
 
@@ -1340,17 +1433,12 @@
             const paperTags = Array.from(paper.querySelectorAll('.type-tag'))
                 .map(tag => tag.getAttribute('data-tag'));
 
-            // Apply AND logic: paper must have ALL active tags to be shown
-            const shouldShow = Array.from(activeTags).every(activeTag => 
-                paperTags.includes(activeTag)
-            );
+            // Paper is shown if it contains at least one enabled tag
+            const shouldShow = paperTags.some(tag => enabledTags.has(tag));
             
             // Toggle visibility based on filter match
             paper.classList.toggle('hidden', !shouldShow);
         });
-        
-        // Update the active filters display at the top
-        updateActiveFiltersDisplay();
     }
 
     /**
@@ -1536,6 +1624,13 @@
         styleCodeLinks();                   // Style active/inactive code links
         initializeOrientationHandling();    // Set up responsive layout handlers
         handleOrientationChange();          // Apply initial responsive layout
+        
+        // Initialize filter system with all tags enabled by default
+        collectAllAvailableTags();
+        allAvailableTags.forEach(tag => enabledTags.add(tag));
+        updateActiveFiltersDisplay();
+        updateTagHighlighting();
+        filterPapers();
     });
  </script>
 
