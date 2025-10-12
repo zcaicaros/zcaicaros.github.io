@@ -624,6 +624,11 @@
             Academic CV
         </a> -->
        </div>
+       
+       <!-- Visit Counter -->
+       <div class="mb-4 sm:mb-6">
+        <script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=F401pTDa-ns2Dho2-XJGi1HllaoQ4f5fPYzMekWCEHM&cl=ffffff&w=a"></script>
+       </div>
       </div>
       
       <!-- Profile Picture -->
@@ -667,14 +672,13 @@
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
       </ul>
 
-     <!-- Instructions for paper filtering -->
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on tags to show/hide papers. Papers are shown if they contain at least one enabled tag. Disable tags to hide related papers.</div>
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
-
      <!-- Active Filters Display - Always visible with all tags -->
      <div id="active-filters-display" class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg max-w-2xl">
          <div class="text-sm font-medium text-blue-800 mb-2">
              Filter Papers by Research Area:
+         </div>
+         <div class="text-xs text-gray-600 mb-2 italic">
+             Click tags to filter papers. Multiple tags can be selected. Click a highlighted tag to deselect it. Deselecting all tags will show all papers.
          </div>
          <div id="active-filters-list" class="flex flex-wrap gap-2">
              <!-- All available tags will be populated here -->
@@ -687,6 +691,28 @@
      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
         Preprints
      </h2>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
+
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> Refining Hybrid Genetic Search for CVRP via Reinforcement Learning-Finetuned LLM
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Rongjie Zhu<sup>*</sup>,
+                <strong>Cong Zhang<sup>*</sup></strong>,
+                Zhiguang Cao
+            </p>
+            <p class="gray-blue-500 mb-1">
+                arXiv preprint, 2025
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="#">paper</a>
+                /
+                <a class="anchor-link text-blue-500" href="#">code</a>
+            </p>
+            </div>
+        </div>
 
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
@@ -729,12 +755,6 @@
      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
         Conference Papers
      </h2>
-     
-     <!-- User instructions for the interactive filtering system -->
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">
-        Click on tags to filter papers. Multiple tags can be selected to narrow down results 
-        (e.g., click [COP] then [VRP] to see only VRP papers within COP)
-     </div>
      
      <!-- Legend for authorship notation -->
      <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">
@@ -991,9 +1011,6 @@
      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
         Journal Articles
      </h2>
-     
-     <!-- Instructions for paper filtering -->
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">Click on tags to show/hide papers. Papers are shown if they contain at least one enabled tag. Disable tags to hide related papers.</div>
      <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
         <div class="flex flex-wrap mb-8 paper-item">
@@ -1260,20 +1277,38 @@
      * Toggle a research area tag filter on or off (from paper tags)
      * 
      * This function handles the core filtering logic:
-     * - Adds tag to enabled filters if not present
-     * - Removes tag from enabled filters if already present
+     * - First click on a tag: only that tag becomes enabled, others disabled
+     * - Clicking more tags: adds them to the enabled set (multi-select)
+     * - Clicking an already enabled tag: removes it from the enabled set
+     * - If all tags would be disabled, enable all tags instead
      * - Updates UI to reflect current filter state
      * 
      * @param {string} tag - The tag identifier to toggle (e.g., 'cop', 'jssp', 'ml')
+     * @param {Event} event - The click event
      */
-    function toggleTag(tag) {
-        // Update the global enabled tags set
-        if (enabledTags.has(tag)) {
-            // Tag is currently enabled - disable it
-            enabledTags.delete(tag);
-        } else {
-            // Tag is not enabled - enable it
+    function toggleTag(tag, event) {
+        // Check if we're in "all tags enabled" state (initial state)
+        const isAllEnabled = enabledTags.size === allAvailableTags.size;
+        
+        if (isAllEnabled) {
+            // Initial state: clicking a tag selects only that tag
+            enabledTags.clear();
             enabledTags.add(tag);
+        } else {
+            // Multi-select state: toggle the clicked tag
+            if (enabledTags.has(tag)) {
+                // Tag is enabled - remove it
+                enabledTags.delete(tag);
+                
+                // If no tags are enabled, enable all tags (reset to initial state)
+                if (enabledTags.size === 0) {
+                    collectAllAvailableTags();
+                    allAvailableTags.forEach(t => enabledTags.add(t));
+                }
+            } else {
+                // Tag is not enabled - add it
+                enabledTags.add(tag);
+            }
         }
         
         // Update visual state and apply filters
@@ -1286,19 +1321,38 @@
      * Toggle a tag's enabled state (from Active Filters display)
      * 
      * This function handles enabling/disabling tags in the Active Filters display:
-     * - Adds tag to enabled set if not enabled
-     * - Removes tag from enabled set if already enabled
+     * - First click on a tag: only that tag becomes enabled, others disabled
+     * - Clicking more tags: adds them to the enabled set (multi-select)
+     * - Clicking an already enabled tag: removes it from the enabled set
+     * - If all tags would be disabled, enable all tags instead
      * - Updates the filtering
      * 
      * @param {string} tag - The tag identifier to toggle enabled state
+     * @param {Event} event - The click event
      */
-    function toggleEnabledTag(tag) {
-        if (enabledTags.has(tag)) {
-            // Tag is currently enabled - disable it
-            enabledTags.delete(tag);
-        } else {
-            // Tag is not enabled - enable it
+    function toggleEnabledTag(tag, event) {
+        // Check if we're in "all tags enabled" state (initial state)
+        const isAllEnabled = enabledTags.size === allAvailableTags.size;
+        
+        if (isAllEnabled) {
+            // Initial state: clicking a tag selects only that tag
+            enabledTags.clear();
             enabledTags.add(tag);
+        } else {
+            // Multi-select state: toggle the clicked tag
+            if (enabledTags.has(tag)) {
+                // Tag is enabled - remove it
+                enabledTags.delete(tag);
+                
+                // If no tags are enabled, enable all tags (reset to initial state)
+                if (enabledTags.size === 0) {
+                    collectAllAvailableTags();
+                    allAvailableTags.forEach(t => enabledTags.add(t));
+                }
+            } else {
+                // Tag is not enabled - add it
+                enabledTags.add(tag);
+            }
         }
         
         // Update visual state and apply filters
@@ -1347,11 +1401,13 @@
             const tagDisplayName = getTagDisplayName(tag);
             
             // Style based on enabled state
+            // Enabled tags are shown (bold, full opacity)
+            // Disabled tags are hidden (dimmed, low opacity)
             const style = isEnabled ? 
                 `color: ${tagColor}; font-weight: bold; opacity: 1;` : 
                 `color: ${tagColor}; font-weight: normal; opacity: 0.5;`;
             
-            filtersHTML += `<span onclick="toggleEnabledTag('${tag}')" style="${style} cursor: pointer; text-decoration: underline; padding: 2px 6px; border-radius: 3px; margin: 1px;" title="Click to ${isEnabled ? 'hide' : 'show'} papers with this tag">${tagDisplayName}</span>`;
+            filtersHTML += `<span onclick="toggleEnabledTag('${tag}', event)" style="${style} cursor: pointer; text-decoration: underline; padding: 2px 6px; border-radius: 3px; margin: 1px;" title="Click to ${isEnabled ? 'deselect this tag' : 'select this tag'}">${tagDisplayName}</span>`;
         });
         
         filtersList.innerHTML = filtersHTML;
@@ -1416,16 +1472,23 @@
     /**
      * Apply filtering logic to show/hide papers based on enabled tags
      * 
-     * Papers are shown if they contain at least one enabled tag.
-     * If no tags are enabled, all papers are hidden.
+     * Papers are shown if they contain ANY of the enabled tags (OR logic).
+     * If no tags are enabled, all papers are shown (no filtering).
+     * If all tags are enabled, all papers are shown.
      */
     function filterPapers() {
         const papers = document.querySelectorAll('.paper-item');
         
         papers.forEach(paper => {
-            // If no tags are enabled, hide all papers
+            // If no tags are enabled, show all papers (no filtering)
             if (enabledTags.size === 0) {
-                paper.classList.add('hidden');
+                paper.classList.remove('hidden');
+                return;
+            }
+            
+            // If all tags are enabled (default state), show all papers
+            if (enabledTags.size === allAvailableTags.size) {
+                paper.classList.remove('hidden');
                 return;
             }
 
@@ -1433,7 +1496,7 @@
             const paperTags = Array.from(paper.querySelectorAll('.type-tag'))
                 .map(tag => tag.getAttribute('data-tag'));
 
-            // Paper is shown if it contains at least one enabled tag
+            // Paper is shown if it contains ANY of the enabled tags (OR logic)
             const shouldShow = paperTags.some(tag => enabledTags.has(tag));
             
             // Toggle visibility based on filter match
@@ -1455,7 +1518,7 @@
                 e.stopPropagation();    // Stop event from bubbling up
                 
                 const tagName = tag.getAttribute('data-tag');
-                toggleTag(tagName);     // Toggle the filter state
+                toggleTag(tagName, e);  // Toggle the filter state, pass event for Ctrl/Cmd detection
             });
         });
     }
@@ -1626,6 +1689,7 @@
         handleOrientationChange();          // Apply initial responsive layout
         
         // Initialize filter system with all tags enabled by default
+        // All tags are selected initially, showing all papers
         collectAllAvailableTags();
         allAvailableTags.forEach(tag => enabledTags.add(tag));
         updateActiveFiltersDisplay();
