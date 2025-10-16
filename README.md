@@ -7,6 +7,7 @@ A clean, responsive academic portfolio website with interactive paper filtering 
 - 📱 **Responsive Design** - Works on desktop, tablet, and mobile devices
 - 🌓 **Dark/Light Mode** - Toggle between themes with a single click
 - 🏷️ **Interactive Paper Filtering** - Filter publications by research areas with clickable tags
+- ⭐ **GitHub Star Badges** - Automatic display of GitHub repository star counts with fancy animations
 - 📊 **Visitor Counter** - Track visitors from different countries
 - 🎨 **Modern UI** - Built with Tailwind CSS for a clean, professional look
 - 🔗 **Social Integration** - Links to Google Scholar, GitHub, LinkedIn
@@ -68,6 +69,10 @@ Publications are organized in three sections:
         <a class="anchor-link text-blue-500" href="URL">paper</a>
         /
         <a class="anchor-link text-blue-500" href="URL">code</a>
+        <a class="github-star loading" href="https://github.com/username/repo" target="_blank" rel="noopener" data-repo="username/repo">
+            <span class="github-star-label">stars</span>
+            <span class="github-star-count">-</span>
+        </a>
     </p>
     </div>
 </div>
@@ -79,7 +84,38 @@ Follow the same structure as preprints.
 #### Journal Articles (Starting Line 986)
 Follow the same structure as preprints.
 
-### 4. Configure Research Area Tags
+### 4. Add GitHub Star Badges
+
+For papers with GitHub repositories, you can add fancy star count badges:
+
+```html
+<a class="github-star loading" href="https://github.com/username/repo" target="_blank" rel="noopener" data-repo="username/repo">
+    <span class="github-star-label">stars</span>
+    <span class="github-star-count">-</span>
+</a>
+```
+
+**Features:**
+- ⭐ **Automatic Star Fetching** - Fetches real-time star counts from GitHub API
+- 🎨 **Fancy Animations** - Gradient backgrounds, shimmer effects, and hover animations
+- 🌙 **Theme Support** - Automatically adapts to light/dark mode
+- 📱 **Responsive Design** - Scales appropriately on mobile devices
+- 🔄 **Fallback Data** - Shows preset values if API fails
+- 🚀 **Dual API Strategy** - Tries direct API first, then CORS proxy
+
+**How it works:**
+1. The badge automatically fetches star counts when the page loads
+2. Uses GitHub API with CORS proxy for reliability
+3. Displays formatted numbers (e.g., 1.2k for 1200 stars)
+4. Shows loading animation while fetching
+5. Falls back to preset values if API fails
+
+**Customization:**
+- Star counts are automatically fetched from GitHub
+- Fallback values can be updated in the `fallbackStars` object (around line 1988)
+- Badge styling can be customized in the CSS section (lines 446-665)
+
+### 5. Configure Research Area Tags
 
 Available tags (defined in CSS):
 - `[COP]` - Combinatorial Optimization Problems (Blue)
@@ -95,7 +131,7 @@ To add a new tag type:
 2. Add to `getTagColor()` function (around line 1390)
 3. Add to `getTagDisplayName()` function (around line 1374)
 
-### 5. Set Up Visitor Counter
+### 6. Set Up Visitor Counter
 
 The template uses Flag Counter. To use your own counter:
 
@@ -104,7 +140,7 @@ The template uses Flag Counter. To use your own counter:
 3. Get the embed code
 4. Replace the code at line 630
 
-### 6. Deploy to GitHub Pages
+### 7. Deploy to GitHub Pages
 
 1. Push changes to GitHub:
 ```bash
@@ -183,6 +219,8 @@ The dark/light mode toggle:
 - Tailwind CSS (CDN)
 - Font Awesome Icons
 - Google Fonts
+- GitHub API (for star counts)
+- CORS Proxy (allorigins.win)
 
 ## Browser Support
 
