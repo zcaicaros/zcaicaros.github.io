@@ -115,6 +115,56 @@ For papers with GitHub repositories, you can add fancy star count badges:
 - Fallback values can be updated in the `fallbackStars` object (around line 1988)
 - Badge styling can be customized in the CSS section (lines 446-665)
 
+**Troubleshooting:**
+
+If star badges are not showing the correct numbers, you can debug the issue:
+
+**Debugging Features:**
+- 🔍 **Detailed Logging** - Shows which repository is being fetched
+- ✅ **Success Logging** - Displays actual star count when API succeeds
+- ❌ **Error Logging** - Shows specific error messages when API fails
+- 🔄 **Fallback Logging** - Indicates when fallback data is being used
+
+**How to View Debug Information:**
+1. Open browser Developer Tools (F12)
+2. Switch to Console tab
+3. Refresh the page
+4. Look for console output with emojis
+
+**Expected Console Output:**
+```
+🔍 Fetching stars for zcaicaros/DRL-MTSP...
+✅ Direct API success: 66 stars for zcaicaros/DRL-MTSP
+```
+
+Or if API fails:
+```
+🔍 Fetching stars for zcaicaros/DRL-MTSP...
+🔄 Direct API failed for zcaicaros/DRL-MTSP, trying proxy...
+📡 Proxy response status for zcaicaros/DRL-MTSP: 200
+✅ Proxy API success: 66 stars for zcaicaros/DRL-MTSP
+```
+
+Or if both fail:
+```
+🔍 Fetching stars for zcaicaros/DRL-MTSP...
+🔄 Direct API failed for zcaicaros/DRL-MTSP, trying proxy...
+⚠️ Both direct and proxy API failed for zcaicaros/DRL-MTSP: CORS error
+🔄 Using fallback data for zcaicaros/DRL-MTSP
+📊 Fallback star count for zcaicaros/DRL-MTSP: 66
+```
+
+**Common Issues:**
+- **CORS Errors**: Browser blocks direct GitHub API calls
+- **Rate Limiting**: Too many requests to GitHub API
+- **Network Issues**: Internet connection problems
+- **Repository Not Found**: Repository name or URL is incorrect
+
+**Solutions:**
+- The system automatically tries multiple approaches (direct API → proxy → fallback)
+- Fallback data ensures badges always show meaningful numbers
+- Check console logs to identify specific issues
+
 ### 5. Configure Research Area Tags
 
 Available tags (defined in CSS):
