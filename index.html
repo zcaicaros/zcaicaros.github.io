@@ -1937,8 +1937,29 @@
      * @returns {Promise<number>} - Star count or 0 if error
      */
     async function fetchGitHubStars(repo) {
+        console.log(`🔍 Fetching stars for ${repo}...`);
+        
+        // First try direct GitHub API (might work in some browsers)
         try {
-            // Try using GitHub's public API with CORS proxy
+            const directResponse = await fetch(`https://api.github.com/repos/${repo}`, {
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json',
+                    'User-Agent': 'Academic-Portfolio'
+                }
+            });
+            
+            if (directResponse.ok) {
+                const data = await directResponse.json();
+                const starCount = data.stargazers_count || 0;
+                console.log(`✅ Direct API success: ${starCount} stars for ${repo}`);
+                return starCount;
+            }
+        } catch (directError) {
+            console.log(`🔄 Direct API failed for ${repo}, trying proxy...`);
+        }
+        
+        // If direct API fails, try with CORS proxy
+        try {
             const proxyUrl = 'https://api.allorigins.win/raw?url=';
             const apiUrl = `https://api.github.com/repos/${repo}`;
             const response = await fetch(proxyUrl + encodeURIComponent(apiUrl), {
@@ -1948,14 +1969,21 @@
                 }
             });
             
+            console.log(`📡 Proxy response status for ${repo}:`, response.status);
+            
             if (!response.ok) {
+                const errorText = await response.text();
+                console.error(`❌ GitHub API error for ${repo}:`, response.status, errorText);
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
             
             const data = await response.json();
-            return data.stargazers_count || 0;
+            const starCount = data.stargazers_count || 0;
+            console.log(`✅ Proxy API success: ${starCount} stars for ${repo}`);
+            return starCount;
         } catch (error) {
-            console.warn(`Failed to fetch stars for ${repo}:`, error.message);
+            console.warn(`⚠️ Both direct and proxy API failed for ${repo}:`, error.message);
+            console.log(`🔄 Using fallback data for ${repo}`);
             // Fallback: return some example data for demo purposes
             const fallbackStars = {
                 'zcaicaros/L2D': 347,
@@ -1968,7 +1996,9 @@
                 'OscarHuangWind/Preference-Guided-DQN-Atari': 12,
                 'zcaicaros/DRL-MTSP': 66
             };
-            return fallbackStars[repo] || 0;
+            const fallbackCount = fallbackStars[repo] || 0;
+            console.log(`📊 Fallback star count for ${repo}: ${fallbackCount}`);
+            return fallbackCount;
         }
     }
     
