@@ -11,6 +11,7 @@ A clean, responsive academic portfolio website with interactive paper filtering 
 - 📊 **Visitor Counter** - Track visitors from different countries
 - 🎨 **Modern UI** - Built with Tailwind CSS for a clean, professional look
 - 🔗 **Social Integration** - Links to Google Scholar, GitHub, LinkedIn
+- 📰 **Collapsible News Section** - Expandable news section with smooth animations to save space
 
 ## Quick Start
 
@@ -230,6 +231,21 @@ The dark/light mode toggle:
 - Smoothly transitions between themes
 - Updates all color variables defined in CSS custom properties
 
+## Collapsible News Section
+
+The news section features an expandable/collapsible design:
+- **Auto-detection**: The "Show More" button only appears when content exceeds the collapsed height (200px)
+- **Smooth Animation**: Uses CSS transitions for smooth expand/collapse animations
+- **Gradient Fade**: Shows a gradient fade effect at the bottom when collapsed
+- **Theme Support**: Automatically adapts to light/dark mode
+- **Responsive**: Works seamlessly on all device sizes
+
+**How it works:**
+1. News items are wrapped in a collapsible container
+2. When content is short, the button is automatically hidden
+3. When content is long, users can click "Show More" to expand
+4. Click "Show Less" to collapse back to the default view
+
 ## Customization Tips
 
 ### Colors
@@ -255,9 +271,8 @@ The dark/light mode toggle:
 
 ```
 .
-├── index.html          # Main HTML file
+├── index.html          # Main HTML file (contains all HTML, CSS, and JavaScript)
 ├── portrait.jpg        # Profile picture
-├── Academic_CV.pdf     # (Optional) CV file
 └── README.md          # This file
 ```
 
