@@ -717,6 +717,76 @@
             display: inline-block;
         }
     }
+    
+    /* ========================================
+       COLLAPSIBLE NEWS SECTION
+       ======================================== */
+    
+    /* Container for collapsible content */
+    .news-container {
+        position: relative;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+    }
+    
+    /* Collapsed state - show only first few items */
+    .news-container.collapsed {
+        max-height: 200px;
+    }
+    
+    /* Expanded state - show all content */
+    .news-container.expanded {
+        max-height: 2000px;
+    }
+    
+    /* Gradient fade effect at bottom when collapsed */
+    .news-container.collapsed::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(to bottom, transparent, var(--bg-primary));
+        pointer-events: none;
+    }
+    
+    /* Toggle button styling */
+    .news-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+        padding: 6px 12px;
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        color: var(--text-primary);
+        cursor: pointer;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+        user-select: none;
+    }
+    
+    .news-toggle-btn:hover {
+        background-color: var(--hover-bg);
+        border-color: var(--text-secondary);
+    }
+    
+    .news-toggle-btn:active {
+        transform: scale(0.98);
+    }
+    
+    /* Icon animation */
+    .news-toggle-icon {
+        transition: transform 0.3s ease;
+        display: inline-block;
+    }
+    
+    /* Rotate icon when expanded */
+    .news-toggle-btn.expanded .news-toggle-icon {
+        transform: rotate(180deg);
+    }
   </style>
  </head>
  <body class="text-sm md:text-base">
@@ -867,13 +937,21 @@
       <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
           News
       </h2>
-      <ul class="list-disc pl-4 sm:pl-6 mb-8 sm:mb-12">
-          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.9】 One paper accepted as <strong class="neurips-spotlight">NeurIPS 2025 Spotlight</strong></li>
-          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.6】 One paper accepted by TMLR</li>
-          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.5】 Two papers accepted by ACL 2025</li>
-          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.3】 One paper accepted by ICLR 2025</li>
-          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.2】 One paper accepted by COLING 2025</li>
-      </ul>
+      <div class="news-container collapsed" id="newsContainer">
+          <ul class="list-disc pl-4 sm:pl-6 mb-4 sm:mb-6">
+              <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.9】 One paper accepted as <strong class="neurips-spotlight">NeurIPS 2025 Spotlight</strong></li>
+              <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.6】 One paper accepted by TMLR</li>
+              <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.5】 Two papers accepted by ACL 2025</li>
+              <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.3】 One paper accepted by ICLR 2025</li>
+              <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2025.2】 One paper accepted by COLING 2025</li>
+          </ul>
+      </div>
+      <div class="news-toggle-wrapper">
+          <button class="news-toggle-btn" id="newsToggleBtn" onclick="toggleNewsSection()">
+              <span>Show More</span>
+              <span class="news-toggle-icon">▼</span>
+          </button>
+      </div>
 
       <!-- Awards Section -->
       <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
@@ -2097,6 +2175,62 @@
     }
 
     /* ==========================================
+       COLLAPSIBLE NEWS SECTION
+       ========================================== 
+       
+       Provides expand/collapse functionality for the news section
+       to save space when there are many news items.
+    */
+    
+    /**
+     * Toggle the news section between collapsed and expanded states
+     */
+    function toggleNewsSection() {
+        const container = document.getElementById('newsContainer');
+        const button = document.getElementById('newsToggleBtn');
+        const buttonText = button.querySelector('span:first-child');
+        
+        if (container.classList.contains('collapsed')) {
+            // Expand the section
+            container.classList.remove('collapsed');
+            container.classList.add('expanded');
+            button.classList.add('expanded');
+            buttonText.textContent = 'Show Less';
+        } else {
+            // Collapse the section
+            container.classList.remove('expanded');
+            container.classList.add('collapsed');
+            button.classList.remove('expanded');
+            buttonText.textContent = 'Show More';
+        }
+    }
+    
+    /**
+     * Initialize news section - check if it needs collapsing
+     * Only show toggle button if content is actually long
+     */
+    function initializeNewsSection() {
+        const container = document.getElementById('newsContainer');
+        const button = document.getElementById('newsToggleBtn');
+        
+        if (!container || !button) return;
+        
+        // Check if content height exceeds collapsed height
+        container.classList.remove('collapsed', 'expanded');
+        const fullHeight = container.scrollHeight;
+        container.classList.add('collapsed');
+        const collapsedHeight = 200; // Match CSS max-height
+        
+        // Only show toggle if content is taller than collapsed height
+        if (fullHeight <= collapsedHeight) {
+            button.style.display = 'none';
+            container.classList.remove('collapsed');
+        } else {
+            button.style.display = 'inline-flex';
+        }
+    }
+
+    /* ==========================================
        APPLICATION INITIALIZATION
        ========================================== 
        
@@ -2134,6 +2268,9 @@
         
         // Initialize GitHub star displays
         initializeGitHubStars();            // Fetch and display GitHub star counts
+        
+        // Initialize news section collapse functionality
+        initializeNewsSection();            // Set up collapsible news section
     });
  </script>
 
