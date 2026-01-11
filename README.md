@@ -29,27 +29,27 @@ Edit `index.html` and update the following sections:
 #### Personal Information
 - Line 14: Update meta description
 - Line 19: Update page title
-- Lines 551-553: Update name (English and Chinese)
-- Lines 558-597: Update "About Me" section
-- Lines 609-610: Update email address
+- Line 844: Update name (English and Chinese)
+- Lines 848-898: Update "About Me" section
+- Line 902: Update email address
 
 #### Education & Experience
-- Lines 582-587: Update education history
-- Lines 643-648: Update news items
-- Lines 655-658: Update awards
-- Lines 664-668: Update work experience
+- Lines 873-879: Update education history
+- Lines 940-947: Update news items
+- Lines 960-963: Update awards
+- Lines 969-973: Update work experience
 
 #### Social Links
-- Lines 614-622: Update Google Scholar, GitHub, LinkedIn URLs
+- Lines 905-918: Update Google Scholar, GitHub, LinkedIn URLs
 
 #### Profile Picture
-- Replace `portrait.jpg` with your own photo (150x150px recommended)
+- Line 928: Replace `portrait.jpg` with your own photo (150x150px recommended)
 
 ### 3. Add Your Publications
 
 Publications are organized in three sections:
 
-#### Preprints (Lines 686-715)
+#### Preprints (Starting Line 996)
 ```html
 <div class="flex flex-wrap mb-8 paper-item">
     <div class="w-full md:w-4/4 px-3">
@@ -79,10 +79,10 @@ Publications are organized in three sections:
 </div>
 ```
 
-#### Conference Papers (Starting Line 725)
+#### Conference Papers (Starting Line 1078)
 Follow the same structure as preprints.
 
-#### Journal Articles (Starting Line 986)
+#### Journal Articles (Starting Line 1354)
 Follow the same structure as preprints.
 
 ### 4. Add GitHub Star Badges
@@ -113,8 +113,8 @@ For papers with GitHub repositories, you can add fancy star count badges:
 
 **Customization:**
 - Star counts are automatically fetched from GitHub
-- Fallback values can be updated in the `fallbackStars` object (around line 1988)
-- Badge styling can be customized in the CSS section (lines 446-665)
+- Fallback values can be updated in the `fallbackStars` object (around line 2094)
+- Badge styling can be customized in the CSS section (lines 449-665)
 
 **Troubleshooting:**
 
@@ -178,9 +178,9 @@ Available tags (defined in CSS):
 - `[LLM]` - Large Language Models (Yellow)
 
 To add a new tag type:
-1. Add CSS color definition (around line 354-410)
-2. Add to `getTagColor()` function (around line 1390)
-3. Add to `getTagDisplayName()` function (around line 1374)
+1. Add CSS color definition (around lines 354-410)
+2. Add to `getTagColor()` function (around line 1810)
+3. Add to `getTagDisplayName()` function (around line 1794)
 
 ### 6. Set Up Visitor Counter
 
@@ -189,7 +189,7 @@ The template uses Flag Counter. To use your own counter:
 1. Visit https://flagcounter.com/
 2. Customize your counter
 3. Get the embed code
-4. Replace the code at line 630
+4. Replace the code at line 922
 
 ### 7. Deploy to GitHub Pages
 
@@ -263,7 +263,7 @@ The news section features an expandable/collapsible design:
 - Adjust these values to change content width
 
 ### Container Styling
-- Main container: Lines 512-638
+- Main container: Lines 804-1578
 - Sections use flexbox for responsive layout
 - Tailwind CSS classes for spacing and alignment
 
