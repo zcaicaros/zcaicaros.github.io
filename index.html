@@ -955,7 +955,7 @@
           </ul>
       </div>
       <div class="news-toggle-wrapper">
-          <button class="news-toggle-btn" id="newsToggleBtn" onclick="toggleNewsSection()">
+          <button type="button" class="news-toggle-btn" id="newsToggleBtn" onclick="toggleNewsSection()">
               <span>Show More</span>
               <span class="news-toggle-icon">▼</span>
           </button>
@@ -2443,22 +2443,6 @@
 
     // Extra safety: re-initialize after full page load (mobile font/layout)
     window.addEventListener('load', initializeNewsSection);
-
-    // Bind reliable event handlers (in addition to inline onclick)
-    (function bindNewsToggleHandlers() {
-        const button = document.getElementById('newsToggleBtn');
-        if (!button) return;
-
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            toggleNewsSection();
-        });
-
-        button.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            toggleNewsSection();
-        }, { passive: false });
-    })();
  </script>
 
 
