@@ -752,6 +752,11 @@
     }
     
     /* Toggle button styling */
+    .news-toggle-wrapper {
+        position: relative;
+        z-index: 2;
+    }
+
     .news-toggle-btn {
         display: inline-flex;
         align-items: center;
@@ -766,6 +771,8 @@
         font-size: 0.875rem;
         transition: all 0.2s ease;
         user-select: none;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
     }
     
     .news-toggle-btn:hover {
@@ -968,7 +975,8 @@
           Working Experiences
       </h2>
       <ul class="list-disc pl-4 sm:pl-6 mb-8 sm:mb-12">
-          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2024.08 - Present】 LLM Algorithm Research Scientist, AIIC/TikTok, Singapore</li>
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2026.02 - Present】 LLM Research Scientist, Binance</li>
+          <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2024.08 - 2025.10】 LLM Algorithm Research Scientist, AIIC/TikTok, Singapore</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2022.11 - 2024.08】 Research Engineer, Huawei Noah's Ark Lab, Singapore</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
       </ul>
@@ -2121,6 +2129,9 @@
                 container.style.maxWidth = '100%';
             }
         });
+
+        // Re-check news collapse after layout changes (mobile/rotation)
+        initializeNewsSection();
     }
 
     /**
@@ -2305,7 +2316,9 @@
     function toggleNewsSection() {
         const container = document.getElementById('newsContainer');
         const button = document.getElementById('newsToggleBtn');
+        if (!container || !button) return;
         const buttonText = button.querySelector('span:first-child');
+        if (!buttonText) return;
         
         if (container.classList.contains('collapsed')) {
             // Expand the section
@@ -2331,20 +2344,23 @@
         const button = document.getElementById('newsToggleBtn');
         
         if (!container || !button) return;
-        
-        // Check if content height exceeds collapsed height
-        container.classList.remove('collapsed', 'expanded');
-        const fullHeight = container.scrollHeight;
-        container.classList.add('collapsed');
-        const collapsedHeight = 200; // Match CSS max-height
-        
-        // Only show toggle if content is taller than collapsed height
-        if (fullHeight <= collapsedHeight) {
-            button.style.display = 'none';
-            container.classList.remove('collapsed');
-        } else {
-            button.style.display = 'inline-flex';
-        }
+
+        // Defer measurement until layout is stable (mobile font swap / reflow)
+        requestAnimationFrame(() => {
+            // Check if content height exceeds collapsed height
+            container.classList.remove('collapsed', 'expanded');
+            const fullHeight = container.scrollHeight;
+            container.classList.add('collapsed');
+            const collapsedHeight = 200; // Match CSS max-height
+
+            // Only show toggle if content is taller than collapsed height
+            if (fullHeight <= collapsedHeight) {
+                button.style.display = 'none';
+                container.classList.remove('collapsed');
+            } else {
+                button.style.display = 'inline-flex';
+            }
+        });
     }
     
     /**
@@ -2424,6 +2440,25 @@
         // Update last edit timestamp
         updateLastEditTime();               // Display last edit time in footer
     });
+
+    // Extra safety: re-initialize after full page load (mobile font/layout)
+    window.addEventListener('load', initializeNewsSection);
+
+    // Bind reliable event handlers (in addition to inline onclick)
+    (function bindNewsToggleHandlers() {
+        const button = document.getElementById('newsToggleBtn');
+        if (!button) return;
+
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleNewsSection();
+        });
+
+        button.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            toggleNewsSection();
+        }, { passive: false });
+    })();
  </script>
 
 
