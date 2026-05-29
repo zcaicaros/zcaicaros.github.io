@@ -344,8 +344,36 @@
     
     /* Smooth transitions for paper visibility changes */
     .paper-item {
-        transition: all 0.3s ease;             /* Smooth show/hide animations */
-        min-height: 0;                         /* Allow height to collapse */
+        transition: all 0.3s ease;
+        min-height: 0;
+        align-items: flex-start;
+        flex-wrap: nowrap;
+        gap: 0.75rem;
+    }
+
+    .paper-number {
+        flex: 0 0 1.5rem;
+        margin-top: 0.125rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        color: var(--text-secondary);
+        text-align: right;
+        line-height: 1.5;
+        opacity: 0.55;
+    }
+
+    .paper-item > div {
+        flex: 1;
+        min-width: 0;
+        padding-left: 0 !important;
+    }
+
+    @media (min-width: 640px) {
+        .paper-number {
+            flex-basis: 1.75rem;
+            font-size: 0.9375rem;
+        }
     }
     /* ========================================
        TAG COLOR SYSTEM
@@ -2450,18 +2478,35 @@
     */
     
     /**
-     * Master initialization function - Called when DOM is fully loaded
-     * 
-     * Initializes all interactive features in the correct order:
-     * 1. Theme system (must be first to prevent flash)
-     * 2. Paper filtering system
-     * 3. Theme toggle click handlers
-     * 4. Link styling for code links
-     * 5. Responsive layout handlers
-     * 6. Initial layout adjustment
+     * Add sequential numbering to papers within each publication section
      */
+    function initializePaperNumbers() {
+        const sectionTitles = ['Preprints', 'Conference Papers', 'Journal Articles'];
+
+        document.querySelectorAll('h2').forEach(h2 => {
+            const sectionName = h2.textContent.trim();
+            if (!sectionTitles.includes(sectionName)) return;
+
+            let counter = 1;
+            let sibling = h2.nextElementSibling;
+
+            while (sibling && sibling.tagName !== 'H2') {
+                if (sibling.classList.contains('paper-item') && !sibling.querySelector('.paper-number')) {
+                    const numSpan = document.createElement('span');
+                    numSpan.className = 'paper-number';
+                    numSpan.textContent = counter + '.';
+                    numSpan.setAttribute('aria-hidden', 'true');
+                    sibling.insertBefore(numSpan, sibling.firstChild);
+                    counter++;
+                }
+                sibling = sibling.nextElementSibling;
+            }
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         initTheme();                        // Load saved theme immediately
+        initializePaperNumbers();           // Add section-wise paper numbering
         initializeTagFiltering();           // Set up paper filter functionality
         initializeThemeToggle();            // Attach theme toggle click handler
         styleCodeLinks();                   // Style active/inactive code links
