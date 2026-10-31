@@ -45,111 +45,61 @@
   <style>
     /* ==========================================
        CSS CUSTOM PROPERTIES (THEME SYSTEM)
-       ========================================== 
-       
-       This section defines CSS custom properties (variables) that enable
-       seamless switching between light and dark themes. The theme system
-       uses CSS custom properties to maintain consistent colors across
-       all components while allowing easy theme switching via JavaScript.
-    */
+       ========================================== */
     
     /* Light Theme Color Palette */
     :root {
-        --bg-primary: #f3f4f6;        /* Main page background (light gray) */
-        --bg-secondary: #ffffff;      /* Card/section backgrounds (white) */
-        --text-primary: #1f2937;      /* Primary text color (dark gray) */
-        --text-secondary: #6b7280;    /* Secondary text color (medium gray) */
-        --border-color: #e5e7eb;      /* Border color for elements */
-        --hover-bg: rgba(0, 0, 0, 0.05); /* Subtle hover effect background */
+        --bg-primary: #f3f4f6;
+        --bg-secondary: #ffffff;
+        --text-primary: #1f2937;
+        --text-secondary: #6b7280;
+        --border-color: #e5e7eb;
+        --hover-bg: rgba(0, 0, 0, 0.05);
     }
 
-    /* Dark Theme Color Palette - Applied when [data-theme="dark"] is set on document */
+    /* Dark Theme Color Palette */
     [data-theme="dark"] {
-        --bg-primary: #111827;        /* Main page background (dark) */
-        --bg-secondary: #1f2937;      /* Card/section backgrounds (darker) */
-        --text-primary: #d1d5db;      /* Primary text color (light gray) */
-        --text-secondary: #9ca3af;    /* Secondary text color (medium gray) */
-        --border-color: #374151;      /* Border color for dark theme */
-        --hover-bg: rgba(255, 255, 255, 0.05); /* Subtle hover effect for dark theme */
+        --bg-primary: #111827;
+        --bg-secondary: #1f2937;
+        --text-primary: #d1d5db;
+        --text-secondary: #9ca3af;
+        --border-color: #374151;
+        --hover-bg: rgba(255, 255, 255, 0.05);
     }
 
-    /* ==========================================
-       GLOBAL STYLES & RESPONSIVE DESIGN
-       ========================================== 
-       
-       This section establishes the foundation styling for the entire site,
-       including typography, theme integration, and responsive behavior
-       across different screen sizes and orientations.
-    */
-    
-    /* Base body styling with theme integration */
+    /* Base body styling */
     body {
-        font-family: 'Open Sans', sans-serif;  /* Consistent typography */
-        background-color: var(--bg-primary);   /* Theme-aware background */
-        color: var(--text-primary);            /* Theme-aware text color */
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transitions */
-        width: 100%;                            /* Full width layout */
-        min-width: 100%;                        /* Prevent horizontal scrolling */
-        overflow-x: hidden;                     /* Hide horizontal overflow */
+        font-family: 'Open Sans', sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
+        width: 100%;
+        min-width: 100%;
+        overflow-x: hidden;
     }
 
-    /* Ensure consistent full-width layout across browsers */
     html, body {
         width: 100%;
         max-width: 100%;
     }
 
-    /* ==========================================
-       RESPONSIVE CONTAINER SYSTEM
-       ========================================== 
-       
-       The site uses a smart container system that adapts to screen size:
-       - Mobile/Tablet (< 1024px): Full width for optimal content visibility
-       - Desktop (≥ 1024px): 50% width for better readability and design balance
-    */
-
-    /* Mobile Portrait Mode - Full width for maximum content visibility */
+    /* Responsive Container System */
     @media screen and (orientation: portrait) and (max-width: 1023px) {
-        .container {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
+        .container { width: 100% !important; max-width: 100% !important; }
     }
-
-    /* Mobile Landscape Mode - Full width to accommodate limited vertical space */
     @media screen and (orientation: landscape) and (max-width: 1023px) {
-        .container {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
+        .container { width: 100% !important; max-width: 100% !important; }
     }
-
-    /* Desktop Layout - Constrained width for better readability */
     @media screen and (min-width: 1024px) {
-        .container {
-            width: 50% !important;          /* Centered, constrained width */
-            max-width: 50% !important;      /* Prevents excessive line length */
-        }
+        .container { width: 50% !important; max-width: 50% !important; }
     }
 
     /* Theme-aware utility classes */
-    .theme-bg-secondary {
-        background-color: var(--bg-secondary);
-    }
+    .theme-bg-secondary { background-color: var(--bg-secondary); }
+    .theme-text-secondary { color: var(--text-secondary); }
+    .theme-border { border-color: var(--border-color); }
+    .theme-hover:hover { background-color: var(--hover-bg); }
 
-    .theme-text-secondary {
-        color: var(--text-secondary);
-    }
-
-    .theme-border {
-        border-color: var(--border-color);
-    }
-
-    .theme-hover:hover {
-        background-color: var(--hover-bg);
-    }
-
-    /* Dark mode text color overrides */
     [data-theme="dark"] .text-gray-700,
     [data-theme="dark"] .text-gray-500,
     [data-theme="dark"] .gray-blue-500 {
@@ -163,186 +113,80 @@
         color: var(--text-primary) !important;
     }
 
-    /* ==========================================
-       THEME TOGGLE COMPONENT
-       ========================================== 
-       
-       Custom-built theme toggle switch that allows users to switch between
-       light and dark modes. The component includes:
-       - Responsive sizing (smaller on mobile, larger on desktop)
-       - Smooth animations for state transitions
-       - Visual feedback with moon/sun icons
-       - Accessible design with proper contrast and interactive states
-    */
-    
-    /* Main toggle container - Creates the background "track" for the switch */
+    /* Theme Toggle Component */
     .theme-toggle {
-        position: relative;                      /* Required for absolute positioning of child elements */
-        width: 50px;                            /* Mobile width */
-        height: 25px;                           /* Mobile height */
-        background: #e5e7eb;                    /* Light gray background for light mode */
-        border-radius: 25px;                    /* Rounded pill shape */
-        cursor: pointer;                        /* Indicates interactive element */
-        transition: background 0.3s ease;       /* Smooth background color transition */
-        margin-left: auto;                      /* Aligns toggle to the right */
+        position: relative;
+        width: 50px;
+        height: 25px;
+        background: #e5e7eb;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-left: auto;
     }
-    
-    /* Larger toggle dimensions for better desktop usability */
     @media (min-width: 640px) {
-        .theme-toggle {
-            width: 60px;                        /* Increased width for desktop */
-            height: 30px;                       /* Increased height for desktop */
-            border-radius: 30px;                /* Adjust border radius to maintain shape */
-        }
+        .theme-toggle { width: 60px; height: 30px; border-radius: 30px; }
     }
-
-    /* Dark theme state - Changes background color when dark mode is active */
-    .theme-toggle.dark {
-        background: #374151;                    /* Darker background for dark mode */
-    }
-
-    /* Toggle button circle - The sliding "thumb" of the switch */
+    .theme-toggle.dark { background: #374151; }
     .theme-toggle::before {
-        content: '';                            /* Creates pseudo-element */
-        position: absolute;                     /* Positioned relative to toggle container */
-        top: 2px;                              /* Small gap from top */
-        left: 2px;                             /* Starting position (left side) */
-        width: 21px;                           /* Circle width */
-        height: 21px;                          /* Circle height */
-        background: white;                      /* White circle for contrast */
-        border-radius: 50%;                     /* Makes it circular */
-        transition: transform 0.3s ease;       /* Smooth sliding animation */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 21px;
+        height: 21px;
+        background: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    
-    /* Larger circle dimensions for desktop */
     @media (min-width: 640px) {
-        .theme-toggle::before {
-            top: 3px;                          /* Adjust position for larger container */
-            left: 3px;                         /* Adjust position for larger container */
-            width: 24px;                       /* Larger circle for desktop */
-            height: 24px;                      /* Larger circle for desktop */
-        }
+        .theme-toggle::before { top: 3px; left: 3px; width: 24px; height: 24px; }
     }
-
-    /* Slide circle to right when dark mode is active */
-    .theme-toggle.dark::before {
-        transform: translateX(25px);           /* Move circle to right side (mobile) */
-        background: white;                     /* Maintain white color */
-    }
-    
-    /* Adjust sliding distance for larger desktop toggle */
+    .theme-toggle.dark::before { transform: translateX(25px); background: white; }
     @media (min-width: 640px) {
-        .theme-toggle.dark::before {
-            transform: translateX(30px);       /* Greater distance for larger toggle */
-        }
+        .theme-toggle.dark::before { transform: translateX(30px); }
     }
-
-    /* Base styling for moon/sun icons inside the toggle */
     .theme-toggle-icon {
-        position: absolute;                     /* Positioned within toggle container */
-        top: 50%;                              /* Center vertically */
-        transform: translateY(-50%);           /* Adjust for true center alignment */
-        font-size: 14px;                      /* Icon size */
-        transition: opacity 0.3s ease;        /* Smooth fade in/out transition */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        transition: opacity 0.3s ease;
     }
+    .theme-toggle-icon.sun { right: 8px; color: #6b7280; opacity: 0; }
+    .theme-toggle-icon.moon { left: 8px; color: #6b7280; opacity: 1; }
+    .theme-toggle.dark .theme-toggle-icon.sun { opacity: 1; }
+    .theme-toggle.dark .theme-toggle-icon.moon { opacity: 0; }
 
-    /* Sun icon - Visible during dark mode (represents switching to light) */
-    .theme-toggle-icon.sun {
-        right: 8px;                            /* Position on right side */
-        color: #6b7280;                        /* Gray color */
-        opacity: 0;                            /* Hidden by default */
-    }
-
-    /* Moon icon - Visible during light mode (represents switching to dark) */
-    .theme-toggle-icon.moon {
-        left: 8px;                             /* Position on left side */
-        color: #6b7280;                        /* Gray color */
-        opacity: 1;                            /* Visible by default */
-    }
-
-    /* Icon visibility control based on theme state */
-    .theme-toggle.dark .theme-toggle-icon.sun {
-        opacity: 1;                            /* Show sun icon in dark mode */
-    }
-
-    .theme-toggle.dark .theme-toggle-icon.moon {
-        opacity: 0;                            /* Hide moon icon in dark mode */
-    }
-
-    /* ========================================
-       CUSTOM UTILITY CLASSES
-       ======================================== */
-    
-    /* Hover effects for links */
-    .hover\:text-orange-500:hover {
-        color: #f97316;
-    }
-    
-    .hover\:text-blue-500:hover {
-        color: rgb(59 130 246);
-    }
-    
-    .hover\:text-underline:hover {
-        text-decoration: underline;
-    }
-    /* ==========================================
-       PAPER FILTERING SYSTEM
-       ========================================== 
-       
-       Interactive filtering system that allows users to filter academic papers
-       by research areas. Features include:
-       - Clickable tags that can be combined for refined filtering
-       - Visual feedback for active filters
-       - Smooth animations for showing/hiding papers
-       - AND-logic filtering (papers must match ALL selected tags)
-    */
-    
-    /* Base styling for clickable research area tags */
+    /* Paper Filtering System */
     .type-tag {
-        margin-right: 0px;                      /* No gap between adjacent tags */
-        cursor: pointer;                        /* Indicates clickable element */
-        user-select: none;                      /* Prevent text selection on click */
-        padding: 1px 4px;                       /* Compact padding */
-        border-radius: 0px;                     /* No rounding by default */
-        transition: all 0.2s ease;              /* Smooth hover/active transitions */
+        margin-right: 0px;
+        cursor: pointer;
+        user-select: none;
+        padding: 1px 4px;
+        border-radius: 0px;
+        transition: all 0.2s ease;
     }
-    
-    /* Create pill-shaped appearance when tags are grouped together */
-    .type-tag:first-child {
-        border-top-left-radius: 3px;           /* Round left side of first tag */
-        border-bottom-left-radius: 3px;
-    }
-    
-    .type-tag:last-child {
-        border-top-right-radius: 3px;          /* Round right side of last tag */
-        border-bottom-right-radius: 3px;
-    }
-    
-    /* Interactive hover effect provides visual feedback */
+    .type-tag:first-child { border-top-left-radius: 3px; border-bottom-left-radius: 3px; }
+    .type-tag:last-child { border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
     .type-tag:hover {
-        opacity: 1;                             /* Ensure full opacity */
-        transform: translateY(-1px);           /* Subtle lift effect */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        opacity: 1;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    
-    /* Active state styling for currently selected filters */
     .type-tag.active {
-        font-weight: bold;                      /* Bold text for emphasis */
-        text-decoration: underline;             /* Underline for clear indication */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Persistent shadow */
+        font-weight: bold;
+        text-decoration: underline;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    
-    /* Hidden state for filtered out papers */
     .paper-item.hidden {
-        display: none;                          /* Completely remove from layout */
-        height: 0;                             /* Collapse height */
-        margin: 0;                             /* Remove margins */
-        padding: 0;                            /* Remove padding */
-        overflow: hidden;                      /* Hide any overflow */
+        display: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
-    
-    /* Smooth transitions for paper visibility changes */
     .paper-item {
         transition: all 0.3s ease;
         min-height: 0;
@@ -350,7 +194,6 @@
         flex-wrap: nowrap;
         gap: 0.75rem;
     }
-
     .paper-number {
         flex: 0 0 1.5rem;
         margin-top: 0.125rem;
@@ -362,119 +205,49 @@
         line-height: 1.5;
         opacity: 0.55;
     }
-
     .paper-item > div {
         flex: 1;
         min-width: 0;
         padding-left: 0 !important;
     }
-
     @media (min-width: 640px) {
-        .paper-number {
-            flex-basis: 1.75rem;
-            font-size: 0.9375rem;
-        }
+        .paper-number { flex-basis: 1.75rem; font-size: 0.9375rem; }
     }
-    /* ========================================
-       TAG COLOR SYSTEM
-       ======================================== */
-    
-    /* Research area color coding */
-    .tag-cop {
-        color: rgb(59 130 246); /* Blue - Combinatorial Optimization Problems */
-    }
-    
-    .tag-jssp {
-        color: rgb(16 185 129); /* Green - Job Shop Scheduling Problem */
-    }
-    
-    .tag-drl {
-        color: rgb(245 158 11); /* Orange - Deep Reinforcement Learning */
-    }
-    
-    .tag-marl {
-        color: rgb(239 68 68); /* Red - Multi-Agent Reinforcement Learning */
-    }
-    
-    .tag-nlp {
-        color: rgb(139 92 246); /* Purple - Natural Language Processing */
-    }
-    
-    .tag-vrp {
-        color: rgb(236, 72, 153); /* Pink - Vehicle Routing Problem */
-    }
-    
-    .tag-llm {
-        color: rgb(236, 192, 72); /* Yellow - Large Language Models */
-    }
-    
-    /* Hover background effects for each tag type */
-    .tag-cop:hover {
-        background-color: rgba(59, 130, 246, 0.1);
-    }
-    
-    .tag-jssp:hover {
-        background-color: rgba(16, 185, 129, 0.1);
-    }
-    
-    .tag-drl:hover {
-        background-color: rgba(245, 158, 11, 0.1);
-    }
-    
-    .tag-marl:hover {
-        background-color: rgba(239, 68, 68, 0.1);
-    }
-    
-    .tag-nlp:hover {
-        background-color: rgba(139, 92, 246, 0.1);
-    }
-    
-    .tag-vrp:hover {
-        background-color: rgba(236, 72, 153, 0.1);
-    }
-    
-    .tag-llm:hover {
-        background-color: rgba(236, 192, 72, 0.1);
-    }
-    
-    /* ========================================
-       ACTIVE FILTERS DISPLAY
-       ======================================== */
-    
-    /* Active filters display */
+
+    /* Tag Colors */
+    .tag-cop { color: rgb(59 130 246); }
+    .tag-jssp { color: rgb(16 185 129); }
+    .tag-drl { color: rgb(245 158 11); }
+    .tag-marl { color: rgb(239 68 68); }
+    .tag-nlp { color: rgb(139 92 246); }
+    .tag-vrp { color: rgb(236, 72, 153); }
+    .tag-llm { color: rgb(236, 192, 72); }
+
+    .tag-cop:hover { background-color: rgba(59, 130, 246, 0.1); }
+    .tag-jssp:hover { background-color: rgba(16, 185, 129, 0.1); }
+    .tag-drl:hover { background-color: rgba(245, 158, 11, 0.1); }
+    .tag-marl:hover { background-color: rgba(239, 68, 68, 0.1); }
+    .tag-nlp:hover { background-color: rgba(139, 92, 246, 0.1); }
+    .tag-vrp:hover { background-color: rgba(236, 72, 153, 0.1); }
+    .tag-llm:hover { background-color: rgba(236, 192, 72, 0.1); }
+
+    /* Active Filters Display */
     #active-filters-display {
         background-color: rgba(59, 130, 246, 0.05);
         border: 1px solid rgba(59, 130, 246, 0.2);
         color: rgb(30, 64, 175);
     }
-    
-    /* Dark theme active filters display */
     [data-theme="dark"] #active-filters-display {
         background-color: rgba(59, 130, 246, 0.1);
         border: 1px solid rgba(59, 130, 246, 0.3);
         color: rgb(147, 197, 253);
     }
-    
-    /* ========================================
-       NEURIPS SPOTLIGHT HIGHLIGHTING
-       ======================================== */
-    
-    /* NeurIPS Spotlight red highlighting for light mode */
-    strong.neurips-spotlight {
-        color: #dc2626 !important;
-        font-weight: bold;
-    }
-    
-    /* NeurIPS Spotlight red highlighting for dark mode */
-    [data-theme="dark"] strong.neurips-spotlight {
-        color: #f87171 !important; /* Lighter red for better contrast in dark mode */
-        font-weight: bold;
-    }
-    /* ========================================
-       FANCY GITHUB STAR BADGE DISPLAY
-       ======================================== */
-    
-    /* Fancy GitHub star badge with advanced effects */
+
+    /* NeurIPS Spotlight */
+    strong.neurips-spotlight { color: #dc2626 !important; font-weight: bold; }
+    [data-theme="dark"] strong.neurips-spotlight { color: #f87171 !important; font-weight: bold; }
+
+    /* Fancy GitHub Star Badge */
     .github-star {
         display: inline-flex;
         align-items: center;
@@ -487,44 +260,26 @@
         position: relative;
         line-height: 1;
         height: 22px;
-        box-shadow: 
-            0 2px 8px rgba(0, 0, 0, 0.15),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         backdrop-filter: blur(10px);
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     }
-    
     .github-star::before {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, 
-            rgba(255, 255, 255, 0.1) 0%, 
-            transparent 50%, 
-            rgba(255, 255, 255, 0.1) 100%);
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
         opacity: 0;
         transition: opacity 0.3s ease;
         pointer-events: none;
     }
-    
     .github-star:hover {
         transform: translateY(-2px) scale(1.05);
-        box-shadow: 
-            0 8px 25px rgba(0, 0, 0, 0.2),
-            0 0 20px rgba(245, 158, 11, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(245, 158, 11, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2);
         text-decoration: none;
     }
-    
-    .github-star:hover::before {
-        opacity: 1;
-    }
-    
-    /* Badge left section - label with gradient */
+    .github-star:hover::before { opacity: 1; }
     .github-star-label {
         background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #374151 100%);
         color: white;
@@ -540,22 +295,13 @@
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
     .github-star-label::after {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(90deg, 
-            transparent 0%, 
-            rgba(255, 255, 255, 0.1) 50%, 
-            transparent 100%);
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
         animation: shimmer 2s infinite;
     }
-    
-    /* Badge right section - count with fancy gradient */
     .github-star-count {
         background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 25%, #f59e0b 50%, #d97706 75%, #f59e0b 100%);
         background-size: 200% 200%;
@@ -570,7 +316,6 @@
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         animation: gradient-shift 3s ease-in-out infinite;
     }
-    
     .github-star-count::before {
         content: '✨';
         position: absolute;
@@ -581,39 +326,26 @@
         opacity: 0;
         animation: sparkle 2s infinite;
     }
-    
-    /* Dark theme fancy styling */
     [data-theme="dark"] .github-star {
-        box-shadow: 
-            0 2px 8px rgba(0, 0, 0, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
         background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
     }
-    
     [data-theme="dark"] .github-star:hover {
-        box-shadow: 
-            0 8px 25px rgba(0, 0, 0, 0.4),
-            0 0 20px rgba(245, 158, 11, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(245, 158, 11, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
     }
-    
     [data-theme="dark"] .github-star-label {
         background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #1f2937 100%);
     }
-    
     [data-theme="dark"] .github-star-count {
         background: linear-gradient(135deg, #d97706 0%, #f59e0b 25%, #d97706 50%, #b45309 75%, #d97706 100%);
         background-size: 200% 200%;
     }
-    
-    /* Loading state with fancy animation */
     .github-star.loading .github-star-count {
         background: linear-gradient(135deg, #9ca3af 0%, #d1d5db 50%, #9ca3af 100%);
         background-size: 200% 200%;
         animation: gradient-shift 1s ease-in-out infinite;
         position: relative;
     }
-    
     .github-star.loading .github-star-count::after {
         content: '';
         position: absolute;
@@ -627,147 +359,56 @@
         border-radius: 50%;
         animation: fancy-spin 1s linear infinite;
     }
-    
-    /* Error state with pulse effect */
     .github-star.error .github-star-count {
         background: linear-gradient(135deg, #ef4444 0%, #f87171 50%, #ef4444 100%);
         background-size: 200% 200%;
         animation: error-pulse 1s ease-in-out infinite;
     }
-    
-    /* Fancy animations */
     @keyframes gradient-shift {
         0%, 100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
     }
-    
     @keyframes shimmer {
         0% { transform: translateX(-100%); }
         100% { transform: translateX(100%); }
     }
-    
     @keyframes sparkle {
         0%, 100% { opacity: 0; transform: translateY(-50%) scale(0.8); }
         50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
     }
-    
     @keyframes fancy-spin {
         0% { transform: translateY(-50%) rotate(0deg) scale(1); }
         50% { transform: translateY(-50%) rotate(180deg) scale(1.1); }
         100% { transform: translateY(-50%) rotate(360deg) scale(1); }
     }
-    
     @keyframes error-pulse {
-        0%, 100% { 
-            background-position: 0% 50%; 
-            box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
-        }
-        50% { 
-            background-position: 100% 50%; 
-            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
-        }
+        0%, 100% { background-position: 0% 50%; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+        50% { background-position: 100% 50%; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1); }
     }
-    
-    /* Hover sparkle effect */
-    .github-star:hover .github-star-count::before {
-        animation: sparkle 0.6s ease-in-out;
-    }
-    
-    /* Responsive adjustments */
+    .github-star:hover .github-star-count::before { animation: sparkle 0.6s ease-in-out; }
     @media (max-width: 640px) {
-        .github-star {
-            font-size: 0.65rem;
-            height: 20px;
-            margin-left: 6px;
-        }
-        
-        .github-star-label,
-        .github-star-count {
-            padding: 2px 6px;
-            font-size: 0.65rem;
-        }
-        
-        .github-star:hover {
-            transform: translateY(-1px) scale(1.02);
-        }
+        .github-star { font-size: 0.65rem; height: 20px; margin-left: 6px; }
+        .github-star-label, .github-star-count { padding: 2px 6px; font-size: 0.65rem; }
+        .github-star:hover { transform: translateY(-1px) scale(1.02); }
     }
 
-    /* ========================================
-       PAPER IMAGES
-       ======================================== */
-    
-    /* Paper thumbnail images */
-    .paper-item img {
-        min-width: 8rem;
-        height: 6rem;
-        object-fit: contain;
-    }
-    
-    /* Larger images on desktop */
-    @media (min-width: 640px) {
-        .paper-item img {
-            min-width: 12rem;
-            height: 10rem;
-        }
-    }
-    
-    /* Background images for papers */
-    .paper-img-bg {
-        width: 8rem;
-        height: 6rem;
-        background-size: cover;
-        background-position: center;
-    }
-    
-    /* Larger background images on desktop */
-    @media (min-width: 640px) {
-        .paper-img-bg {
-            width: 12rem;
-            height: 10rem;
-        }
-    }
-    
+    /* Paper Images */
+    .paper-item img { min-width: 8rem; height: 6rem; object-fit: contain; }
+    @media (min-width: 640px) { .paper-item img { min-width: 12rem; height: 10rem; } }
+    .paper-img-bg { width: 8rem; height: 6rem; background-size: cover; background-position: center; }
+    @media (min-width: 640px) { .paper-img-bg { width: 12rem; height: 10rem; } }
+
     /* Mobile-first responsive improvements */
     @media (max-width: 639px) {
-        .type-tag {
-            font-size: 0.75rem;
-            padding: 2px 4px;
-        }
-        
-        /* Ensure readability on small screens */
-        body {
-            line-height: 1.5;
-        }
-        
-        /* Improved touch targets for mobile */
-        .anchor-link {
-            padding: 2px 0;
-            display: inline-block;
-        }
+        .type-tag { font-size: 0.75rem; padding: 2px 4px; }
+        body { line-height: 1.5; }
+        .anchor-link { padding: 2px 0; display: inline-block; }
     }
-    
-    /* ========================================
-       COLLAPSIBLE NEWS SECTION
-       ======================================== */
-    
-    /* Container for collapsible content */
-    .news-container {
-        position: relative;
-        overflow: hidden;
-        transition: max-height 0.4s ease-in-out;
-    }
-    
-    /* Collapsed state - show only first few items */
-    .news-container.collapsed {
-        max-height: 200px;
-    }
-    
-    /* Expanded state - show all content */
-    .news-container.expanded {
-        max-height: 2000px;
-    }
-    
-    /* Gradient fade effect at bottom when collapsed */
+
+    /* Collapsible News Section */
+    .news-container { position: relative; overflow: hidden; transition: max-height 0.4s ease-in-out; }
+    .news-container.collapsed { max-height: 200px; }
+    .news-container.expanded { max-height: 2000px; }
     .news-container.collapsed::after {
         content: '';
         position: absolute;
@@ -778,13 +419,7 @@
         background: linear-gradient(to bottom, transparent, var(--bg-primary));
         pointer-events: none;
     }
-    
-    /* Toggle button styling */
-    .news-toggle-wrapper {
-        position: relative;
-        z-index: 2;
-    }
-
+    .news-toggle-wrapper { position: relative; z-index: 2; }
     .news-toggle-btn {
         display: inline-flex;
         align-items: center;
@@ -802,84 +437,33 @@
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
     }
-    
-    .news-toggle-btn:hover {
-        background-color: var(--hover-bg);
-        border-color: var(--text-secondary);
-    }
-    
-    .news-toggle-btn:active {
-        transform: scale(0.98);
-    }
-    
-    /* Icon animation */
-    .news-toggle-icon {
-        transition: transform 0.3s ease;
-        display: inline-block;
-    }
-    
-    /* Rotate icon when expanded */
-    .news-toggle-btn.expanded .news-toggle-icon {
-        transform: rotate(180deg);
-    }
+    .news-toggle-btn:hover { background-color: var(--hover-bg); border-color: var(--text-secondary); }
+    .news-toggle-btn:active { transform: scale(0.98); }
+    .news-toggle-icon { transition: transform 0.3s ease; display: inline-block; }
+    .news-toggle-btn.expanded .news-toggle-icon { transform: rotate(180deg); }
   </style>
  </head>
  <body class="text-sm md:text-base">
-  <!-- ==========================================
-       MAIN SITE STRUCTURE
-       ========================================== 
-       
-       The site uses a responsive container system:
-       - Mobile/Tablet: Full width for optimal content display
-       - Desktop: Centered 50% width for better readability
-       
-       The layout is built with Tailwind CSS using flexbox
-       for responsive design across all screen sizes.
-  -->
   <div class="container mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 w-full lg:w-1/2">
    <div class="flex flex-wrap">
     <div class="w-full">
      
-     <!-- ==========================================
-          SITE HEADER WITH THEME TOGGLE
-          ========================================== 
-          
-          Minimal header containing only the theme toggle button.
-          The toggle is positioned on the right side and provides
-          visual feedback for the current theme state.
-     -->
+     <!-- SITE HEADER -->
      <div class="flex justify-between items-center mb-4 sm:mb-6">
-       <!-- Spacer div to push theme toggle to the right -->
        <div></div>
-       
-       <!-- Interactive theme toggle component -->
        <div class="theme-toggle" id="themeToggle">
-         <!-- Moon icon: visible in light mode, indicates "switch to dark" -->
          <i class="fas fa-moon theme-toggle-icon moon"></i>
-         <!-- Sun icon: visible in dark mode, indicates "switch to light" -->
          <i class="fas fa-sun theme-toggle-icon sun"></i>
        </div>
      </div>
      
-     <!-- ==========================================
-          PERSONAL PROFILE SECTION
-          ========================================== 
-          
-          Contains the main biographical and contact information:
-          - Name and professional title
-          - Academic background and research interests
-          - Education history
-          - Contact information and social links
-          - Professional headshot (desktop only)
-     -->
+     <!-- PERSONAL PROFILE SECTION -->
      <div class="flex flex-wrap">
-      <!-- Main content area -->
       <div class="w-full lg:w-3/4 mb-6 lg:mb-0">
        <h1 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 md:mb-8">
         Cong Zhang (张聪)
        </h1>
        
-       <!-- About Me Section -->
        <strong>About Me:</strong>
         <p class="text-gray-700 mb-4 sm:mb-6"></p>
         <p class="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">  
@@ -932,46 +516,28 @@
             </ul>
         </p>
 
-
        <p class="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base"> 
             Email: cong.zhang92@gmail.com
        </p>
-       <!-- Social Links -->
        <div class="flex flex-wrap text-blue-500 mb-6 sm:mb-8 md:mb-10 gap-y-2">
-        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://scholar.google.com.sg/citations?user=lSC-K24AAAAJ&hl=zh-CN">
-            Google Scholar
-        </a>
-        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://github.com/zcaicaros">
-            Github
-        </a>
-        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://www.linkedin.com/in/cong-zhang-5b9358122/">
-            Linkedin
-        </a>
-<!--         <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="./Academic_CV.pdf">
-            Academic CV
-        </a> -->
+        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://scholar.google.com.sg/citations?user=lSC-K24AAAAJ&hl=zh-CN">Google Scholar</a>
+        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://github.com/zcaicaros">Github</a>
+        <a class="mr-3 sm:mr-4 anchor-link text-sm sm:text-base" href="https://www.linkedin.com/in/cong-zhang-5b9358122/">Linkedin</a>
        </div>
        
-       <!-- Visit Counter -->
        <div class="mb-4 sm:mb-6">
         <a href="https://info.flagcounter.com/co0J"><img src="https://s01.flagcounter.com/count2/co0J/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
        </div>
       </div>
       
-      <!-- Profile Picture -->
       <div class="w-full lg:w-1/4 lg:pl-4 mt-6 justify-center hidden lg:block">
         <img alt="Cong Zhang's profile picture" class="rounded-full" height="150" src="./portrait.jpg" width="150"/>
       </div>
      </div>
 
-     <!-- ========================================
-          NEWS, AWARDS, AND EXPERIENCE SECTIONS
-          ======================================== -->
+     <!-- NEWS, AWARDS, AND EXPERIENCE SECTIONS -->
      <div class="mb-6 sm:mb-8">
-      <!-- News Section -->
-      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
-          News
-      </h2>
+      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">News</h2>
       <div class="news-container collapsed" id="newsContainer">
           <ul class="list-disc pl-4 sm:pl-6 mb-4 sm:mb-6">
               <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2026.10】 One paper accepted by <strong>Advanced Engineering Informatics</strong></li>
@@ -997,27 +563,21 @@
           </button>
       </div>
 
-      <!-- Awards Section -->
-      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
-          Awards
-      </h2>
+      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">Awards</h2>
       <ul class="list-disc pl-4 sm:pl-6 mb-8 sm:mb-12">
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2026】ICML 2026 <strong>Gold Reviewer</strong> (top reviewers recognition with complimentary registration)</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2019】Certified to teach, Nanyang Technological University</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2018】Singapore International Graduate Award (SINGA), PhD scholarship provided by the SG Government</li>
       </ul>
 
-      <!-- Work Experience Section -->
-      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
-          Working Experiences
-      </h2>
+      <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">Working Experiences</h2>
       <ul class="list-disc pl-4 sm:pl-6 mb-8 sm:mb-12">
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2024.08 - 2025.10】 LLM Algorithm Research Scientist, AIIC/TikTok, Singapore</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2022.11 - 2024.08】 Research Engineer, Huawei Noah's Ark Lab, Singapore</li>
           <li class="mb-1 sm:mb-2 text-sm sm:text-base">【2017.11 - 2018.08】 Research Assistant, Hong Kong Polytechnic University, HongKong</li>
       </ul>
 
-     <!-- Active Filters Display - Always visible with all tags -->
+     <!-- Active Filters Display -->
      <div id="active-filters-display" class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg max-w-2xl">
          <div class="text-sm font-medium text-blue-800 mb-2">
              Filter Papers by Research Area:
@@ -1030,14 +590,32 @@
          </div>
      </div>
 
-     <!-- ========================================
-          PREPRINTS SECTION
-          ======================================== -->                       
-     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
-        Preprints
-     </h2>
+     <!-- PREPRINTS SECTION -->                       
+     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">Preprints</h2>
      <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
+        <!-- NEW PREPRINT: arXiv 2610.40023 -->
+        <div class="flex flex-wrap mb-8 paper-item">
+            <div class="w-full md:w-4/4 px-3">
+            <h3 class="text-l font-bold mb-1 paper-title">
+                <span class="type-tag tag-cop" data-tag="cop">[COP]</span><span class="type-tag tag-llm" data-tag="llm">[LLM]</span> HEMO: Harness Self-Evolution for Multi-Objective Combinatorial Optimization
+            </h3>
+            <p class="text-gray-700 mb-1">
+                Jianghan Zhu,
+                <strong>Cong Zhang<sup>#</sup></strong>,
+                Ni Zhang,
+                Yifan Yang,
+                Yew Soon Ong,
+                and Zhiguang Cao
+            </p>
+            <p class="gray-blue-500 mb-1">
+                arXiv preprint, 2026
+            </p>
+            <p>
+                <a class="anchor-link text-blue-500" href="https://arxiv.org/pdf/2610.40023v1">paper</a>
+            </p>
+            </div>
+        </div>
 
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
@@ -1067,26 +645,9 @@
             </div>
         </div>
 
-
-     <!-- ==========================================
-          CONFERENCE PAPERS SECTION
-          ========================================== 
-          
-          Interactive academic publications list featuring:
-          - Click-to-filter tag system by research area
-          - AND-logic filtering for precise paper discovery
-          - Links to papers and code repositories
-          - Visual indicators for authorship roles
-          - Responsive layout for all screen sizes
-     -->
-     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
-        Conference Papers
-     </h2>
-     
-     <!-- Legend for authorship notation -->
-     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">
-        * denotes equal contribution, # denotes corresponding author
-     </div>
+     <!-- CONFERENCE PAPERS SECTION -->
+     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">Conference Papers</h2>
+     <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full px-2 sm:px-3">
@@ -1553,17 +1114,10 @@
             </div>
         </div>
 
-     <!-- ========================================
-          JOURNAL ARTICLES SECTION
-          ======================================== -->                       
-     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">
-        Journal Articles
-     </h2>
+     <!-- JOURNAL ARTICLES SECTION -->
+     <h2 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-5">Journal Articles</h2>
      <div class="text-gray-500 italic text-xs sm:text-sm mb-3 sm:mb-4">* denotes equal contribution, # denotes corresponding author</div>
 
-        <!-- ============================================================
-             NEW JOURNAL ARTICLE (Moved to top)
-             ============================================================ -->
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
              <h3 class="text-l font-bold mb-1 paper-title">
@@ -1582,9 +1136,6 @@
              </p>
             </div>
         </div>
-        <!-- ============================================================
-             END OF NEW JOURNAL ARTICLE
-             ============================================================ -->
 
         <div class="flex flex-wrap mb-8 paper-item">
             <div class="w-full md:w-4/4 px-3">
@@ -1848,27 +1399,16 @@
    </div>
   </div>
 
-  <!-- ==========================================
-       SITE FOOTER
-       ========================================== 
-       
-       Simple footer with copyright information and additional GitHub link.
-       Uses theme-aware classes to adapt to light/dark mode automatically.
-       The footer is styled to complement the overall design while
-       providing essential attribution and links.
-  -->
+  <!-- SITE FOOTER -->
   <footer class="w-full theme-bg-secondary theme-text-secondary py-3 sm:py-4 mt-6 sm:mt-8 md:mt-10 text-center text-xs sm:text-sm theme-border border-t">
     <div class="px-4">
-      <!-- Copyright notice and attribution -->
       &copy; 2025 Cong Zhang. Modified with Cursor.
       
-      <!-- Additional GitHub link with hover effects -->
       <a href="https://github.com/zcaicaros" 
          class="text-blue-500 hover:text-orange-500 ml-2" 
          target="_blank" 
          rel="noopener">GitHub</a>
       
-      <!-- Last edit timestamp -->
       <div class="mt-2 text-gray-500 dark:text-gray-400">
         Last updated: <span id="lastEditTime"></span>
       </div>
@@ -1877,138 +1417,55 @@
 
  </body>
  
- <!-- ==========================================
-      JAVASCRIPT FUNCTIONALITY
-      ========================================== 
-      
-      This script manages the interactive features of the portfolio site:
-      1. Paper Filtering System - Interactive tag-based filtering with AND logic
-      2. Theme Toggle System - Light/dark mode switching with persistence
-      3. Link Styling System - Dynamic styling for active/inactive links
-      4. Responsive Layout Management - Orientation and resize handling
-      
-      All functions are designed to be lightweight, accessible, and performant.
- -->
  <script>
-    /* ==========================================
-       PAPER FILTERING SYSTEM
-       ========================================== 
-       
-       Implements an interactive filtering system for academic papers.
-       Users can click on research area tags to filter papers, with support for:
-       - Multiple simultaneous filters (AND logic)
-       - Visual feedback for active filters
-       - Smooth animations for paper show/hide
-       - Persistent filter display
-    */
-    
-    // Global state: Set to store enabled tags (tags that show papers)
     let enabledTags = new Set();
-    
-    // Global state: Set to store all available tags found in papers
     let allAvailableTags = new Set();
 
-    /**
-     * Toggle a research area tag filter on or off (from paper tags)
-     * 
-     * This function handles the core filtering logic:
-     * - First click on a tag: only that tag becomes enabled, others disabled
-     * - Clicking more tags: adds them to the enabled set (multi-select)
-     * - Clicking an already enabled tag: removes it from the enabled set
-     * - If all tags would be disabled, enable all tags instead
-     * - Updates UI to reflect current filter state
-     * 
-     * @param {string} tag - The tag identifier to toggle (e.g., 'cop', 'jssp', 'ml')
-     * @param {Event} event - The click event
-     */
     function toggleTag(tag, event) {
-        // Check if we're in "all tags enabled" state (initial state)
         const isAllEnabled = enabledTags.size === allAvailableTags.size;
-        
         if (isAllEnabled) {
-            // Initial state: clicking a tag selects only that tag
             enabledTags.clear();
             enabledTags.add(tag);
         } else {
-            // Multi-select state: toggle the clicked tag
             if (enabledTags.has(tag)) {
-                // Tag is enabled - remove it
                 enabledTags.delete(tag);
-                
-                // If no tags are enabled, enable all tags (reset to initial state)
                 if (enabledTags.size === 0) {
                     collectAllAvailableTags();
                     allAvailableTags.forEach(t => enabledTags.add(t));
                 }
             } else {
-                // Tag is not enabled - add it
                 enabledTags.add(tag);
             }
         }
-        
-        // Update visual state and apply filters
-        updateTagHighlighting();  // Refresh tag visual states
-        updateActiveFiltersDisplay(); // Update the filter display
-        filterPapers();          // Apply filtering to papers
+        updateTagHighlighting();
+        updateActiveFiltersDisplay();
+        filterPapers();
     }
     
-    /**
-     * Toggle a tag's enabled state (from Active Filters display)
-     * 
-     * This function handles enabling/disabling tags in the Active Filters display:
-     * - First click on a tag: only that tag becomes enabled, others disabled
-     * - Clicking more tags: adds them to the enabled set (multi-select)
-     * - Clicking an already enabled tag: removes it from the enabled set
-     * - If all tags would be disabled, enable all tags instead
-     * - Updates the filtering
-     * 
-     * @param {string} tag - The tag identifier to toggle enabled state
-     * @param {Event} event - The click event
-     */
     function toggleEnabledTag(tag, event) {
-        // Check if we're in "all tags enabled" state (initial state)
         const isAllEnabled = enabledTags.size === allAvailableTags.size;
-        
         if (isAllEnabled) {
-            // Initial state: clicking a tag selects only that tag
             enabledTags.clear();
             enabledTags.add(tag);
         } else {
-            // Multi-select state: toggle the clicked tag
             if (enabledTags.has(tag)) {
-                // Tag is enabled - remove it
                 enabledTags.delete(tag);
-                
-                // If no tags are enabled, enable all tags (reset to initial state)
                 if (enabledTags.size === 0) {
                     collectAllAvailableTags();
                     allAvailableTags.forEach(t => enabledTags.add(t));
                 }
             } else {
-                // Tag is not enabled - add it
                 enabledTags.add(tag);
             }
         }
-        
-        // Update visual state and apply filters
-        updateTagHighlighting();  // Refresh tag visual states
-        updateActiveFiltersDisplay(); // Update the filter display
-        filterPapers();          // Apply filtering to papers
+        updateTagHighlighting();
+        updateActiveFiltersDisplay();
+        filterPapers();
     }
     
-    /**
-     * Update visual highlighting for all tag elements across the page
-     * 
-     * Synchronizes the visual state of all tag elements with the same data-tag
-     * attribute, ensuring consistent highlighting when multiple instances of
-     * the same tag exist (e.g., [COP] appearing in multiple papers).
-     */
     function updateTagHighlighting() {
-        // Find all tag elements and update their active state
         document.querySelectorAll('.type-tag').forEach(tagElement => {
             const tagName = tagElement.getAttribute('data-tag');
-            
-            // Apply or remove 'active' class based on enabled state
             if (enabledTags.has(tagName)) {
                 tagElement.classList.add('active');
             } else {
@@ -2017,40 +1474,23 @@
         });
     }
     
-    /**
-     * Update the persistent active filters display with all available tags
-     */
     function updateActiveFiltersDisplay() {
         const filtersList = document.getElementById('active-filters-list');
-        
-        // Get all available tags from papers
         collectAllAvailableTags();
-        
-        // Create the list of all available tags
         let filtersHTML = '';
         const sortedTags = Array.from(allAvailableTags).sort();
-        
         sortedTags.forEach((tag, index) => {
             const tagColor = getTagColor(tag);
             const isEnabled = enabledTags.has(tag);
             const tagDisplayName = getTagDisplayName(tag);
-            
-            // Style based on enabled state
-            // Enabled tags are shown (bold, full opacity)
-            // Disabled tags are hidden (dimmed, low opacity)
             const style = isEnabled ? 
                 `color: ${tagColor}; font-weight: bold; opacity: 1;` : 
                 `color: ${tagColor}; font-weight: normal; opacity: 0.5;`;
-            
             filtersHTML += `<span onclick="toggleEnabledTag('${tag}', event)" style="${style} cursor: pointer; text-decoration: underline; padding: 2px 6px; border-radius: 3px; margin: 1px;" title="Click to ${isEnabled ? 'deselect this tag' : 'select this tag'}">${tagDisplayName}</span>`;
         });
-        
         filtersList.innerHTML = filtersHTML;
     }
     
-    /**
-     * Collect all available tags from all papers
-     */
     function collectAllAvailableTags() {
         allAvailableTags.clear();
         document.querySelectorAll('.type-tag').forEach(tagElement => {
@@ -2059,168 +1499,74 @@
         });
     }
     
-    /**
-     * Get display name for a tag
-     */
     function getTagDisplayName(tag) {
         const displayNames = {
-            'cop': '[COP]',
-            'jssp': '[JSSP]',
-            'drl': '[DRL]',
-            'marl': '[MARL]',
-            'nlp': '[NLP]',
-            'vrp': '[VRP]',
-            'llm': '[LLM]'
+            'cop': '[COP]', 'jssp': '[JSSP]', 'drl': '[DRL]',
+            'marl': '[MARL]', 'nlp': '[NLP]', 'vrp': '[VRP]', 'llm': '[LLM]'
         };
         return displayNames[tag] || `[${tag.toUpperCase()}]`;
     }
     
-    /**
-     * Get color for a specific tag type
-     */
     function getTagColor(tag) {
         const colorMap = {
-            'cop': 'rgb(59, 130, 246)',     // Blue
-            'jssp': 'rgb(16, 185, 129)',    // Green
-            'drl': 'rgb(245, 158, 11)',      // Orange
-            'marl': 'rgb(239, 68, 68)',     // Red
-            'nlp': 'rgb(139, 92, 246)',     // Purple
-            'vrp': 'rgb(236, 72, 153)',     // Pink
-            'llm': 'rgb(236, 192, 72)'      // Yellow
+            'cop': 'rgb(59, 130, 246)', 'jssp': 'rgb(16, 185, 129)', 'drl': 'rgb(245, 158, 11)',
+            'marl': 'rgb(239, 68, 68)', 'nlp': 'rgb(139, 92, 246)', 'vrp': 'rgb(236, 72, 153)', 'llm': 'rgb(236, 192, 72)'
         };
-        return colorMap[tag] || 'rgb(107, 114, 128)'; // Default gray
-    }
-    
-    /**
-     * Clear all active filters (enable all tags)
-     */
-    function clearAllFilters() {
-        enabledTags.clear();
-        // Enable all available tags
-        collectAllAvailableTags();
-        allAvailableTags.forEach(tag => enabledTags.add(tag));
-        updateTagHighlighting();
-        updateActiveFiltersDisplay();
-        filterPapers();
+        return colorMap[tag] || 'rgb(107, 114, 128)';
     }
 
-    /**
-     * Apply filtering logic to show/hide papers based on enabled tags
-     * 
-     * Papers are shown if they contain ANY of the enabled tags (OR logic).
-     * If no tags are enabled, all papers are shown (no filtering).
-     * If all tags are enabled, all papers are shown.
-     */
     function filterPapers() {
         const papers = document.querySelectorAll('.paper-item');
-        
         papers.forEach(paper => {
-            // If no tags are enabled, show all papers (no filtering)
             if (enabledTags.size === 0) {
                 paper.classList.remove('hidden');
                 return;
             }
-            
-            // If all tags are enabled (default state), show all papers
             if (enabledTags.size === allAvailableTags.size) {
                 paper.classList.remove('hidden');
                 return;
             }
-
-            // Extract all research area tags from this paper
             const paperTags = Array.from(paper.querySelectorAll('.type-tag'))
                 .map(tag => tag.getAttribute('data-tag'));
-
-            // Paper is shown if it contains ANY of the enabled tags (OR logic)
             const shouldShow = paperTags.some(tag => enabledTags.has(tag));
-            
-            // Toggle visibility based on filter match
             paper.classList.toggle('hidden', !shouldShow);
         });
     }
 
-    /**
-     * Initialize click handlers for all tag elements
-     * 
-     * Sets up event listeners for tag filtering functionality.
-     * Prevents default link behavior and stops event propagation
-     * to ensure clean interaction handling.
-     */
     function initializeTagFiltering() {
         document.querySelectorAll('.type-tag').forEach(tag => {
             tag.addEventListener('click', (e) => {
-                e.preventDefault();     // Prevent any default link behavior
-                e.stopPropagation();    // Stop event from bubbling up
-                
+                e.preventDefault();
+                e.stopPropagation();
                 const tagName = tag.getAttribute('data-tag');
-                toggleTag(tagName, e);  // Toggle the filter state, pass event for Ctrl/Cmd detection
+                toggleTag(tagName, e);
             });
         });
     }
 
-    /* ==========================================
-       THEME TOGGLE SYSTEM
-       ========================================== 
-       
-       Manages light/dark theme switching with browser persistence.
-       The theme system works by:
-       - Setting data-theme attribute on document element
-       - Using CSS custom properties to update colors
-       - Persisting user preference in localStorage
-       - Providing smooth visual transitions between themes
-    */
-    
-    /**
-     * Initialize theme on page load based on user's saved preference
-     * 
-     * Checks localStorage for previously saved theme preference
-     * and applies it immediately to prevent theme flash. Defaults
-     * to light theme if no preference is found.
-     */
     function initTheme() {
-        // Retrieve saved theme preference or default to light
         const savedTheme = localStorage.getItem('theme') || 'light';
         const toggle = document.getElementById('themeToggle');
-        
-        // Apply dark theme if it was previously selected
         if (savedTheme === 'dark') {
-            // Set the data-theme attribute to trigger CSS changes
             document.documentElement.setAttribute('data-theme', 'dark');
-            // Update toggle visual state to match
             toggle.classList.add('dark');
         }
-        // Light theme is default, no action needed
     }
 
-    /**
-     * Toggle between light and dark themes with persistence
-     * 
-     * Switches theme state, updates the visual toggle component,
-     * and saves the new preference to localStorage for future visits.
-     */
     function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const toggle = document.getElementById('themeToggle');
-        
         if (currentTheme === 'dark') {
-            // Switch to light theme
             document.documentElement.setAttribute('data-theme', 'light');
             toggle.classList.remove('dark');
             localStorage.setItem('theme', 'light');
         } else {
-            // Switch to dark theme (covers null/undefined/light cases)
             document.documentElement.setAttribute('data-theme', 'dark');
             toggle.classList.add('dark');
             localStorage.setItem('theme', 'dark');
         }
     }
 
-    /**
-     * Set up click handler for the theme toggle button
-     * 
-     * Attaches the toggle functionality to the theme toggle element.
-     * This must be called after DOM is loaded.
-     */
     function initializeThemeToggle() {
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
@@ -2228,23 +1574,14 @@
         }
     }
 
-    /* ========================================
-       LINK STYLING SYSTEM
-       ======================================== */
-    
-    /**
-     * Style code links based on whether they have valid URLs
-     */
     function styleCodeLinks() {
         document.querySelectorAll('a.anchor-link').forEach(link => {
             if (link.textContent.trim().toLowerCase() === 'code') {
                 if (!link.getAttribute('href') || link.getAttribute('href') === '#') {
-                    // Gray out inactive code links
                     link.classList.remove('text-blue-500');
-                    link.style.color = '#6b7280'; // Tailwind gray-500
+                    link.style.color = '#6b7280';
                     link.style.pointerEvents = 'none';
                 } else {
-                    // Keep active code links blue
                     link.classList.add('text-blue-500');
                     link.style.color = '';
                     link.style.pointerEvents = '';
@@ -2253,141 +1590,60 @@
         });
     }
 
-    /* ========================================
-       ORIENTATION CHANGE HANDLING
-       ======================================== */
-    
-    /**
-     * Handle orientation changes to ensure proper layout
-     */
     function handleOrientationChange() {
-        // Force a reflow to ensure proper sizing
         document.body.style.width = '100%';
         document.documentElement.style.width = '100%';
-        
-        // Update container width based on screen size
         const containers = document.querySelectorAll('.container');
         const isDesktop = window.innerWidth >= 1024;
-        
         containers.forEach(container => {
             if (isDesktop) {
-                // Desktop: use 50% width
                 container.style.width = '50%';
                 container.style.maxWidth = '50%';
             } else {
-                // Mobile/Tablet: use 100% width
                 container.style.width = '100%';
                 container.style.maxWidth = '100%';
             }
         });
-
-        // Re-check news collapse after layout changes (mobile/rotation)
         initializeNewsSection();
     }
 
-    /**
-     * Initialize orientation change handling
-     */
     function initializeOrientationHandling() {
-        // Handle orientation change
-        window.addEventListener('orientationchange', function() {
-            setTimeout(handleOrientationChange, 100);
-        });
-        
-        // Handle resize events
+        window.addEventListener('orientationchange', function() { setTimeout(handleOrientationChange, 100); });
         window.addEventListener('resize', handleOrientationChange);
     }
 
-    /* ==========================================
-       GITHUB STAR DISPLAY SYSTEM
-       ========================================== 
-       
-       Fetches GitHub repository star counts using the GitHub API
-       and displays them next to GitHub links. Features include:
-       - Automatic detection of GitHub links
-       - Star count fetching with error handling
-       - Loading states and fallback display
-       - Rate limiting and caching
-    */
-    
-    /**
-     * Fetch GitHub repository star count using GitHub API
-     * 
-     * @param {string} repo - Repository in format "owner/repo"
-     * @returns {Promise<number>} - Star count or 0 if error
-     */
     async function fetchGitHubStars(repo) {
         console.log(`🔍 Fetching stars for ${repo}...`);
-        
-        // First try direct GitHub API (might work in some browsers)
         try {
             const directResponse = await fetch(`https://api.github.com/repos/${repo}`, {
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                    'User-Agent': 'Academic-Portfolio'
-                }
+                headers: { 'Accept': 'application/vnd.github.v3+json', 'User-Agent': 'Academic-Portfolio' }
             });
-            
             if (directResponse.ok) {
                 const data = await directResponse.json();
-                const starCount = data.stargazers_count || 0;
-                console.log(`✅ Direct API success: ${starCount} stars for ${repo}`);
-                return starCount;
+                return data.stargazers_count || 0;
             }
         } catch (directError) {
             console.log(`🔄 Direct API failed for ${repo}, trying proxy...`);
         }
-        
-        // If direct API fails, try with CORS proxy
         try {
             const proxyUrl = 'https://api.allorigins.win/raw?url=';
             const apiUrl = `https://api.github.com/repos/${repo}`;
             const response = await fetch(proxyUrl + encodeURIComponent(apiUrl), {
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                    'User-Agent': 'Academic-Portfolio'
-                }
+                headers: { 'Accept': 'application/vnd.github.v3+json', 'User-Agent': 'Academic-Portfolio' }
             });
-            
-            console.log(`📡 Proxy response status for ${repo}:`, response.status);
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error(`❌ GitHub API error for ${repo}:`, response.status, errorText);
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
-            const starCount = data.stargazers_count || 0;
-            console.log(`✅ Proxy API success: ${starCount} stars for ${repo}`);
-            return starCount;
+            return data.stargazers_count || 0;
         } catch (error) {
-            console.warn(`⚠️ Both direct and proxy API failed for ${repo}:`, error.message);
-            console.log(`🔄 Using fallback data for ${repo}`);
-            // Fallback: return some example data for demo purposes
             const fallbackStars = {
-                'zcaicaros/L2D': 347,
-                'zcaicaros/L2S': 57,
-                'zcaicaros/TBGAT': 26,
-                'zcaicaros/DPRM': 2,
-                'YifanYang1995/GOODRL': 19,
-                'Chupeng24/PGRL': 19,
-                'Chupeng24/ES-GRL-JSSP': 2,
-                'OscarHuangWind/Preference-Guided-DQN-Atari': 12,
-                'zcaicaros/DRL-MTSP': 66
+                'zcaicaros/L2D': 347, 'zcaicaros/L2S': 57, 'zcaicaros/TBGAT': 26, 'zcaicaros/DPRM': 2,
+                'YifanYang1995/GOODRL': 19, 'Chupeng24/PGRL': 19, 'Chupeng24/ES-GRL-JSSP': 2,
+                'OscarHuangWind/Preference-Guided-DQN-Atari': 12, 'zcaicaros/DRL-MTSP': 66
             };
-            const fallbackCount = fallbackStars[repo] || 0;
-            console.log(`📊 Fallback star count for ${repo}: ${fallbackCount}`);
-            return fallbackCount;
+            return fallbackStars[repo] || 0;
         }
     }
     
-    /**
-     * Format star count for display (e.g., 1234 -> 1.2k)
-     * 
-     * @param {number} count - Raw star count
-     * @returns {string} - Formatted star count
-     */
     function formatStarCount(count) {
         if (count === 0) return '0';
         if (count < 1000) return count.toString();
@@ -2395,32 +1651,16 @@
         return (count / 1000000).toFixed(1) + 'M';
     }
     
-    /**
-     * Update GitHub star display for a specific element
-     * 
-     * @param {HTMLElement} starElement - The star display element
-     * @param {string} repo - Repository name
-     */
     async function updateGitHubStar(starElement, repo) {
         const countElement = starElement.querySelector('.github-star-count');
-        
         try {
-            // Show loading state
             starElement.classList.add('loading');
             countElement.textContent = '-';
-            
-            // Fetch star count
             const starCount = await fetchGitHubStars(repo);
-            
-            // Update display
             countElement.textContent = formatStarCount(starCount);
             starElement.classList.remove('loading');
-            
-            // Add title with full count
             starElement.title = `${starCount} stars on GitHub`;
-            
         } catch (error) {
-            // Handle error state
             countElement.textContent = '?';
             starElement.classList.remove('loading');
             starElement.classList.add('error');
@@ -2428,57 +1668,30 @@
         }
     }
     
-    /**
-     * Initialize GitHub star displays for all GitHub links
-     * 
-     * Finds all GitHub star elements and fetches their star counts.
-     * Uses a small delay between requests to avoid rate limiting.
-     */
     async function initializeGitHubStars() {
         const starElements = document.querySelectorAll('.github-star[data-repo]');
-        
-        // Process each star element with a small delay to avoid rate limiting
         for (let i = 0; i < starElements.length; i++) {
             const starElement = starElements[i];
             const repo = starElement.getAttribute('data-repo');
-            
             if (repo) {
-                // Add a small delay between requests to be respectful to GitHub API
-                if (i > 0) {
-                    await new Promise(resolve => setTimeout(resolve, 200));
-                }
-                
+                if (i > 0) await new Promise(resolve => setTimeout(resolve, 200));
                 await updateGitHubStar(starElement, repo);
             }
         }
     }
 
-    /* ==========================================
-       COLLAPSIBLE NEWS SECTION
-       ========================================== 
-       
-       Provides expand/collapse functionality for the news section
-       to save space when there are many news items.
-    */
-    
-    /**
-     * Toggle the news section between collapsed and expanded states
-     */
     function toggleNewsSection() {
         const container = document.getElementById('newsContainer');
         const button = document.getElementById('newsToggleBtn');
         if (!container || !button) return;
         const buttonText = button.querySelector('span:first-child');
         if (!buttonText) return;
-        
         if (container.classList.contains('collapsed')) {
-            // Expand the section
             container.classList.remove('collapsed');
             container.classList.add('expanded');
             button.classList.add('expanded');
             buttonText.textContent = 'Show Less';
         } else {
-            // Collapse the section
             container.classList.remove('expanded');
             container.classList.add('collapsed');
             button.classList.remove('expanded');
@@ -2486,25 +1699,15 @@
         }
     }
     
-    /**
-     * Initialize news section - check if it needs collapsing
-     * Only show toggle button if content is actually long
-     */
     function initializeNewsSection() {
         const container = document.getElementById('newsContainer');
         const button = document.getElementById('newsToggleBtn');
-        
         if (!container || !button) return;
-
-        // Defer measurement until layout is stable (mobile font swap / reflow)
         requestAnimationFrame(() => {
-            // Check if content height exceeds collapsed height
             container.classList.remove('collapsed', 'expanded');
             const fullHeight = container.scrollHeight;
             container.classList.add('collapsed');
-            const collapsedHeight = 200; // Match CSS max-height
-
-            // Only show toggle if content is taller than collapsed height
+            const collapsedHeight = 200;
             if (fullHeight <= collapsedHeight) {
                 button.style.display = 'none';
                 container.classList.remove('collapsed');
@@ -2514,60 +1717,25 @@
         });
     }
     
-    /**
-     * Update last edit timestamp in footer
-     * Uses document.lastModified or falls back to current date
-     */
     function updateLastEditTime() {
         const lastEditElement = document.getElementById('lastEditTime');
         if (!lastEditElement) return;
-        
-        // Try to use document.lastModified first
         let lastModified = document.lastModified;
-        
-        // If lastModified is not available or seems invalid, use current date
         if (!lastModified || lastModified === 'Invalid Date' || lastModified === '') {
             lastModified = new Date().toISOString();
         }
-        
-        // Format the date
         const date = new Date(lastModified);
-        const options = { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            timeZoneName: 'short'
-        };
-        
-        // Format date string
-        const formattedDate = date.toLocaleDateString('en-US', options);
-        lastEditElement.textContent = formattedDate;
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' };
+        lastEditElement.textContent = date.toLocaleDateString('en-US', options);
     }
 
-    /* ==========================================
-       APPLICATION INITIALIZATION
-       ========================================== 
-       
-       Coordinates the initialization of all interactive features
-       when the page loads. Functions are called in a specific order
-       to ensure proper setup and avoid any dependency issues.
-    */
-    
-    /**
-     * Add sequential numbering to papers within each publication section
-     */
     function initializePaperNumbers() {
         const sectionTitles = ['Preprints', 'Conference Papers', 'Journal Articles'];
-
         document.querySelectorAll('h2').forEach(h2 => {
             const sectionName = h2.textContent.trim();
             if (!sectionTitles.includes(sectionName)) return;
-
             let counter = 1;
             let sibling = h2.nextElementSibling;
-
             while (sibling && sibling.tagName !== 'H2') {
                 if (sibling.classList.contains('paper-item') && !sibling.querySelector('.paper-number')) {
                     const numSpan = document.createElement('span');
@@ -2583,35 +1751,25 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        initTheme();                        // Load saved theme immediately
-        initializePaperNumbers();           // Add section-wise paper numbering
-        initializeTagFiltering();           // Set up paper filter functionality
-        initializeThemeToggle();            // Attach theme toggle click handler
-        styleCodeLinks();                   // Style active/inactive code links
-        initializeOrientationHandling();    // Set up responsive layout handlers
-        handleOrientationChange();          // Apply initial responsive layout
+        initTheme();
+        initializePaperNumbers();
+        initializeTagFiltering();
+        initializeThemeToggle();
+        styleCodeLinks();
+        initializeOrientationHandling();
+        handleOrientationChange();
         
-        // Initialize filter system with all tags enabled by default
-        // All tags are selected initially, showing all papers
         collectAllAvailableTags();
         allAvailableTags.forEach(tag => enabledTags.add(tag));
         updateActiveFiltersDisplay();
         updateTagHighlighting();
         filterPapers();
         
-        // Initialize GitHub star displays
-        initializeGitHubStars();            // Fetch and display GitHub star counts
-        
-        // Initialize news section collapse functionality
-        initializeNewsSection();            // Set up collapsible news section
-        
-        // Update last edit timestamp
-        updateLastEditTime();               // Display last edit time in footer
+        initializeGitHubStars();
+        initializeNewsSection();
+        updateLastEditTime();
     });
 
-    // Extra safety: re-initialize after full page load (mobile font/layout)
     window.addEventListener('load', initializeNewsSection);
  </script>
-
-
 </html>
